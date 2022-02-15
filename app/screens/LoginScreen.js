@@ -10,13 +10,17 @@ import {
     Image,
 } from 'react-native';
 
-/*function onSignIn(googleUser){
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+/*<meta name="google-signin-client_id" content=".apps.googleusercontent.com">*/
+
+function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getID());
     console.log('Name: '+profile.getName());
     console.log('Image URL: '+profile.getImageURL());
     console.log('Email: '+profile.getEmail());
-}*/
+}
+
 const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState('');
@@ -40,9 +44,9 @@ const LoginScreen = ({navigation}) => {
                     <Image style={{width: 50, height: 50}} source={require('../assets/crossed_sabers.jpg')} />
                 </TouchableOpacity>
             </View>
-            {/*<View style={styles.loginEmailButton}>
+            <View style={styles.loginEmailButton}>
                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            </View>*/}
+            </View>
             <View style={styles.loginEmailButton}>
                 <TextInput
                     style={styles.text}
@@ -71,7 +75,6 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.forgotText}> Forgot Clearance Code?</Text>
             </TouchableOpacity>
         </ImageBackground>
- /*       <script src="https://apis.google.com/js/platform.js" async defer></script>*/
     );
 }
 
