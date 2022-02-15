@@ -15,6 +15,7 @@ function onSignIn(googleUser){
     console.log('ID: ' + profile.getID());
     console.log('Name: '+profile.getName());
     console.log('Image URL: '+profile.getImageURL());
+    console.log('Email: '+profile.getEmail());
 }
 const LoginScreen = ({navigation}) => {
 
