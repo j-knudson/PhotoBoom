@@ -1,20 +1,30 @@
-import {Alert, Button, Text} from "react-native";
-import {View} from "react-native-web";
+import {Button, StyleSheet, Text, View} from "react-native";
 
 
-const LandingScreen = ({navigation}) => {
+//function LandingScreen(props) {
+
+
+
+const LandingScreen =( {route, navigation} ) => {
+    const {itemID, newEmail: passwordIs, testString} = route.params
     const testPress = () => {
         navigation.navigate('Login')
     }
     return (
-       <View>
+
+        <View style={{justifyContent: "center", alignContent: "center",}}>
             <Text>It's an older code, sir, but it checks out</Text>
+            <Text>Email: {JSON.stringify(itemID)}</Text>
+            <Text>Password: {JSON.stringify(passwordIs)}</Text>
+            <Text>Test: {JSON.stringify(testString)}</Text>
             <Button
                 title={'Landing Screen Test'}
                 onPress={testPress}
             />
-       </View>
-    )
+        </View>
+    );
 }
+
+
 
 export default LandingScreen;
