@@ -18,7 +18,7 @@ const App = () => {
                 <Stack.Screen
                     name="Login"
                     component={LoginScreen}
-                    options={{title:'Abdul test commit 2'}}
+                    options={{title:'Jake was here'}}
                 />
                 <Stack.Screen
                     name={"Landing"}
