@@ -139,7 +139,11 @@ const styles = StyleSheet.create({
 });*/
     return (
         <View style={styles.container}>
-            <Text style={styles.TextTitle}> PhotoBoom </Text>
+            <Image
+                resizeMode = {"contain"}
+                style={styles.photoboomText}
+                source={require("../assets/photo_boom_text.png")}
+            />
             <Image
                 resizeMode = {"contain"}
                 style={styles.image2}
@@ -195,11 +199,8 @@ const styles = StyleSheet.create({
         color: "black",
     },
 
-    image: {
-        marginBottom: 40,
-    },
-
     image2: {
+        flex: 2,
         width: '50%',
         height: '50%',
     },
@@ -234,7 +235,6 @@ const styles = StyleSheet.create({
 
     },
 
-
     text: {
         color: "white",
         fontSize: 32,
@@ -243,6 +243,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         //backgroundColor: "#000000c0"
+    },
+
+
+    photoboomText: {
+        flex: 1,
+        width: '70%',
+        height: '25%',
     },
 
     TextInput: {
