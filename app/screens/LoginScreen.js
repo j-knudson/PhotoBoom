@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+//import React, {useState} from 'react';
 import { StatusBar} from "expo-status-bar";
+import React from 'react';
 import {
     Alert,
     ImageBackground,
@@ -35,9 +36,9 @@ const LoginScreen = ({navigation}) => {
 
     const [request, response, promptAsync] = Google.useAuthRequest({
         expoClientId: '668793616964-4t8885n5ahg6lhsre569ivvlnps2c9e2.apps.googleusercontent.com',
-        //iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+        iosClientId: '668793616964-qv1f3av811hrhdmdfiq46ue49nas25hv.apps.googleusercontent.com',
         androidClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',
-        webClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',
+        webClientId: '668793616964-ghs8734d1vrjhj8b12cfk21vhte87lc0.apps.googleusercontent.com',
     });
 
     React.useEffect(() => {
