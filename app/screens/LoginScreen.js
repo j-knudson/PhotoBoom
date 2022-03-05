@@ -8,26 +8,17 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image,
+    Image, Button,
 } from 'react-native';
-/*import * as Google from 'expo-auth-session/providers/google';
+
+import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 
-WebBrowser.maybeCompleteAuthSession();*/
-
-
-function onSignIn(googleUser){
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getID());
-    console.log('Name: '+profile.getName());
-    console.log('Image URL: '+profile.getImageURL());
-    console.log('Email: '+profile.getEmail());
-}
+WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
 
-
-    const [email, setEmail] = useState('');
+/*    const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
     const onLoginPress = () => {
         Alert.alert('Login Press', "You pressed the log me in button")
@@ -36,114 +27,48 @@ const LoginScreen = ({navigation}) => {
             newEmail: password,
             testString: 'This is my test message'
         });
-    }
- /*   return (
-        <ImageBackground
-            resizeMode={"contain"}
-            style={styles.background}
-            source={require('../assets/rebel_empire.jpg')}
-        >
-            <View style={styles.container}>
-                <TouchableOpacity onPress={()=> onLoginPress()}>
-                    <Image style={{width: 50, height: 50}} source={require('../assets/crossed_sabers.jpg')} />
-                </TouchableOpacity>
-            </View>
-            {/!*<View style={styles.loginEmailButton}>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            </View>*!/}
-            <View style={styles.loginEmailButton}>
-                <TextInput
-                    style={styles.text}
-                    placeholder ="Imperial Email"
-                    onChangeText={(email) => setEmail(email)}
-                />
-            </View>
-            <View style={styles.loginPasswordButton}>
-                <TextInput
-                    style={styles.text}
-                    placeholder ="Code Clearance"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                    onKeyPress = {event =>  {
-                        if (event.key === 'Enter') {
-                            navigation.navigate('Landing', {
-                                itemID : email,
-                                newEmail: password,
-                                testString: 'This is my test message'
-                            })
-                        }
-                    }}
-                />
-            </View>
-            <TouchableOpacity onPress={()=> navigation.navigate('Forgot')}>
-                <Text style={styles.forgotText}> Forgot Clearance Code?</Text>
-            </TouchableOpacity>
-        </ImageBackground>
- /!*       <script src="https://apis.google.com/js/platform.js" async defer></script>*!/
-    );
-}
+    }*/
 
-const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'black',
-        justifyContent: "flex-end",
-        alignItems: "center",
-    },
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        backgroundColor: 'blue',
-        position: "absolute",
-        top: 50,
-    },
-    forgotPassword: {
-        width: '100%',
-        height: 70,
-        backgroundColor: 'black',
-    },
-    forgotText: {
-        color: "white",
-        textAlign: "center",
-        justifyContent: "center",
-        fontSize: 22
-    },
-    loginButton: {
-        alignContent: "center",
-        position: "absolute",
-        top: 50,
+    const [accessToken, setAccessToken] = React.useState();
+    const [userInfo, setUserInfo] = React.useState();
+    const [message, setMessage] = React.useState();
 
-    },
-    loginEmailButton: {
-        width: '100%',
-        height: 70,
-        backgroundColor: 'red',
-    },
-    loginPasswordButton: {
-        width: '100%',
-        height: 70,
-        backgroundColor: 'limegreen',
-    },
-    logo: {
-        resizeMode: "contain",
-        width: '25%',
-        height: '25%',
-        //position: 'absolute',
-        //top: 50,
-    },
-    text: {
-        color: "white",
-        fontSize: 32,
-        lineHeight: 84,
-        fontWeight: "bold",
-        textAlign: "center",
-        justifyContent: "center",
-        backgroundColor: "#000000c0"
+    const [request, response, promptAsync] = Google.useAuthRequest({
+        expoClientId: '668793616964-4t8885n5ahg6lhsre569ivvlnps2c9e2.apps.googleusercontent.com',
+        //iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+        androidClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',
+        webClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',
+    });
+
+    React.useEffect(() => {
+        setMessage(JSON.stringify(response));
+        if (response?.type === "success") {
+            setAccessToken(response.authentication.accessToken);
+        }
+    }, [response]);
+
+    async function getUserData() {
+        let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+            headers: { Authorization: `Bearer ${accessToken}`}
+        });
+
+        userInfoResponse.json().then(data => {
+            setUserInfo(data);
+        });
     }
 
-});*/
+    function showUserInfo() {
+        if (userInfo) {
+            return (
+                <View style={styles.userInfo}>
+                    <Image source={{uri: userInfo.picture}} style={styles.profilePic} />
+                    <Text>Welcome {userInfo.name}</Text>
+                    <Text>{userInfo.email}</Text>
+                </View>
+            );
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -184,18 +109,32 @@ const styles = StyleSheet.create({
             <TouchableOpacity onPress={()=> navigation.navigate('Forgot')}>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
-            <View>
-                <script src="https://apis.google.com/js/platform.js" async defer></script>
-                <meta name="google-signin-client_id" content="668793616964-ghs8734d1vrjhj8b12cfk21vhte87lc0.apps.googleusercontent.com" />
-                <div className="g-signin2" data-onsuccess="onSignIn"></div>
 
-            </View>
-            <TouchableOpacity   style={styles.loginBtn} >
+ {/*           <TouchableOpacity   style={styles.loginBtn}  >
                 <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
+            {showUserInfo()}
+            <Button
+                title={accessToken ? "Get User Data" : "Login"}
+                onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}
+            />
+
         </View>
     );
 }
+
+/*    return (
+        <View style={styles.container}>
+            <Text>TEST TEST TEST 2  Open up App.js to start working on your app!</Text>
+            {showUserInfo()}
+            <Button
+                title={accessToken ? "Get User Data" : "Login"}
+                onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}
+            />
+            <StatusBar style="auto" />
+        </View>
+    );
+}*/
 
 const styles = StyleSheet.create({
     container: {
