@@ -10,15 +10,22 @@ import {
     View,
     Image,
 } from 'react-native';
+/*import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
 
-/*function onSignIn(googleUser){
+WebBrowser.maybeCompleteAuthSession();*/
+
+
+function onSignIn(googleUser){
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getID());
     console.log('Name: '+profile.getName());
     console.log('Image URL: '+profile.getImageURL());
     console.log('Email: '+profile.getEmail());
-}*/
+}
+
 const LoginScreen = ({navigation}) => {
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
@@ -177,8 +184,13 @@ const styles = StyleSheet.create({
             <TouchableOpacity onPress={()=> navigation.navigate('Forgot')}>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
+            <View>
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <meta name="google-signin-client_id" content="668793616964-ghs8734d1vrjhj8b12cfk21vhte87lc0.apps.googleusercontent.com" />
+                <div className="g-signin2" data-onsuccess="onSignIn"></div>
 
-            <TouchableOpacity   style={styles.loginBtn}  >
+            </View>
+            <TouchableOpacity   style={styles.loginBtn} >
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
         </View>
