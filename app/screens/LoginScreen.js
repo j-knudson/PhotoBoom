@@ -119,6 +119,7 @@ const LoginScreen = ({navigation}) => {
             {showUserInfo()}
             <Button
                 title="Login"
+                color="red"
                 onPress={onLoginPress}
             />
 
