@@ -1,6 +1,6 @@
-//import React, {useState} from 'react';
+import React, {useState} from 'react';
 import { StatusBar} from "expo-status-bar";
-import React from 'react';
+/*import React from 'react';*/
 import {
     Alert,
     ImageBackground,
@@ -11,6 +11,7 @@ import {
     View,
     Image, Button,
 } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
@@ -19,8 +20,9 @@ WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
 
-/*    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
+
     const onLoginPress = () => {
         Alert.alert('Login Press', "You pressed the log me in button")
         navigation.navigate('Landing', {
@@ -28,7 +30,7 @@ const LoginScreen = ({navigation}) => {
             newEmail: password,
             testString: 'This is my test message'
         });
-    }*/
+    }
 
     const [accessToken, setAccessToken] = React.useState();
     const [userInfo, setUserInfo] = React.useState();
@@ -116,26 +118,23 @@ const LoginScreen = ({navigation}) => {
             </TouchableOpacity>*/}
             {showUserInfo()}
             <Button
-                title={accessToken ? "Get User Data" : "Login"}
-                onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}
+                title="Login"
+                onPress={onLoginPress}
             />
+
+
+            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}>
+                <Image
+                    //resizeMode={"contain"}
+                    style={styles.googleButtonImage}
+                    source={require("../assets/btn_google_signin_dark_normal_web.png")}
+                />
+            </TouchableOpacity>
+
 
         </View>
     );
 }
-
-/*    return (
-        <View style={styles.container}>
-            <Text>TEST TEST TEST 2  Open up App.js to start working on your app!</Text>
-            {showUserInfo()}
-            <Button
-                title={accessToken ? "Get User Data" : "Login"}
-                onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}
-            />
-            <StatusBar style="auto" />
-        </View>
-    );
-}*/
 
 const styles = StyleSheet.create({
     container: {
@@ -150,11 +149,25 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         color: "black",
     },
-
-    image2: {
-        flex: 2,
+    googleButtonContainer: {
+        flex: 1,
         width: '50%',
         height: '50%',
+        alignItems: 'center',
+        resizeMode: 'contain'
+    },
+    googleButtonImage: {
+      //flex: 1,
+      width: '50%',
+      height: '50%',
+      resizeMode:'contain',
+    },
+
+    image2: {
+        flex: 1,
+        width: '30%',
+        height: '30%',
+        resizeMode: 'contain'
     },
 
     inputView: {
