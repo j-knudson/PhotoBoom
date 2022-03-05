@@ -127,7 +127,7 @@ const LoginScreen = ({navigation}) => {
                 <Image
                     //resizeMode={"contain"}
                     style={styles.googleButtonImage}
-                    source={require("../assets/btn_google_signin_dark_normal_web.png")}
+                    source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
                 />
             </TouchableOpacity>
 
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     },
     googleButtonImage: {
       //flex: 1,
-      width: '50%',
-      height: '50%',
+      width: '70%',
+      height: '70%',
       resizeMode:'contain',
     },
 
