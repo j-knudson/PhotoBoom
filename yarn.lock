@@ -2493,6 +2493,14 @@
     "snapdragon" "^0.8.1"
     "to-regex" "^3.0.1"
 
+"expo-app-auth@~11.1.0":
+  "integrity" "sha512-BYsVJ54GySnpVjRLmUX//XkDkqlqigpOS+MWBARURecPu038Ei2tsIsboLqbaa6oyoWhtU9OfYacVHczE/BFmQ=="
+  "resolved" "https://registry.npmjs.org/expo-app-auth/-/expo-app-auth-11.1.1.tgz"
+  "version" "11.1.1"
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "invariant" "^2.2.4"
+
 "expo-application@^4.0.2", "expo-application@~4.0.2":
   "integrity" "sha512-ngTaFplTkWn0X45gMC+VNXGyJfGxX4wOwKmtr17rNMVWOQUhhLlyMkTj9bAamzsuwZh35l3S/eD/N1aMWWUwMw=="
   "resolved" "https://registry.npmjs.org/expo-application/-/expo-application-4.0.2.tgz"
@@ -4305,6 +4313,11 @@
   dependencies:
     "is-wsl" "^1.1.0"
 
+"openssl@^2.0.0":
+  "integrity" "sha512-0FgKhQ/e+XCtTTgn3qZO2g3y+Y3FC/LGvt77oObmMR4ZkZvsV1CuG/mMZClZgZqVKr0+tkemP+I3Uub4WXkHYw=="
+  "resolved" "https://registry.npmjs.org/openssl/-/openssl-2.0.0.tgz"
+  "version" "2.0.0"
+
 "options@>=0.0.5":
   "integrity" "sha1-7CLTEoBrtT5zF3Pnza788cZDEo8="
   "resolved" "https://registry.npmjs.org/options/-/options-0.0.6.tgz"
@@ -4622,6 +4635,11 @@
     "flow-parser" "^0.121.0"
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
+
+"react-native-keychain@^8.0.0":
+  "integrity" "sha512-c7Cs+YQN26UaQsRG1dmlXL7VL2ctnXwH/dl0IOMEQ7ZaL2NdN313YSAI8ZEZZjrVhNmPsyWEuvTFqWrdpItqQg=="
+  "resolved" "https://registry.npmjs.org/react-native-keychain/-/react-native-keychain-8.0.0.tgz"
+  "version" "8.0.0"
 
 "react-native-safe-area-context@>= 3.0.0", "react-native-safe-area-context@3.3.2":
   "integrity" "sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q=="

@@ -13,22 +13,21 @@
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "expo": "~44.0.0",
+    "expo-app-auth": "~11.1.0",
     "expo-application": "^4.0.2",
     "expo-auth-session": "~3.5.0",
     "expo-random": "~12.1.1",
     "expo-status-bar": "~1.2.0",
     "expo-web-browser": "~10.1.0",
+    "openssl": "^2.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-keychain": "^8.0.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-web": "0.17.1",
-    "react-navigation": "^4.4.4",
-    "expo-app-auth": "~11.1.0",
-    "expo-auth-session": "~3.5.0",
-    "expo-random": "~12.1.1",
-    "expo-web-browser": "~10.1.0"
+    "react-navigation": "^4.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
