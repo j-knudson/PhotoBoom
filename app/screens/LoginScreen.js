@@ -144,6 +144,7 @@ const LoginScreen = ({navigation}) => {
             </TouchableOpacity>
 {/*            <Button
                 title="Login"
+                color="red"
                 onPress={onLoginPress}
             />*/}
 
