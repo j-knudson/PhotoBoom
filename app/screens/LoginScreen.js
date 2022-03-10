@@ -17,7 +17,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import stringifySafe from "react-native/Libraries/Utilities/stringifySafe";
 
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -58,6 +58,51 @@ const LoginScreen = ({navigation}) => {
         androidClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',
         webClientId: '668793616964-ghs8734d1vrjhj8b12cfk21vhte87lc0.apps.googleusercontent.com',
     });
+
+    // <Cookies>
+
+        const [isLoading, setIsLoading] = React.useState(true);
+        const [loginCounter, setLoginCounter] = React.useState(0);
+        const [forgotCounter, setForgotCounter] = React.useState(0);
+
+    const getData = async () => {
+        //Multiget
+        const values = await AsyncStorage.multiGet(['@forgotCount', '@loginCount']);
+
+        values.forEach(value => {
+            if (value[0] === '@forgotCount') {
+                const count = parseInt(value[1]);
+                setForgotCounter(isNaN(count) ? 0 : count);
+            } else if(value[0] === '@loginCount') {
+                const loginCount = parseInt(value[1]);
+                setLoginCounter(isNaN(loginCount) ? 0: loginCount);
+            }
+        });
+
+        setIsLoading(false);
+    };
+
+
+        React.useEffect(getData);
+
+/*        if (isLoading) {
+            return (
+                <Text style={styles.TextTitle}>Loading...</Text>
+            );
+        }*/
+
+
+        const incrementLoginCounter = async () => {
+            await AsyncStorage.setItem('@loginCount', (loginCounter + 1).toString());
+            setLoginCounter(loginCounter + 1);
+        }
+
+        const incrementForgotCounter = async () => {
+            await AsyncStorage.setItem('@forgotCount', (forgotCounter + 1).toString());
+            setForgotCounter(forgotCounter + 1);
+        }
+
+    // </Cookies>
 
     React.useEffect(() => {
         setMessage(JSON.stringify(response));
@@ -125,28 +170,34 @@ const LoginScreen = ({navigation}) => {
                 />
             </View>
 
-            <TouchableOpacity onPress={()=>{clickCounter("ForgotPW"),navigation.navigate('Forgot')}}>
+{/*            <TouchableOpacity onPress={()=>{clickCounter("ForgotPW"),navigation.navigate('Forgot')}}>
+                <Text style={styles.forgot_button}>Forgot Password?</Text>
+            </TouchableOpacity>*/}
+
+            <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
 
-            <div>
+            <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
+            <Text>This is how many times the login button has been clicked {loginCounter}</Text>
+{/*            <div>
                 <Text>This is how many times you've forgotten your password {localStorage.getItem("ForgotPW")}</Text>
                 <br></br>
                 <Text>This is how many times the login button has been clicked {localStorage.getItem("Login")}</Text>
-            </div>
+            </div>*/}
 
  {/*           <TouchableOpacity   style={styles.loginBtn}  >
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>*/}
             {showUserInfo()}
-            <TouchableOpacity onPress={()=>{clickCounter("Login"),onLoginPress()}}>
+{/*            <TouchableOpacity onPress={()=>{clickCounter("Login"),onLoginPress()}}>
                 <Text>Login</Text>
-            </TouchableOpacity>
-{/*            <Button
+            </TouchableOpacity>*/}
+            <Button
                 title="Login"
                 color="red"
-                onPress={onLoginPress}
-            />*/}
+                onPress={()=>{incrementLoginCounter(), onLoginPress()}}
+            />
 
 
             <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}>
