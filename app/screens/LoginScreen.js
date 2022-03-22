@@ -11,7 +11,6 @@ import {
     View,
     Image, Button,
 } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
@@ -178,18 +177,18 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
 
+            {showUserInfo()}
             <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
             <Text>This is how many times the login button has been clicked {loginCounter}</Text>
-{/*            <div>
+            {/*            <div>
                 <Text>This is how many times you've forgotten your password {localStorage.getItem("ForgotPW")}</Text>
                 <br></br>
                 <Text>This is how many times the login button has been clicked {localStorage.getItem("Login")}</Text>
             </div>*/}
 
- {/*           <TouchableOpacity   style={styles.loginBtn}  >
+            {/*           <TouchableOpacity   style={styles.loginBtn}  >
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>*/}
-            {showUserInfo()}
 {/*            <TouchableOpacity onPress={()=>{clickCounter("Login"),onLoginPress()}}>
                 <Text>Login</Text>
             </TouchableOpacity>*/}

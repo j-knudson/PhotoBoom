@@ -1,13 +1,25 @@
 import LandingScreen from "./app/screens/LandingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import ForgotLoginScreen from "./app/screens/ForgotLoginScreen";
+import SignUpScreen from "./app/screens/SignUpScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Button, Text} from "react-native-web";
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {StyleSheet} from "react-native";
 
 const Stack = createNativeStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
+function LoginSignIn() {
+    return (
+        <Tab.Navigator style={styles.tabItems}>
+            <Tab.Screen name="Login" component={LoginScreen} />
+            <Tab.Screen name="Sign Up" component={SignUpScreen} />
+        </Tab.Navigator>
+    );
+}
 
 const App = () => {
     return (
@@ -15,7 +27,7 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Login"
-                    component={LoginScreen}
+                    component={LoginSignIn}
                     //options={{title:'PhotoBoom'}}
                     options={{title:''}}
                 />
@@ -25,16 +37,6 @@ const App = () => {
 
                     options={({ route }) => ({
                         headerTitle:"Photoboom  " ,
-/*                        headerRight: ()=> (
-                            <Text style={{color: "white", fontWeight: 'bold'}}> Hello: {route.params.itemID} </Text>
-                        ),*/
-/*                        headerRight: ()=> (
-                            <Button
-                                onPress={() => alert('This is a button!')}
-                                title="Info"
-                                color="#fff"
-                            />
-                        ),*/
                         headerStyle: {
                             backgroundColor: '#008000'
                         },
@@ -55,6 +57,12 @@ const App = () => {
     )
 }
 
+const styles = StyleSheet.create({
+    tabItems: {
+        paddingTop: 70,
+    }
+
+});
 
 export default App;
 
