@@ -3,7 +3,6 @@ import LoginScreen from "./app/screens/LoginScreen";
 import ForgotLoginScreen from "./app/screens/ForgotLoginScreen";
 import SignUpScreen from "./app/screens/SignUpScreen";
 
-import ScratchApp from "../../../../AppData/Roaming/JetBrains/IntelliJIdea2021.3/scratches/scratch_1";
 
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -40,7 +39,6 @@ const App = () => {
                 <Stack.Screen
                     name="Login"
                     component={LoginSignIn}
-                    //component={ScratchApp}
                     //options={{title:'PhotoBoom'}}
                     options={{title:''}}
                 />
