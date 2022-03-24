@@ -160,11 +160,13 @@ const styles = StyleSheet.create({
 
     text: {
         color: "white",
-        fontSize: 32,
-        lineHeight: 84,
+/*        fontSize: 32,*/
+        //lineHeight: 84,
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "center",
+        width: '90%',
+        height: '100%',
         //backgroundColor: "#000000c0"
     },
 
@@ -192,6 +194,10 @@ const styles = StyleSheet.create({
         //lineHeight: 84,
         fontWeight: "bold",
         fontStyle: "italic",
-    }
+    },
+    userInfo: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
 export default SignUpScreen;
