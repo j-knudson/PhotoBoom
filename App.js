@@ -6,7 +6,6 @@ import SignUpScreen from "./app/screens/SignUpScreen";
 
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {Button, Text} from "react-native-web";
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {StyleSheet} from "react-native";

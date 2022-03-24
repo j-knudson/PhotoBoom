@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar} from "expo-status-bar";
-/*import React from 'react';*/
 import {
     Alert,
-    ImageBackground,
     StyleSheet,
     Text,
     TextInput,
@@ -14,7 +12,6 @@ import {
 
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
-import stringifySafe from "react-native/Libraries/Utilities/stringifySafe";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,14 +23,6 @@ WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
 
-    function clickCounter(buttonName) {
-        console.log(buttonName)
-        if (localStorage.getItem(buttonName)) {
-            localStorage.setItem(buttonName, stringifySafe(Number(localStorage.getItem(buttonName))+1));
-        } else {
-            localStorage.setItem(buttonName, "1");
-        }
-    }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
@@ -46,7 +35,7 @@ const LoginScreen = ({navigation}) => {
             testString: 'This is my test message'
         });
     }
-
+    // <Google OAuth>
     const [accessToken, setAccessToken] = React.useState();
     const [userInfo, setUserInfo] = React.useState();
     const [message, setMessage] = React.useState();
@@ -57,6 +46,36 @@ const LoginScreen = ({navigation}) => {
         androidClientId: '668793616964-0reltth60ectsb34e77trphv10f3team.apps.googleusercontent.com',*/
         webClientId: '837731496311-7nm5sbgj8ja4mj34ja1332j3ko0106va.apps.googleusercontent.com',
     });
+
+    React.useEffect(() => {
+        setMessage(JSON.stringify(response));
+        if (response?.type === "success") {
+            setAccessToken(response.authentication.accessToken);
+        }
+    }, [response]);
+
+    async function getUserData() {
+        let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+            headers: { Authorization: `Bearer ${accessToken}`}
+        });
+
+        userInfoResponse.json().then(data => {
+            setUserInfo(data);
+        });
+    }
+
+    function showUserInfo() {
+        if (userInfo) {
+            return (
+                <View style={styles.userInfo}>
+                    <Image source={{uri: userInfo.picture}} style={styles.profilePic} />
+                    <Text>Welcome {userInfo.name}</Text>
+                    <Text>{userInfo.email}</Text>
+                </View>
+            );
+        }
+    }
+    // </Google OAuth>
 
     // <Cookies>
 
@@ -103,34 +122,7 @@ const LoginScreen = ({navigation}) => {
 
     // </Cookies>
 
-    React.useEffect(() => {
-        setMessage(JSON.stringify(response));
-        if (response?.type === "success") {
-            setAccessToken(response.authentication.accessToken);
-        }
-    }, [response]);
 
-    async function getUserData() {
-        let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-            headers: { Authorization: `Bearer ${accessToken}`}
-        });
-
-        userInfoResponse.json().then(data => {
-            setUserInfo(data);
-        });
-    }
-
-    function showUserInfo() {
-        if (userInfo) {
-            return (
-                <View style={styles.userInfo}>
-                    <Image source={{uri: userInfo.picture}} style={styles.profilePic} />
-                    <Text>Welcome {userInfo.name}</Text>
-                    <Text>{userInfo.email}</Text>
-                </View>
-            );
-        }
-    }
 
     return (
         <View style={styles.container}>
@@ -169,29 +161,13 @@ const LoginScreen = ({navigation}) => {
                 />
             </View>
 
-{/*            <TouchableOpacity onPress={()=>{clickCounter("ForgotPW"),navigation.navigate('Forgot')}}>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>*/}
 
             <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
 
             {showUserInfo()}
-{/*            <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
-            <Text>This is how many times the login button has been clicked {loginCounter}</Text>*/}
-            {/*            <div>
-                <Text>This is how many times you've forgotten your password {localStorage.getItem("ForgotPW")}</Text>
-                <br></br>
-                <Text>This is how many times the login button has been clicked {localStorage.getItem("Login")}</Text>
-            </div>*/}
 
-            {/*           <TouchableOpacity   style={styles.loginBtn}  >
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>*/}
-{/*            <TouchableOpacity onPress={()=>{clickCounter("Login"),onLoginPress()}}>
-                <Text>Login</Text>
-            </TouchableOpacity>*/}
             <Button
                 title="Login"
                 color="red"
@@ -201,7 +177,6 @@ const LoginScreen = ({navigation}) => {
 
             <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
                 <Image
-                    //resizeMode={"contain"}
                     style={styles.googleButtonImage}
                     source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
                 />
@@ -211,8 +186,8 @@ const LoginScreen = ({navigation}) => {
         </View>
     );
 
-   /*  onbeforeunload(This is where we need to send the information somewhere
-   we will send each individual button clicks by using localstorage.getItem(button name here))
+   /*  onbeforeunload(This is where we need to send the information (cookies) somewhere
+   we will send each individual button clicks
     */
 }
 
