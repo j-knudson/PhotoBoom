@@ -1,6 +1,7 @@
 import {ImageBackground, Image, StyleSheet, View, TextInput, TouchableOpacity, Text, Button, Alert} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
+import axios from "axios";
 
 
 
@@ -51,43 +52,15 @@ const SignUpScreen = (navigation) => {
                 />
             </View>
 
-            {/*            <TouchableOpacity onPress={()=>{clickCounter("ForgotPW"),navigation.navigate('Forgot')}}>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>*/}
-
-{/*            <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>*/}
-
-{/*            {showUserInfo()}
-            <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
-            <Text>This is how many times the login button has been clicked {loginCounter}</Text>*/}
-            {/*            <div>
-                <Text>This is how many times you've forgotten your password {localStorage.getItem("ForgotPW")}</Text>
-                <br></br>
-                <Text>This is how many times the login button has been clicked {localStorage.getItem("Login")}</Text>
-            </div>*/}
-
-            {/*           <TouchableOpacity   style={styles.loginBtn}  >
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>*/}
-            {/*            <TouchableOpacity onPress={()=>{clickCounter("Login"),onLoginPress()}}>
-                <Text>Login</Text>
-            </TouchableOpacity>*/}
             <Button
                 title="Sign Up"
                 color="red"
-                /*onPress={()=>{TODO}*/
+                onPress={async function (){
+                    console.log("email is "+email+"   Password is "+password);
+                    const res = await axios.put('http://10.0.2.2:3000/users',(email,password))
+                }}
             />
 
-
-{/*            <TouchableOpacity style={styles.googleButtonContainer} >
-                <Image
-                    //resizeMode={"contain"}
-                    style={styles.googleButtonImage}
-                    source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
-                />
-            </TouchableOpacity>*/}
 
 
         </View>
