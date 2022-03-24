@@ -35,7 +35,9 @@ const LoginScreen = ({navigation}) => {
             testString: 'This is my test message'
         });
     }
-    // <Google OAuth>
+
+    // <Google OAuth> -------------------------------------------------------------------------------------
+
     const [accessToken, setAccessToken] = React.useState();
     const [userInfo, setUserInfo] = React.useState();
     const [message, setMessage] = React.useState();
@@ -75,9 +77,9 @@ const LoginScreen = ({navigation}) => {
             );
         }
     }
-    // </Google OAuth>
+    // </Google OAuth> --------------------------------------------------------------------------------------------
 
-    // <Cookies>
+    // <Cookies> --------------------------------------------------------------------------------------------------
 
         const [isLoading, setIsLoading] = React.useState(true);
         const [loginCounter, setLoginCounter] = React.useState(0);
@@ -120,7 +122,7 @@ const LoginScreen = ({navigation}) => {
             setForgotCounter(forgotCounter + 1);
         }
 
-    // </Cookies>
+    // </Cookies> -------------------------------------------------------------------------------------------------
 
 
 
