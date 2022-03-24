@@ -2,6 +2,9 @@ import LandingScreen from "./app/screens/LandingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import ForgotLoginScreen from "./app/screens/ForgotLoginScreen";
 import SignUpScreen from "./app/screens/SignUpScreen";
+
+import ScratchApp from "../../../../AppData/Roaming/JetBrains/IntelliJIdea2021.3/scratches/scratch_1";
+
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Button, Text} from "react-native-web";
@@ -14,9 +17,18 @@ const Tab = createMaterialTopTabNavigator();
 
 function LoginSignIn() {
     return (
-        <Tab.Navigator style={styles.tabItems}>
-            <Tab.Screen name="Login" component={LoginScreen} />
-            <Tab.Screen name="Sign Up" component={SignUpScreen} />
+        <Tab.Navigator style={styles.tabItems}
+           screenOptions={{
+                //tabBarStyle: { backgroundColor: 'red'},
+               //tabBarActiveTintColor: 'red',
+/*               indicatorStyle: {
+                   backgroundColor: "red",
+               }*/
+
+           }}
+        >
+                <Tab.Screen name="Login" component={LoginScreen} />
+                <Tab.Screen name="Sign Up" component={SignUpScreen} />
         </Tab.Navigator>
     );
 }
@@ -28,6 +40,7 @@ const App = () => {
                 <Stack.Screen
                     name="Login"
                     component={LoginSignIn}
+                    //component={ScratchApp}
                     //options={{title:'PhotoBoom'}}
                     options={{title:''}}
                 />
@@ -36,11 +49,11 @@ const App = () => {
                     component={LandingScreen}
 
                     options={({ route }) => ({
-                        headerTitle:"Photoboom  " ,
+                        headerTitle:"Photoboom  ",
                         headerStyle: {
                             backgroundColor: '#008000'
                         },
-                           headerTintColor: '#fff',
+                        headerTintColor: '#fff',
                         headerTitleStyle: {
                             fontWeight: 'bold',
                             fontStyle: 'italic',
@@ -59,7 +72,8 @@ const App = () => {
 
 const styles = StyleSheet.create({
     tabItems: {
-        paddingTop: 70,
+        //paddingTop: 10,
+        backgroundColor: "red",
     }
 
 });

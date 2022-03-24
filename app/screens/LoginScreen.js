@@ -178,8 +178,8 @@ const LoginScreen = ({navigation}) => {
             </TouchableOpacity>
 
             {showUserInfo()}
-            <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
-            <Text>This is how many times the login button has been clicked {loginCounter}</Text>
+{/*            <Text>This is how many times you've forgotten your password: {forgotCounter}</Text>
+            <Text>This is how many times the login button has been clicked {loginCounter}</Text>*/}
             {/*            <div>
                 <Text>This is how many times you've forgotten your password {localStorage.getItem("ForgotPW")}</Text>
                 <br></br>
@@ -202,7 +202,7 @@ const LoginScreen = ({navigation}) => {
             />
 
 
-            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}>
+            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
                 <Image
                     //resizeMode={"contain"}
                     style={styles.googleButtonImage}
@@ -285,19 +285,23 @@ const styles = StyleSheet.create({
 
     text: {
         color: "white",
-        fontSize: 32,
+        //fontSize: 32,
         lineHeight: 84,
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "center",
+        width: '90%'
         //backgroundColor: "#000000c0"
     },
-
-
     photoboomText: {
         flex: 1,
         width: '70%',
         height: '25%',
+    },
+
+    profilePic: {
+        width: 50,
+        height: 50
     },
 
     TextInput: {
@@ -317,7 +321,11 @@ const styles = StyleSheet.create({
         //lineHeight: 84,
         fontWeight: "bold",
         fontStyle: "italic",
-    }
+    },
+    userInfo: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
 
 
