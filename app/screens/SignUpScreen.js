@@ -57,7 +57,23 @@ const SignUpScreen = (navigation) => {
                 color="red"
                 onPress={async function (){
                     console.log("email is "+email+"   Password is "+password);
-                    const res = await axios.put('http://10.0.2.2:3000/users',(email,password))
+                    const res = await axios.put('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                        let rep = result.data;
+                        console.log("This is rep: "+rep);
+                    if (rep === "SUCCESS"){
+                        navigation.navigate('Login')}
+                    else if (rep === "DUPEMAIL"){
+                        Alert.alert("That Email already exists");
+                        navigation.navigate('Sign Up');
+                    }
+                    else if (rep === "BADPW"){
+                        Alert.alert("That username or password is invalid");
+                        navigation.navigate('Sign Up');
+                    }
+                    else{
+                        Alert.alert("An error occured "+result.statusText);
+                        navigation.navigate('Sign Up');
+                    }});
                 }}
             />
 
