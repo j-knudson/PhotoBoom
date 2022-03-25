@@ -60,6 +60,7 @@ const SignUpScreen = (navigation) => {
                     const res = await axios.put('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
+                        console.log("This is result: "+result);
                     if (rep === "SUCCESS"){
                         navigation.navigate('Login')}
                     else if (rep === "DUPEMAIL"){
@@ -71,7 +72,7 @@ const SignUpScreen = (navigation) => {
                         navigation.navigate('Sign Up');
                     }
                     else{
-                        Alert.alert("An error occured "+result.statusText);
+                        Alert.alert("An error occured "+result.data);
                         navigation.navigate('Sign Up');
                     }});
                 }}

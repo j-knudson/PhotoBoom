@@ -8,14 +8,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 const port = 3000;
-let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
-// connect/open to given connection "conn"
-conn.connect();
+
 
 
 
 app.get("/users",async function(request,response){
     try{
+        let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
+// connect/open to given connection "conn"
+        await conn.connect();
 
 
 
@@ -31,6 +32,7 @@ app.get("/users",async function(request,response){
             response.send(result);
         })
         //always close connection at end
+        conn.end();
     } catch (error){
         response.send("Ran into error ", error);
         console.log("Ran into error in / path",error);
@@ -55,22 +57,22 @@ app.post("/users",async function(request,response){
 
 app.put("/users",async function (request,response){
     try {
+        let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
+        // connect/open to given connection "conn"
+        await conn.connect();
         let email = request.body.email;
         let pw = request.body.password;
-        console.log(request.body.email);
-        console.log(request.body.password);
 
         let sql = "INSERT INTO users(userEmail,userPassword) VALUES ('" + email + "','" + pw + "');";
-
         await conn.query(sql, function (err, result) {
             if (err) {
                 response.send(err);
                 return "ERROR";
             } else {
-                response.send("SUCCESS");
                 return "SUCCESS";
             }
         })
+        conn.end();
     } catch (error){
         response.send("Ran into error ", error);
         console.log("Ran into error in /users path ", error)
