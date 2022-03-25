@@ -66,11 +66,13 @@ app.put("/users",async function (request,response){
         let sql = "INSERT INTO users(userEmail,userPassword) VALUES ('" + email + "','" + pw + "');";
         await conn.query(sql, function (err, result) {
             if (err) {
-                response.send(err);
-                return "ERROR";
+                if(err.errno == 1062){
+                    response.send("DUPEMAIL");}
+                else{
+                    response.send("ERROR");
+                }
             } else {
-                return "SUCCESS";
-            }
+                response.send("SUCCESS");}
         })
         conn.end();
     } catch (error){
@@ -81,5 +83,18 @@ app.put("/users",async function (request,response){
 
 })
 
+app.request("/users", async function (request, response){
+    try{
+        let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
+        // connect/open to given connection "conn"
+        await conn.connect();
+
+        let email = request.body.email;
+        let pw = request.body.password;
+
+        let sql = "SELECT userEmail FROM users WHERE userEmail = ''"+email"';";
+        console.log(sql);
+    }
+}
 
 app.listen(port,()=> console.log("App listening on ",port));

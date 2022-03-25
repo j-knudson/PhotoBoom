@@ -195,7 +195,10 @@ const LoginScreen = ({navigation}) => {
             <Button
                 title="Login"
                 color="red"
-                onPress={()=>{incrementLoginCounter(), onLoginPress()}}
+                onPress={()=>{
+                    incrementLoginCounter();
+
+                    onLoginPress()}}
             />
 
 
