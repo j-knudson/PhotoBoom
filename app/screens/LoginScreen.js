@@ -15,6 +15,8 @@ import * as WebBrowser from 'expo-web-browser';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import axios from 'axios';
+
 
 
 
@@ -175,7 +177,21 @@ const LoginScreen = ({navigation}) => {
                 color="red"
                 onPress={()=>{
                     incrementLoginCounter();
-
+                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                        let rep = result.data;
+                        console.log("This is rep: "+rep);
+                        if (rep === "SUCCESS"){
+                            navigation.navigate('Login')}
+                        else if (rep === "DNE"){
+                            Alert.alert("That Username and/or email is not correct");
+                            navigation.navigate('Sign Up');
+                        }
+                        else if (rep === "BADPW"){
+                            Alert.alert("That Username and/or email is not correct");}
+                        else{
+                            Alert.alert("An error occured "+result.data);
+                            navigation.navigate('Sign Up');
+                    }});
                     onLoginPress()}}
             />
 

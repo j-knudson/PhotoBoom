@@ -39,7 +39,7 @@ app.get("/users",async function(request,response){
     }
 })
 
-app.post("/users",async function(request,response){
+/*app.post("/users",async function(request,response){
     try{
         console.log(request.body);
         //response.send("This is the name: "+request.body.name+"This is the age: "+request.body.age);
@@ -53,7 +53,7 @@ app.post("/users",async function(request,response){
         console.log("Ran into error in / path",error);
     }
 
-})
+})*/
 
 app.put("/users",async function (request,response){
     try {
@@ -83,7 +83,7 @@ app.put("/users",async function (request,response){
 
 })
 
-app.request("/users", async function (request, response){
+app.post("/users", async function (request, response){
     try{
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         // connect/open to given connection "conn"
@@ -92,9 +92,24 @@ app.request("/users", async function (request, response){
         let email = request.body.email;
         let pw = request.body.password;
 
-        let sql = "SELECT userEmail FROM users WHERE userEmail = ''"+email"';";
+        let sql = "SELECT userEmail FROM users WHERE userEmail = '"+email+"';";
         console.log(sql);
+        await conn.query(sql, function (err, result) {
+            if (err) {
+                response.send("ERROR");
+            } else if (result.length === 0){
+                console.log("No records found");
+                response.send("DNE");
+            }
+            else {
+                console.log(result);
+                response.send("SUCCESS");}
+        });
+        conn.end()
+    }catch (error){
+        response.send("Ran into error ", error);
+        console.log("Ran into error in /users path ", error)
     }
-}
+});
 
 app.listen(port,()=> console.log("App listening on ",port));
