@@ -152,7 +152,7 @@ const LoginScreen = ({navigation}) => {
             <Image
                 resizeMode = {"contain"}
                 style={styles.image2}
-                source={require("../assets/weblogo.png")}
+                source={require("../assets/photoboom_logo.png")}
             />
             <StatusBar style="auto" />
             <View style={styles.inputView}>

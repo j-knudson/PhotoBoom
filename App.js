@@ -1,7 +1,8 @@
 import LandingScreen from "./app/screens/LandingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
-import ForgotLoginScreen from "./app/screens/ForgotLoginScreen";
+import ForgotLoginScreen from "./app/screens/ForgotLoginScreen"
 import SignUpScreen from "./app/screens/SignUpScreen";
+import SplashScreen from "./app/screens/SplashScreen";
 
 
 import {NavigationContainer} from "@react-navigation/native";
@@ -37,7 +38,8 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Login"
-                    component={LoginSignIn}
+                    //component={LoginSignIn}
+                    component={SplashScreen}
                     //options={{title:'PhotoBoom'}}
                     options={{title:''}}
                 />
