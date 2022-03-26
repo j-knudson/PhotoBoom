@@ -22,8 +22,8 @@ const SplashScreen = ( navigation) => {
     }, [])
 
     useEffect(() =>{
-        opacity.value = withTiming(1, {duration: 3000});
-        scale.value = withTiming(.5, {duration: 3000})
+        opacity.value = withTiming(1, {duration: 2000});
+        scale.value = withTiming(.5, {duration: 2000})
     });
 
     return (

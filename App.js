@@ -37,11 +37,12 @@ const App = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Login"
+                    name="SignIn"
                     //component={LoginSignIn}
-                    component={SplashScreen}
+                    component={LoginSignIn}
                     //options={{title:'PhotoBoom'}}
-                    options={{title:''}}
+                    //options={{title:''}}
+                    options={{ headerShown: false, marginTop: 20}}
                 />
                 <Stack.Screen
                     name={"Landing"}
@@ -50,7 +51,7 @@ const App = () => {
                     options={({ route }) => ({
                         headerTitle:"Photoboom  ",
                         headerStyle: {
-                            backgroundColor: '#008000'
+                            backgroundColor: '#008000',
                         },
                         headerTintColor: '#fff',
                         headerTitleStyle: {
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     tabItems: {
         //paddingTop: 10,
         backgroundColor: "red",
+        marginTop: 60,
     }
 
 });
