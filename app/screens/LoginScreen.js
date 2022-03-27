@@ -10,6 +10,9 @@ import {
     Image, Button,
 } from 'react-native';
 
+//icons
+import {Octicons} from '@expo/vector-icons';
+
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 
