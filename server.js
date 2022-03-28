@@ -39,27 +39,14 @@ app.get("/users",async function(request,response){
     }
 })
 
-/*app.post("/users",async function(request,response){
-    try{
-        console.log(request.body);
-        //response.send("This is the name: "+request.body.name+"This is the age: "+request.body.age);
-        response.json({
-            name: request.body.name,
-            age: request.body.age,
-        })
-
-    } catch (error){
-        response.status(500).send("Ran into error ", error);
-        console.log("Ran into error in / path",error);
-    }
-
-})*/
 
 app.put("/users",async function (request,response){
     try {
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         // connect/open to given connection "conn"
         await conn.connect();
+
+        // -------------------------------user sign up backend functions -------------------------------------------
         let email = request.body.email;
         let pw = request.body.password;
 
@@ -75,6 +62,8 @@ app.put("/users",async function (request,response){
                 response.send("SUCCESS");}
         })
         conn.end();
+
+        //--------------------------------end of user sign up backend functions-------------------------------------
     } catch (error){
         response.send("Ran into error ", error);
         console.log("Ran into error in /users path ", error)
@@ -88,7 +77,7 @@ app.post("/users", async function (request, response){
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         // connect/open to given connection "conn"
         await conn.connect();
-
+//----------------This is the backend functionality for the login ---------------------------------------
         let email = request.body.email;
         let pw = request.body.password;
 
@@ -115,6 +104,7 @@ app.post("/users", async function (request, response){
         response.send("Ran into error ", error);
         console.log("Ran into error in /users path ", error)
     }
+    //------------------------------------end of backend login functionality----------------------------------------
 });
 
 app.listen(port,()=> console.log("App listening on ",port));
