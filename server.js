@@ -92,7 +92,7 @@ app.post("/users", async function (request, response){
         let email = request.body.email;
         let pw = request.body.password;
 
-        let sql = "SELECT userEmail FROM users WHERE userEmail = '"+email+"';";
+        let sql = "SELECT userEmail,userPassword FROM users WHERE userEmail = '"+email+"';";
         console.log(sql);
         await conn.query(sql, function (err, result) {
             if (err) {
@@ -102,8 +102,13 @@ app.post("/users", async function (request, response){
                 response.send("DNE");
             }
             else {
-                console.log(result);
-                response.send("SUCCESS");}
+                if (pw === result[0].userPassword){
+                    console.log(result);
+                    console.log(result[0].userPassword);
+                    response.send("SUCCESS");}
+                else{
+                    response.send("BADPW");
+            }}
         });
         conn.end()
     }catch (error){
