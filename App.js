@@ -38,8 +38,8 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="SignIn"
-                    //component={LoginSignIn}
                     component={LoginSignIn}
+                    //component={SplashScreen}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
                     options={{ headerShown: false, marginTop: 20}}
