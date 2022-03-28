@@ -34,16 +34,14 @@ const LoginScreen = ({navigation}) => {
         navigation.navigate('Landing', {
             itemID : email,
             newEmail: password,
-            testString: 'This is my test message'
+            testString: 'This is my test message',
         });
     }
 
     // <Google OAuth> -------------------------------------------------------------------------------------
-
     const [accessToken, setAccessToken] = React.useState();
     const [userInfo, setUserInfo] = React.useState();
     const [message, setMessage] = React.useState();
-
     const [request, response, promptAsync] = Google.useAuthRequest({
         expoClientId: '837731496311-8nb4dc273uvhttev27tso91iv0ghst8f.apps.googleusercontent.com',
 /*        iosClientId: '668793616964-qv1f3av811hrhdmdfiq46ue49nas25hv.apps.googleusercontent.com',
@@ -66,6 +64,23 @@ const LoginScreen = ({navigation}) => {
         userInfoResponse.json().then(data => {
             setUserInfo(data);
         });
+
+    }
+
+    async function onGooglePress() {
+        let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+            headers: { Authorization: `Bearer ${accessToken}`}
+        });
+
+        await userInfoResponse.json().then(data => {
+            navigation.navigate('Landing',{
+                testString: "This message is coming from Google",
+                userData: data
+            })
+        });
+
+        Alert.alert( 'Google Press', "You signed in with google")
+
     }
 
     function showUserInfo() {
@@ -82,7 +97,6 @@ const LoginScreen = ({navigation}) => {
     // </Google OAuth> --------------------------------------------------------------------------------------------
 
     // <Cookies> --------------------------------------------------------------------------------------------------
-
         const [isLoading, setIsLoading] = React.useState(true);
         const [loginCounter, setLoginCounter] = React.useState(0);
         const [forgotCounter, setForgotCounter] = React.useState(0);

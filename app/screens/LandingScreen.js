@@ -1,4 +1,5 @@
-import {Button, StyleSheet, Text, View} from "react-native";
+import {Button, Image, StyleSheet, Text, View} from "react-native";
+import React from "react";
 
 
 //function LandingScreen(props) {
@@ -6,9 +7,23 @@ import {Button, StyleSheet, Text, View} from "react-native";
 
 
 const LandingScreen =( {route, navigation} ) => {
-    const {itemID, newEmail: passwordIs, testString} = route.params
+    const {itemID, newEmail: passwordIs, testString, userData} = route.params
     const testPress = () => {
         navigation.navigate('Login')
+    }
+
+
+    const [userInfo, setUserInfo] = React.useState();
+    function showUserInfo() {
+        if (userData) {
+            return (
+                <View style={styles.userInfo}>
+                    <Image source={{uri: userData.picture}} style={styles.profilePic} />
+                    <Text>Welcome {userData.name}</Text>
+                    <Text>{userData.email}</Text>
+                </View>
+            );
+        }
     }
     return (
 
@@ -17,15 +32,21 @@ const LandingScreen =( {route, navigation} ) => {
             <Text>Email: {JSON.stringify(itemID)}</Text>
             <Text>Password: {JSON.stringify(passwordIs)}</Text>
             <Text>Test: {JSON.stringify(testString)}</Text>
+            {/*<Text>Name: {userInfo.name}</Text>*/}
+            {showUserInfo()}
             <Button
                 title={'Landing Screen Test'}
                 onPress={testPress}
             />
+
         </View>
     );
 }
 const styles = StyleSheet.create({
-
+    profilePic: {
+        width: 50,
+        height: 50
+    },
 });
 
 
