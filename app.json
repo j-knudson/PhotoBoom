@@ -4,11 +4,11 @@
     "slug": "PhotoBoom",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/photoboom_logo_1024.png",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/splash_photoboom.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f5f5f5",
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
       }
     },
     "web": {
-      "favicon": "./app/assets/favicon.png"
+      "favicon": "./app/assets/photoboom_logo.png"
     }
   }
 }

@@ -10,10 +10,17 @@ import {
     Image, Button,
 } from 'react-native';
 
+//icons
+import {Octicons} from '@expo/vector-icons';
+
+import {Formik} from "formik";
+import * as yup from 'yup'
+
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import customStyle from "../components/styles";
 
 import axios from 'axios';
 
@@ -144,40 +151,82 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Image
-                resizeMode = {"contain"}
+            <View style={customStyle.innerContainer}>
+                <Image
+                resizeMode={"contain"}
                 style={styles.photoboomText}
                 source={require("../assets/photo_boom_text.png")}
-            />
-            <Image
-                resizeMode = {"contain"}
-                style={styles.image2}
-                source={require("../assets/weblogo.png")}
-            />
-            <StatusBar style="auto" />
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.text}
-                    placeholder="Enter Email"
-                    placeholderTextColor="white"
-                    onChangeText={(email) => setEmail(email)}
                 />
-            </View>
+                <Image
+                    resizeMode={"contain"}
+                    style={styles.image2}
+                    source={require("../assets/photoboom_logo.png")}
+                />
 
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.text}
-                    placeholder="Enter Password"
-                    placeholderTextColor="white"
-                    secureTextEntry={true}
-                    onChangeText={(password) => setPassword(password)}
-                    onKeyPress = {event =>  {
-                        if (event.key === 'Enter') {
-                            onLoginPress()
-                        }
-                    }}
-                />
-            </View>
+            <StatusBar style="auto" />
+
+
+                <View style={customStyle.loginContainer}>
+                    <Formik
+                        validationSchema={loginValidationSchema}
+                        initialValues={{email: '', password: ''}}
+                        onSubmit={values => console.log(values)}
+                    >
+                            {({
+                              handleChange,
+                              handleBlur,
+                              handleSubmit,
+                              values,
+                              errors,
+                              isValid,
+                            }) => (
+                            <>
+                            <View style={customStyle.TextInputArea}>
+                                <View style={customStyle.leftIcon}>
+                                    <Octicons name="mail" size={30} color="red"/>
+                                </View>
+                                <TextInput
+                                    style={customStyle.text}
+                                    name="email"
+                                    placeholder="Email Address"
+                                    placeholderTextColor="white"
+                                    onChangeText={handleChange('email')}
+                                    onBlur={handleBlur('email')}
+                                    value={values.email}
+                                    keyboardType="email-address"
+                                />
+                                {errors.email &&
+                                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
+                                }
+                                {errors.password &&
+                                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
+                                }
+                                <View style={customStyle.rightIcon}/>
+                            </View>
+                            <View style={customStyle.TextInputArea}>
+                                <View style={customStyle.leftIcon}>
+                                    <Octicons name="lock" size={30} color="red"/>
+                                </View>
+                                <TextInput
+                                    name="password"
+                                    placeholder="Password"
+                                    placeholderTextColor="white"
+                                    style={customStyle.text}
+                                    onChangeText={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                    value={values.password}
+                                    secureTextEntry
+                                />
+                                <View style={customStyle.rightIcon}>
+                                    <Octicons name="eye" size={30} color="red"/>
+                                </View>
+                            </View>
+                                <Button onPress={handleSubmit} title="Submit" color="red"/>
+                            </>
+                        )}
+                    </Formik>
+                </View>
+
 
 
             <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
@@ -217,7 +266,7 @@ const LoginScreen = ({navigation}) => {
                 />
             </TouchableOpacity>
 
-
+            </View>
         </View>
     );
 
@@ -225,6 +274,18 @@ const LoginScreen = ({navigation}) => {
    we will send each individual button clicks
     */
 }
+
+//*** Regextest
+const loginValidationSchema = yup.object().shape({
+    email: yup
+        .string()
+        .email("Please enter valid email")
+        .required('Email Address is Required'),
+    password: yup
+        .string()
+        .min(8, ({ min }) => `Password must be at least ${min} characters`)
+        .required('Password is required'),
+})
 
 const styles = StyleSheet.create({
     container: {
