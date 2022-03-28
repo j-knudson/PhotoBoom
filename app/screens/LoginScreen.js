@@ -15,6 +15,8 @@ import * as WebBrowser from 'expo-web-browser';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import axios from 'axios';
+
 
 
 
@@ -36,8 +38,7 @@ const LoginScreen = ({navigation}) => {
         });
     }
 
-    // <Google OAuth>
-
+    // <Google OAuth> -------------------------------------------------------------------------------------
     const [accessToken, setAccessToken] = React.useState();
     const [userInfo, setUserInfo] = React.useState();
     const [message, setMessage] = React.useState();
@@ -93,10 +94,9 @@ const LoginScreen = ({navigation}) => {
             );
         }
     }
+    // </Google OAuth> --------------------------------------------------------------------------------------------
 
-    // </Google OAuth>
-    // <Cookies>
-
+    // <Cookies> --------------------------------------------------------------------------------------------------
         const [isLoading, setIsLoading] = React.useState(true);
         const [loginCounter, setLoginCounter] = React.useState(0);
         const [forgotCounter, setForgotCounter] = React.useState(0);
@@ -138,7 +138,7 @@ const LoginScreen = ({navigation}) => {
             setForgotCounter(forgotCounter + 1);
         }
 
-    // </Cookies>
+    // </Cookies> -------------------------------------------------------------------------------------------------
 
 
 
@@ -189,12 +189,28 @@ const LoginScreen = ({navigation}) => {
             <Button
                 title="Login"
                 color="red"
-                onPress={()=>{incrementLoginCounter(), onLoginPress()}}
+                onPress={()=>{
+                    incrementLoginCounter();
+                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                        let rep = result.data;
+                        console.log("This is rep: "+rep);
+                        if (rep === "SUCCESS"){
+                            navigation.navigate('Login')}
+                        else if (rep === "DNE"){
+                            Alert.alert("That Username and/or email is not correct");
+                            navigation.navigate('Sign Up');
+                        }
+                        else if (rep === "BADPW"){
+                            Alert.alert("That Username and/or email is not correct");}
+                        else{
+                            Alert.alert("An error occured "+result.data);
+                            navigation.navigate('Sign Up');
+                    }});
+                    onLoginPress()}}
             />
 
 
-           {/* <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>*/}
-            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? onGooglePress : () => { promptAsync() }}>
+            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
                 <Image
                     style={styles.googleButtonImage}
                     source={require("../assets/btn_google_signin_dark_normal_web2x.png")}

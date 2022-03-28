@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "axios": "^0.26.1",
+    "bcrypt": "^5.0.1",
     "expo": "~44.0.0",
     "expo-app-auth": "~11.1.0",
     "expo-application": "^4.0.2",
