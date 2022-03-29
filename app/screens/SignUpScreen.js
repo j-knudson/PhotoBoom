@@ -3,7 +3,7 @@ import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
 import axios from "axios";
 
-
+/*const bcrypt = require('bcrypt');*/
 
 
 const SignUpScreen = (navigation) => {
@@ -57,6 +57,10 @@ const SignUpScreen = (navigation) => {
                 color="red"
                 onPress={async function (){
                     console.log("email is "+email+"   Password is "+password);
+                  /*  bcrypt.hash(password,8,function(err,hash){
+                        if (err) console.log("err is " + err);
+                        else console.log("hash is " + hash);
+                    })*/
                     const res = await axios.put('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
