@@ -2,6 +2,7 @@ import LandingScreen from "./app/screens/LandingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import ForgotLoginScreen from "./app/screens/ForgotLoginScreen"
 import SignUpScreen from "./app/screens/SignUpScreen";
+import SignUpScreenMore from "./app/screens/SignUpScreenMore";
 import SplashScreen from "./app/screens/SplashScreen";
 
 
@@ -39,7 +40,7 @@ const App = () => {
                 <Stack.Screen
                     name="SignIn"
                     component={LoginSignIn}
-                    //component={SplashScreen}
+                    //component={SignUpScreenMore}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
                     options={{ headerShown: false, marginTop: 20}}

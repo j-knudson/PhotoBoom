@@ -182,13 +182,12 @@ export const customStyle = StyleSheet.create({
     text: {
         color: "white",
         //fontSize: 32,
-        lineHeight: 84,
+        //lineHeight: 84,
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "center",
-        width: '70%'
-        //backgroundColor: "#000000c0"
-    },
+        width: '70%',
+        },
     photoboomLogo: {
         width: '100%',
         height: '100%',
@@ -213,8 +212,12 @@ export const customStyle = StyleSheet.create({
         marginLeft: 20,
     },
     TextInput2: {
-        textAlign: "center",
-        color: 'white',
+        alignSelf: "flex-start",
+        color: "black",
+        fontSize: 20,
+        paddingLeft: 10,
+/*        position: "absolute",
+        paddingBottom: 80,*/
     },
 
     TextTitle: {
@@ -238,11 +241,29 @@ export const customStyle = StyleSheet.create({
     },
 
     StyledContainer: {
-        backgroundColor: "whitesmoke",
+        //backgroundColor: "purple",
         alignItems: "center",
         justifyContent: "center",
+        width: "70%",
+        //height: "20%",
+        flex: 1,
     },
     TextInputArea: {
+        flex: 1,
+        backgroundColor: "blue",
+        //color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+        justifyContent: "space-between",
+        width: "70%",
+        borderRadius: 30,
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 20,
+        //padding: "5%",
+        position: "relative"
+    },
+    TextInputArea2: {
         flex: 1,
         backgroundColor: "blue",
         //color: "white",
@@ -253,14 +274,20 @@ export const customStyle = StyleSheet.create({
         borderRadius: 30,
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 10,
+        marginBottom: 20,
         //padding: "5%",
         position: "relative"
     },
     leftIcon: {
       //alignSelf: "flex-start",
       //justifyContent: "center",
-        paddingLeft: "5%"
+
+        //paddingLeft: "5%"
+        left: 15,
+        //top: 10,
+        //position: "absolute",
+        alignItems: 'center',
+        zIndex: 1,
     },
     loginButtonContainer: {
         flex: 1,
@@ -285,8 +312,27 @@ export const customStyle = StyleSheet.create({
         paddingRight: "5%",
         //justifyContent: "center"
         //zIndex: 1,
-
     },
+    StyledButton: {
+        flex: 1,
+        backgroundColor: "red",
+        //color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+        width: "70%",
+        borderRadius: 30,
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 10,
+        justifyContent: "center",
+    },
+    errorMessageBox: {
+        textAlign: "center",
+    },
+    errorText: {
+        color: 'red',
+        fontStyle: 'italic',
+    }
 });
 
 export default customStyle;

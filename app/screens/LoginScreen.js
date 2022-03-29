@@ -138,6 +138,7 @@ const LoginScreen = ({navigation}) => {
         const incrementLoginCounter = async () => {
             await AsyncStorage.setItem('@loginCount', (loginCounter + 1).toString());
             setLoginCounter(loginCounter + 1);
+            console.log("increment login pressed")
         }
 
         const incrementForgotCounter = async () => {
@@ -146,6 +147,8 @@ const LoginScreen = ({navigation}) => {
         }
 
     // </Cookies> -------------------------------------------------------------------------------------------------
+
+const [hidePassword, setHidePassword] = useState(true);
 
 
 
@@ -183,47 +186,52 @@ const LoginScreen = ({navigation}) => {
                             <>
                             <View style={customStyle.TextInputArea}>
                                 <View style={customStyle.leftIcon}>
-                                    <Octicons name="mail" size={30} color="red"/>
+                                    <Octicons name="mail" size={25} color="red"/>
                                 </View>
                                 <TextInput
                                     style={customStyle.text}
                                     name="email"
                                     placeholder="Email Address"
-                                    placeholderTextColor="white"
+                                    placeholderTextColor="gray"
                                     onChangeText={handleChange('email')}
                                     onBlur={handleBlur('email')}
                                     value={values.email}
                                     keyboardType="email-address"
                                 />
-                                {errors.email &&
-                                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
-                                }
-                                {errors.password &&
-                                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
-                                }
+                                {/*blank area so content lines up correctly with password area below*/}
                                 <View style={customStyle.rightIcon}/>
                             </View>
                             <View style={customStyle.TextInputArea}>
                                 <View style={customStyle.leftIcon}>
-                                    <Octicons name="lock" size={30} color="red"/>
+                                    <Octicons name="lock" size={25} color="red"/>
                                 </View>
                                 <TextInput
                                     name="password"
                                     placeholder="Password"
-                                    placeholderTextColor="white"
+                                    placeholderTextColor="gray"
                                     style={customStyle.text}
                                     onChangeText={handleChange('password')}
                                     onBlur={handleBlur('password')}
                                     value={values.password}
-                                    secureTextEntry
+                                    secureTextEntry={hidePassword}
                                 />
                                 <View style={customStyle.rightIcon}>
-                                    <Octicons name="eye" size={30} color="red"/>
+                                    <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
                                 </View>
                             </View>
-                                <Button onPress={handleSubmit} title="Submit" color="red"/>
+                                <View style={customStyle.errorMessageBox}>
+                                    {errors.email &&
+                                        <Text style={customStyle.errorText}>{errors.email}</Text>
+                                    }
+                                    {errors.password &&
+                                        <Text style={customStyle.errorText}>{errors.password}</Text>
+                                    }
+                                </View>
+                                <TouchableOpacity style={customStyle.StyledButton} onPress={()=> {handleSubmit,incrementLoginCounter();}}>
+                                    <Text style={customStyle.text}> Submit </Text>
+                                </TouchableOpacity>
                             </>
-                        )}
+                            )}
                     </Formik>
                 </View>
 
