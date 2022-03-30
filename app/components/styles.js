@@ -237,6 +237,7 @@ export const customStyle = StyleSheet.create({
         flex: 1,
         width: "70%",
         alignItems: "center",
+        margin: 5,
         //backgroundColor: "dodgerblue"
     },
 
@@ -255,7 +256,7 @@ export const customStyle = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "space-between",
-        width: "70%",
+        width: "75%",
         borderRadius: 30,
         flexDirection: "row",
         alignItems: "center",
@@ -275,8 +276,6 @@ export const customStyle = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 20,
-        //padding: "5%",
-        position: "relative"
     },
     leftIcon: {
       //alignSelf: "flex-start",
@@ -308,10 +307,10 @@ export const customStyle = StyleSheet.create({
         textAlign: "left",
     },
     rightIcon: {
-        //alignSelf: "flex-end",
-        paddingRight: "5%",
-        //justifyContent: "center"
-        //zIndex: 1,
+        //paddingRight: "5%",
+        right: 15,
+        alignItems: "center",
+        zIndex: 1,
     },
     StyledButton: {
         flex: 1,
@@ -319,7 +318,7 @@ export const customStyle = StyleSheet.create({
         //color: "white",
         fontWeight: "bold",
         textAlign: "center",
-        width: "70%",
+        width: "75%",
         borderRadius: 30,
         flexDirection: "row",
         alignItems: "center",

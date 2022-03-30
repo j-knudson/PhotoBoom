@@ -113,11 +113,16 @@ const SignUpScreen = (navigation) => {
                     style={styles.photoboomText}
                     source={require("../assets/photo_boom_text.png")}
                 />
+            </View>
+            <View style={customStyle.innerContainer}>
                 <Image
                     resizeMode={"contain"}
                     style={styles.image2}
                     source={require("../assets/photoboom_logo.png")}
                 />
+            </View>
+
+            <View style={customStyle.innerContainer}>
 
                 <StatusBar style="auto" />
 
@@ -179,7 +184,7 @@ const SignUpScreen = (navigation) => {
                                 />*/}
                                 <View style={customStyle.TextInputArea}>
                                     <View style={customStyle.leftIcon}>
-                                        <Octicons name="mail" size={25} color="red"/>
+                                        <Octicons name="mail" size={20} color="red"/>
                                     </View>
                                     <TextInput
                                         style={customStyle.text}
@@ -196,7 +201,7 @@ const SignUpScreen = (navigation) => {
                                 </View>
                                 <View style={customStyle.TextInputArea}>
                                     <View style={customStyle.leftIcon}>
-                                        <Octicons name="lock" size={25} color="red"/>
+                                        <Octicons name="lock" size={20} color="red"/>
                                     </View>
                                     <TextInput
                                         name="password"
@@ -209,12 +214,12 @@ const SignUpScreen = (navigation) => {
                                         secureTextEntry={hidePassword}
                                     />
                                     <View style={customStyle.rightIcon}>
-                                        <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
+                                        <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={20} color="red"/>
                                     </View>
                                 </View>
                                 <View style={customStyle.TextInputArea}>
                                     <View style={customStyle.leftIcon}>
-                                        <Octicons name="lock" size={25} color="red"/>
+                                        <Octicons name="lock" size={20} color="red"/>
                                     </View>
                                     <TextInput
                                         name="password"
@@ -227,7 +232,7 @@ const SignUpScreen = (navigation) => {
                                         secureTextEntry={hidePassword}
                                     />
                                     <View style={customStyle.rightIcon}>
-                                        <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
+                                        <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={20} color="red"/>
                                     </View>
                                 </View>
                                 <View style={customStyle.errorMessageBox}>
@@ -244,6 +249,7 @@ const SignUpScreen = (navigation) => {
                             </>
                         )}
                     </Formik>
+                    <View style={customStyle.innerContainer}></View>
                 </View>
             </View>
         </View>
