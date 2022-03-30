@@ -16,8 +16,9 @@ const SignUpScreen = (navigation) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
-    const onSignInPress = () => {
+    const onSignInPress = values => {
         Alert.alert('Sign Up Press', "You pressed the sign me up button")
+        console.log(values)
     }
 
 
@@ -131,7 +132,8 @@ const SignUpScreen = (navigation) => {
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}
-                        onSubmit={values => console.log(values)}
+                        //onSubmit={values => console.log(values)}
+                        onSubmit={onSignInPress}
                     >
                         {({
                               handleChange,
@@ -243,7 +245,7 @@ const SignUpScreen = (navigation) => {
                                         <Text style={customStyle.errorText}>{errors.password}</Text>
                                     }
                                 </View>
-                                <TouchableOpacity style={customStyle.StyledButton} onPress={()=> {handleSubmit,incrementLoginCounter();}}>
+                                <TouchableOpacity style={customStyle.StyledButton} onPress={ handleSubmit}>
                                     <Text style={customStyle.text}> Submit </Text>
                                 </TouchableOpacity>
                             </>
@@ -285,7 +287,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
             {/*blank area so content lines up correctly with password area below*/}
             <View style={customStyle.rightIcon}>
                 {isPassword && (
-                <TouchableOpacity onPress={()=> {setHidePassword(!hidePassword)}}>
+                <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
                     <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
                 </TouchableOpacity>
                 )}

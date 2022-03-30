@@ -13,6 +13,9 @@ const SignUpStyles = StyleSheet.create ({
         alignItems: "center",
         justifyContent: "center",
     },
+    errorMessageBox: {
+        textAlign: "center",
+    },
     innerContainer: {
         flex: 1,
         width: "70%",
@@ -31,7 +34,7 @@ const SignUpStyles = StyleSheet.create ({
         zIndex: 1,
     },
     loginContainer: {
-        flex: 3,
+        flex: 2,
         width: "100%",
         alignItems: "center",
         //backgroundColor: "red",
@@ -55,7 +58,6 @@ const SignUpStyles = StyleSheet.create ({
     StyledButton: {
         flex: .5,
         backgroundColor: "red",
-        //color: "white",
         fontWeight: "bold",
         textAlign: "center",
         width: "75%",
@@ -66,7 +68,6 @@ const SignUpStyles = StyleSheet.create ({
         justifyContent: "center",
     },
     StyledContainer: {
-        //backgroundColor: "purple",
         alignItems: "center",
         justifyContent: "center",
         width: "75%",
@@ -79,7 +80,15 @@ const SignUpStyles = StyleSheet.create ({
         justifyContent: "center",
         width: '70%',
     },
-    TextInputArea2: {
+    textCalendar: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+        justifyContent: "center",
+        width: '100%',
+    },
+
+    TextInputArea: {
         flex: 1,
         backgroundColor: "blue",
         fontWeight: "bold",

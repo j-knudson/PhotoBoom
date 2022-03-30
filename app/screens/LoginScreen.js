@@ -233,7 +233,7 @@ const [hidePassword, setHidePassword] = useState(true);
                                     }
                                 </View>
                                 <TouchableOpacity style={customStyle.StyledButton} onPress={()=> {handleSubmit,incrementLoginCounter();}}>
-                                    <Text style={customStyle.text}> Submit </Text>
+                                    <Text style={customStyle.text}> Login </Text>
                                 </TouchableOpacity>
                             </>
                             )}

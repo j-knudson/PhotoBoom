@@ -39,9 +39,9 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="SignIn"
-                    //component={LoginSignIn}
+                    component={LoginSignIn}
                     //component={SplashScreen}
-                    component={SignUpScreenMore}
+                    //component={SignUpScreenMore}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
                     options={{ headerShown: false, marginTop: 20}}

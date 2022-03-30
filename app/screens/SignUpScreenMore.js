@@ -1,5 +1,5 @@
 
-import {Image, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, Platform, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 import SignUpStyles from "../components/SignupStyles";
 import {StatusBar} from "expo-status-bar";
@@ -8,18 +8,46 @@ import {Octicons} from "@expo/vector-icons";
 import {Formik} from "formik";
 
 
-const SignUpScreenMore = ( navigation) => {
-    const [hidePassword, setHidePassword] = useState(true);
 
-/*    const PasswordVisibility = () => {
-        console.log(hidePassword);
-        setHidePassword(!hidePassword);
-    }*/
+import DateTimePicker from '@react-native-community/datetimepicker';
+import customStyle from "../components/styles";
+const SignUpScreenMore = ( navigation) => {
+    const [hidePassword, setHidePassword] = useState(false);
+    const [show, setShow] = useState(false);
+    const [date, setDate] = useState(new Date(2000, 0, 1))
+
+    const [isWeb, setIsWeb] = useState(true);
+    const webCheck = () => {
+        if (Platform.OS === 'web') {
+            setIsWeb(true)
+            console.log("web check found a web")
+        }
+        else {
+            setIsWeb(false)
+        }
+    }
+
+    React.useEffect(webCheck)
+
+    //Actual date of birth to be sent
+    const[dob, setDob] = useState();
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(false);
+        setDate(currentDate);
+        setDob(currentDate);
+        console.log(show);
+    }
+
+    const showDatePicker = () => {
+        setShow(true);
+    }
+
     return (
         <View style={SignUpStyles.container}>
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
-
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomText}
@@ -34,6 +62,16 @@ const SignUpScreenMore = ( navigation) => {
                 />
             </View>
             <View style={SignUpStyles.loginContainer}>
+                {show && (
+                    <DateTimePicker
+                        testId="datetimePicker"
+                        value={date}
+                        mode='date'
+                        is24hour={true}
+                        display={"default"}
+                        onChange={onChange}
+                    />
+                    )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
                         initialValues={{firstName: '', last: '', dateOfBirth: ''}}
@@ -77,24 +115,22 @@ const SignUpScreenMore = ( navigation) => {
                                 placeholderTextColor="gray"
                                 onChangeText={handleChange('dateOfBirth')}
                                 onBlur={handleBlur('dateOfBirth')}
-                                value={values.dateOfBirth}
+                                value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
+                                isDate={true}
+                                editable={isWeb}
+                                //editable={true}
+                                showDatePicker={showDatePicker}
                             />
-                            <MyTextInput
-                                label="Password"
-                                icon="lock"
-                                name="password"
-                                placeholder="* * * * * "
-                                placeholderTextColor="gray"
-                                onChangeText={handleChange('password')}
-                                onBlur={handleBlur('password')}
-                                value={values.password}
-                                secureTextEntry={hidePassword}
-                                isPassword={true}
-                                hidePassword={hidePassword}
-                                setHidePassword={{setHidePassword}}
-                            />
+                            <View style={SignUpStyles.errorMessageBox}>
+                                {errors.firstName &&
+                                    <Text style={customStyle.errorText}>{errors.firstName}</Text>
+                                }
+                                {errors.password &&
+                                    <Text style={customStyle.lastName}>{errors.lastName}</Text>
+                                }
+                            </View>
 
-                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={()=> handleSubmit}>
+                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={()=> {handleSubmit, console.log("submit pressed")}}>
                                 <Text style={SignUpStyles.text}> Submit </Text>
                             </TouchableOpacity>
                             </>
@@ -106,45 +142,50 @@ const SignUpScreenMore = ( navigation) => {
     );
 }
 const SignUpValidationSchema = yup.object().shape({
-    email: yup
+    firstName: yup
         .string()
-        .email("Please enter valid email")
-        .required('Email Address is Required'),
-    password: yup
+        .required('First name is required'),
+    lastName: yup
         .string()
-        .min(8, ({ min }) => `Password must be at least ${min} characters`)
-        .required('Password is required'),
+        .required('Last Name is required'),
 })
 
 
-const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword,...props}) => {
-    const PasswordVisibility = () => {
-        console.log(hidePassword);
-        setHidePassword(!hidePassword);
-    }
+const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
     return (
         <View style={SignUpStyles.StyledContainer}>
             <Text style={SignUpStyles.InputLabel}>{label}:</Text>
-            <View style={SignUpStyles.TextInputArea2}>
-                <View style={SignUpStyles.leftIcon}>
-                    <Octicons name={icon} size={25} color="red"/>
-                </View>
-                <TextInput
-                    style={SignUpStyles.text}
-                    {...props}
-                />
-                {/*blank area so content lines up correctly with password area below*/}
-                <View style={SignUpStyles.rightIcon}>
-                    {isPassword && (
-                        <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
-                        {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
-                            <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
+
+                <View style={SignUpStyles.TextInputArea}>
+                    <View style={SignUpStyles.leftIcon}>
+                        <Octicons name={icon} size={25} color="red"/>
+                    </View>
+                    {!isDate && !isWeb && (
+                        <TextInput
+                            style={SignUpStyles.text}
+                            {...props}
+                        />
+                    )}
+                    {isDate && (
+                        <TouchableOpacity  onPress={showDatePicker}>
+                            <TextInput
+                                style={SignUpStyles.textCalendar}
+                                {...props}
+                            />
                         </TouchableOpacity>
                     )}
+                    {/*blank area so content lines up correctly with password area below*/}
+                    <View style={SignUpStyles.rightIcon}>
+                        {isPassword && (
+                            <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
+                            {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
+                                <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
+                            </TouchableOpacity>
+                        )}
+
+                    </View>
 
                 </View>
-
-            </View>
         </View>
 
     );
