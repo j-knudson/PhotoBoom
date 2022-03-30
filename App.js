@@ -10,7 +10,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {StyleSheet} from "react-native";
+import {StyleSheet, Text, TextComponent} from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -45,6 +45,11 @@ const App = () => {
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
                     options={{ headerShown: false, marginTop: 20}}
+                />
+                <Stack.Screen
+                    name="SignUpMore"
+                    component={SignUpScreenMore}
+                    //options={{ headerShown: true, marginTop: 20}}
                 />
                 <Stack.Screen
                     name={"Landing"}

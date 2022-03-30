@@ -11,7 +11,10 @@ import {Formik} from "formik";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
-const SignUpScreenMore = ( navigation) => {
+const SignUpScreenMore = ( {route, navigation} ) => {
+
+    const {u_email} = route.params
+
     const [hidePassword, setHidePassword] = useState(false);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000, 0, 1))
@@ -25,6 +28,7 @@ const SignUpScreenMore = ( navigation) => {
         else {
             setIsWeb(false)
         }
+        console.log(u_email)
     }
 
     React.useEffect(webCheck)
@@ -48,6 +52,7 @@ const SignUpScreenMore = ( navigation) => {
         <View style={SignUpStyles.container}>
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
+                <Text>Email: {JSON.stringify(u_email)}</Text>
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomText}
@@ -74,8 +79,9 @@ const SignUpScreenMore = ( navigation) => {
                     )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', last: '', dateOfBirth: ''}}
-                        onSubmit={values => console.log(values)}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: ''}}
+                        //onSubmit={values => console.log(values)}
+                        onSubmit={onFormikSubmit}
                     >
                         {({
                               handleChange,
@@ -122,16 +128,17 @@ const SignUpScreenMore = ( navigation) => {
                                 showDatePicker={showDatePicker}
                             />
                             <View style={SignUpStyles.errorMessageBox}>
+                               {/* <Text> ... </Text>*/}
                                 {errors.firstName &&
                                     <Text style={customStyle.errorText}>{errors.firstName}</Text>
                                 }
-                                {errors.password &&
-                                    <Text style={customStyle.lastName}>{errors.lastName}</Text>
+                                {errors.lastName &&
+                                    <Text style={customStyle.errorText}>{errors.lastName}</Text>
                                 }
                             </View>
 
-                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={()=> {handleSubmit, console.log("submit pressed")}}>
-                                <Text style={SignUpStyles.text}> Submit </Text>
+                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={handleSubmit}>
+                                <Text style={SignUpStyles.text}> Submit Registration </Text>
                             </TouchableOpacity>
                             </>
                         )}
@@ -147,7 +154,7 @@ const SignUpValidationSchema = yup.object().shape({
         .required('First name is required'),
     lastName: yup
         .string()
-        .required('Last Name is required'),
+        .required('Last name is required'),
 })
 
 
@@ -191,6 +198,9 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
     );
 };
 
-
+const onFormikSubmit = values => {
+    console.log(values)
+    console.log("Sign up More Submitted")
+}
 
 export default SignUpScreenMore;

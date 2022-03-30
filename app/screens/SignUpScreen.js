@@ -6,12 +6,14 @@ import customStyle from "../components/styles";
 import {Formik} from "formik";
 import {Octicons} from "@expo/vector-icons";
 import * as yup from "yup";
+import SignUpScreenMore from "./SignUpScreenMore";
 
 
 /*const bcrypt = require('bcrypt');*/
 
 
-const SignUpScreen = (navigation) => {
+const SignUpScreen = ({navigation}) => {
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
@@ -19,8 +21,15 @@ const SignUpScreen = (navigation) => {
     const onSignInPress = values => {
         Alert.alert('Sign Up Press', "You pressed the sign me up button")
         console.log(values)
+        navigation.navigate('SignUpMore', {
+            u_email: values.email,
+        });
     }
-
+/*    navigation.navigate('Landing', {
+        itemID : email,
+        newEmail: password,
+        testString: 'This is my test message',
+    });*/
 
     ///********************ORIGINAL WORKING ******************************
 /*    return (
@@ -95,14 +104,14 @@ const SignUpScreen = (navigation) => {
 
     //*** Regextest
     const loginValidationSchema = yup.object().shape({
-        email: yup
+/*        email: yup
             .string()
             .email("Please enter valid email")
             .required('Email Address is Required'),
         password: yup
             .string()
             .min(8, ({ min }) => `Password must be at least ${min} characters`)
-            .required('Password is required'),
+            .required('Password is required'),*/
     })
 
 
@@ -246,7 +255,7 @@ const SignUpScreen = (navigation) => {
                                     }
                                 </View>
                                 <TouchableOpacity style={customStyle.StyledButton} onPress={ handleSubmit}>
-                                    <Text style={customStyle.text}> Submit </Text>
+                                    <Text style={customStyle.text}> Continue </Text>
                                 </TouchableOpacity>
                             </>
                         )}
