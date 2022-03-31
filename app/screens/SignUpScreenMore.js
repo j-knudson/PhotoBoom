@@ -70,7 +70,7 @@ const Title = styled.h1`
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
                 {/*<Text>Email: {JSON.stringify(u_email)}</Text>*/}
-                {/*<Wrapper><Text>Hello World</Text></Wrapper>*/}
+
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomText}
