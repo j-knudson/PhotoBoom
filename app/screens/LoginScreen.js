@@ -163,7 +163,7 @@ const LoginScreen = ({navigation}) => {
             const result = await AsyncStorage.multiGet(keys);
             const map1 = result.map(element => element = {name: element[0], value: element[1]});
             console.log(map1);
-            map1.forEach(function(cookie){axios.put('http://10.0.2.2:3000/cookies', {user: email, cName: cookie.name, cValue: cookie.value})})
+            const res = axios.put('http://10.0.2.2:3000/cookies', {user: email, cArray: map1});
 
         } catch (error) {
             console.error(error)
@@ -298,13 +298,13 @@ const LoginScreen = ({navigation}) => {
         </View>
     );
 
-   window.onbeforeunload = (event) => {
+/*   window.onbeforeunload = (event) => {
        console.log("In beforeunload");
        const cookieArray = importData();
        cookieArray.forEach(function(cookie){axios.put('http://10.0.2.2:3000/cookies', {user: email, cName: cookie.name, cValue: cookie.value})})
-   }
+   }*/
 
-    React.useEffect(() => {
+/*    React.useEffect(() => {
         React.AppState.addEventListener('change', handleAppStateChange);
 
         return () => {
@@ -316,7 +316,7 @@ const LoginScreen = ({navigation}) => {
         if (nextAppState === 'inactive') {
             console.log('the app is closed');
         }
-    }
+    }*/
 
 //*** Regextest
 const loginValidationSchema = yup.object().shape({

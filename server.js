@@ -109,20 +109,23 @@ app.post("/users", async function (request, response){
 
 app.put("/cookies",async function (request,response){
     try{
+        console.log("Request received");
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         // connect/open to given connection "conn"
         await conn.connect();
 //----------------This is the backend functionality for the cookies ---------------------------------------
-        let cookieName = request.body.cName;
-        let cookieValue = request.body.cValue;
         let userEmail = request.body.user;
+        let cookies = request.body.cArray;
 
-        let sql = "REPLACE INTO cookies(cookieName,cookieValue,userID) VALUES ('"+cookieName+"','"+cookieValue+"',(SELECT userID from users WHERE userEmail = '"+userEmail+"'));";
-        console.log(sql);
-        await conn.query(sql, function (err, result) {
-            if (err) console.log("Error occurred: " + err);
-            else console.log("Record successfully updated");
-        });
+
+        cookies.forEach(function(cookie){
+            let sql = "REPLACE INTO cookies(cookieName,cookieValue,userID) VALUES ('"+cookie.name+"','"+cookie.value+"',(SELECT userID from users WHERE userEmail = '"+userEmail+"'));";
+            console.log(sql);
+            conn.query(sql, function (err, result) {
+                if (err) console.log("Error occurred: " + err);
+                else console.log("Record successfully updated");
+            });
+        })
         conn.end()
     } catch (error){
     console.log("Ran into error in /cookies path ", error)}
