@@ -4,7 +4,15 @@ import styled from 'styled-components';
 
 const StatusBarHeight = Constants.statusBarHeight;
 
+export const Colors = {
+    primaryBlue: '#0000ff',
+    primaryGreen: '#008000',
+    primaryRed: '#ff0000',
+    darkLight: '#9CA3AF',
+    white: '#ffffff',
+}
 
+const {primaryBlue, primaryGreen, primaryRed, darkLight, white} = Colors;
 
 const SignUpStyles = StyleSheet.create ({
     container: {
@@ -89,17 +97,45 @@ const SignUpStyles = StyleSheet.create ({
     },
 
     TextInputArea: {
-        flex: 1,
+        //flex: 1,
+        //flexShrink: 0,
+        height: 60,
         backgroundColor: "blue",
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "space-between",
         width: "100%",
-        borderRadius: 30,
+        borderRadius: 10,
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 20,
     },
+
+///*********Matching styled inputs
+    StyledTextInput: {
+        backgroundColor: primaryBlue,
+        padding: 15,
+        paddingLeft: 55,
+        borderRadius: 5,
+        height: 60,
+        marginVertical: 3,
+        marginBottom: 10,
+        color: white,
+        width: "100%",
+        flexDirection: "row",
+        textAlign: "center",
+        justifyContent: "space-between",
+        alignItems: "center",
+
+        /*        fontWeight: "bold",
+
+                marginBottom: 20,*/
+    },
+    StyledInputLabel: {
+        color: primaryGreen,
+        fontSize: 13,
+        textAlign: 'left',
+    }
 })
 
 

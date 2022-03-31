@@ -6,12 +6,18 @@ import {StatusBar} from "expo-status-bar";
 import * as yup from "yup";
 import {Octicons} from "@expo/vector-icons";
 import {Formik} from "formik";
+import styled from 'styled-components/native';
 
 
+
+import {Colors} from "../components/styles";
+//import {Title} from "../components/styledcontainers";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
 const SignUpScreenMore = ( {route, navigation} ) => {
+
+
 
     const {u_email} = route.params
 
@@ -48,24 +54,36 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         setShow(true);
     }
 
+const Wrapper = styled.section`
+  padding: 4em;
+  background: ${Colors.primaryGreen};
+`;
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: ${Colors.primaryGreen};
+`;
+
     return (
         <View style={SignUpStyles.container}>
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
-                <Text>Email: {JSON.stringify(u_email)}</Text>
+                {/*<Text>Email: {JSON.stringify(u_email)}</Text>*/}
+                {/*<Wrapper><Text>Hello World</Text></Wrapper>*/}
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomText}
                     source={require("../assets/photo_boom_text.png")}
                 />
-            </View>
-            <View style={SignUpStyles.innerContainer}>
+{/*            </View>*/}
+{/*            <View style={SignUpStyles.innerContainer}>*/}
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomLogo}
                     source={require("../assets/photoboom_logo.png")}
                 />
-            </View>
+{/*            </View>*/}
             <View style={SignUpStyles.loginContainer}>
                 {show && (
                     <DateTimePicker
@@ -145,6 +163,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     </Formik>
 
             </View>
+            </View>
         </View>
     );
 }
@@ -160,10 +179,10 @@ const SignUpValidationSchema = yup.object().shape({
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
     return (
-        <View style={SignUpStyles.StyledContainer}>
+/*        <View style={SignUpStyles.StyledContainer}>
             <Text style={SignUpStyles.InputLabel}>{label}:</Text>
 
-                <View style={SignUpStyles.TextInputArea}>
+                <View style={SignUpStyles.TextInputArea2}>
                     <View style={SignUpStyles.leftIcon}>
                         <Octicons name={icon} size={25} color="red"/>
                     </View>
@@ -181,11 +200,11 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                             />
                         </TouchableOpacity>
                     )}
-                    {/*blank area so content lines up correctly with password area below*/}
+                    {/!*blank area so content lines up correctly with password area below*!/}
                     <View style={SignUpStyles.rightIcon}>
                         {isPassword && (
                             <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
-                            {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
+                            {/!*<TouchableOpacity onPress={PasswordVisibility}>*!/}
                                 <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
                             </TouchableOpacity>
                         )}
@@ -193,6 +212,15 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                     </View>
 
                 </View>
+        </View>*/
+
+
+
+        <View>
+            <View style={SignUpStyles.leftIcon}>
+                <Octicons name={icon} size={25} color={Colors.primaryGreen}/>
+            </View>
+
         </View>
 
     );
