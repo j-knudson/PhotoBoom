@@ -2,6 +2,7 @@ import LandingScreen from "./app/screens/LandingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import ForgotLoginScreen from "./app/screens/ForgotLoginScreen"
 import SignUpScreen from "./app/screens/SignUpScreen";
+import SignUpScreenMore from "./app/screens/SignUpScreenMore";
 import SplashScreen from "./app/screens/SplashScreen";
 
 
@@ -9,7 +10,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {StyleSheet} from "react-native";
+import {StyleSheet, Text, TextComponent} from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -40,9 +41,15 @@ const App = () => {
                     name="SignIn"
                     component={LoginSignIn}
                     //component={SplashScreen}
+                    //component={SignUpScreenMore}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
                     options={{ headerShown: false, marginTop: 20}}
+                />
+                <Stack.Screen
+                    name="SignUpMore"
+                    component={SignUpScreenMore}
+                    //options={{ headerShown: true, marginTop: 20}}
                 />
                 <Stack.Screen
                     name={"Landing"}

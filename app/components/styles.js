@@ -6,7 +6,7 @@ const StatusBarHeight = Constants.statusBarHeight;
 
 
 //colors
-/*export const Colors = {
+export const Colors = {
     primaryRed: '#ff0000',
     primaryGreen: '#008000',
     primaryBlue: '#0000ff',
@@ -19,8 +19,7 @@ const StatusBarHeight = Constants.statusBarHeight;
     white: '#ffffff',
  }
 
-*/
-
+const {primaryBlue, primaryGreen, primaryRed, darkLight, white} = Colors;
 
 /*export const StyledContainer = styled.View `
     flex: 1; 
@@ -32,14 +31,14 @@ export const InnerContainer = styled.View`
     flex: 1; 
     width: 100%; 
     align-items: center; 
-`;*/
+`;
 
-/*export const PageLogo = styled.Image`
+export const PageLogo = styled.Image`
     width: 250px; 
     height: 200px;
-`;*/
+`;
 
-/*export const PageLogo = styled.Image`
+export const PageLogo = styled.Image`
     width: '70%'; 
     height: '25%;
 `;
@@ -182,13 +181,12 @@ export const customStyle = StyleSheet.create({
     text: {
         color: "white",
         //fontSize: 32,
-        lineHeight: 84,
+        //lineHeight: 84,
         fontWeight: "bold",
         textAlign: "center",
         justifyContent: "center",
-        width: '70%'
-        //backgroundColor: "#000000c0"
-    },
+        width: '70%',
+        },
     photoboomLogo: {
         width: '100%',
         height: '100%',
@@ -213,8 +211,12 @@ export const customStyle = StyleSheet.create({
         marginLeft: 20,
     },
     TextInput2: {
-        textAlign: "center",
-        color: 'white',
+        alignSelf: "flex-start",
+        color: "black",
+        fontSize: 20,
+        paddingLeft: 10,
+/*        position: "absolute",
+        paddingBottom: 80,*/
     },
 
     TextTitle: {
@@ -234,15 +236,34 @@ export const customStyle = StyleSheet.create({
         flex: 1,
         width: "70%",
         alignItems: "center",
+        margin: 5,
         //backgroundColor: "dodgerblue"
     },
 
     StyledContainer: {
-        backgroundColor: "whitesmoke",
+        //backgroundColor: "purple",
         alignItems: "center",
         justifyContent: "center",
+        width: "70%",
+        //height: "20%",
+        flex: 1,
     },
     TextInputArea: {
+        flex: 1,
+        backgroundColor: "blue",
+        //color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+        justifyContent: "space-between",
+        width: "75%",
+        borderRadius: 30,
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 20,
+        //padding: "5%",
+        position: "relative"
+    },
+    TextInputArea2: {
         flex: 1,
         backgroundColor: "blue",
         //color: "white",
@@ -253,14 +274,18 @@ export const customStyle = StyleSheet.create({
         borderRadius: 30,
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 10,
-        //padding: "5%",
-        position: "relative"
+        marginBottom: 20,
     },
     leftIcon: {
       //alignSelf: "flex-start",
       //justifyContent: "center",
-        paddingLeft: "5%"
+
+        //paddingLeft: "5%"
+        left: 15,
+        //top: 10,
+        //position: "absolute",
+        alignItems: 'center',
+        zIndex: 1,
     },
     loginButtonContainer: {
         flex: 1,
@@ -281,12 +306,31 @@ export const customStyle = StyleSheet.create({
         textAlign: "left",
     },
     rightIcon: {
-        //alignSelf: "flex-end",
-        paddingRight: "5%",
-        //justifyContent: "center"
-        //zIndex: 1,
-
+        //paddingRight: "5%",
+        right: 15,
+        alignItems: "center",
+        zIndex: 1,
     },
+    StyledButton: {
+        flex: 1,
+        backgroundColor: "red",
+        //color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+        width: "75%",
+        borderRadius: 30,
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 10,
+        justifyContent: "center",
+    },
+    errorMessageBox: {
+        textAlign: "center",
+    },
+    errorText: {
+        color: 'red',
+        fontStyle: 'italic',
+    }
 });
 
 export default customStyle;
