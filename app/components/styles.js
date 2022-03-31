@@ -6,7 +6,7 @@ const StatusBarHeight = Constants.statusBarHeight;
 
 
 //colors
-/*export const Colors = {
+export const Colors = {
     primaryRed: '#ff0000',
     primaryGreen: '#008000',
     primaryBlue: '#0000ff',
@@ -19,8 +19,7 @@ const StatusBarHeight = Constants.statusBarHeight;
     white: '#ffffff',
  }
 
-*/
-
+const {primaryBlue, primaryGreen, primaryRed, darkLight, white} = Colors;
 
 /*export const StyledContainer = styled.View `
     flex: 1; 
@@ -32,14 +31,14 @@ export const InnerContainer = styled.View`
     flex: 1; 
     width: 100%; 
     align-items: center; 
-`;*/
+`;
 
-/*export const PageLogo = styled.Image`
+export const PageLogo = styled.Image`
     width: 250px; 
     height: 200px;
-`;*/
+`;
 
-/*export const PageLogo = styled.Image`
+export const PageLogo = styled.Image`
     width: '70%'; 
     height: '25%;
 `;
