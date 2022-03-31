@@ -54,22 +54,12 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         setShow(true);
     }
 
-const Wrapper = styled.section`
-  padding: 4em;
-  background: ${Colors.primaryGreen};
-`;
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: ${Colors.primaryGreen};
-`;
 
     return (
         <View style={SignUpStyles.container}>
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
-                {/*<Text>Email: {JSON.stringify(u_email)}</Text>*/}
+                <Text>Email: {JSON.stringify(u_email)}</Text>
 
                 <Image
                     resizeMode={"contain"}
@@ -179,10 +169,10 @@ const SignUpValidationSchema = yup.object().shape({
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
     return (
-/*        <View style={SignUpStyles.StyledContainer}>
+        <View style={SignUpStyles.StyledContainer}>
             <Text style={SignUpStyles.InputLabel}>{label}:</Text>
 
-                <View style={SignUpStyles.TextInputArea2}>
+                <View style={SignUpStyles.TextInputArea}>
                     <View style={SignUpStyles.leftIcon}>
                         <Octicons name={icon} size={25} color="red"/>
                     </View>
@@ -200,11 +190,11 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                             />
                         </TouchableOpacity>
                     )}
-                    {/!*blank area so content lines up correctly with password area below*!/}
+                    {/*blank area so content lines up correctly with password area below*/}
                     <View style={SignUpStyles.rightIcon}>
                         {isPassword && (
                             <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
-                            {/!*<TouchableOpacity onPress={PasswordVisibility}>*!/}
+                            {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
                                 <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
                             </TouchableOpacity>
                         )}
@@ -212,16 +202,16 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                     </View>
 
                 </View>
-        </View>*/
+        </View>
 
 
 
-        <View>
+/*        <View>
             <View style={SignUpStyles.leftIcon}>
                 <Octicons name={icon} size={25} color={Colors.primaryGreen}/>
             </View>
 
-        </View>
+        </View>*/
 
     );
 };

@@ -97,9 +97,9 @@ const SignUpStyles = StyleSheet.create ({
     },
 
     TextInputArea: {
-        //flex: 1,
-        //flexShrink: 0,
-        height: 60,
+        flex: 1,
+        flexShrink: 0,
+        /*height: 60,*/
         backgroundColor: "blue",
         fontWeight: "bold",
         textAlign: "center",
