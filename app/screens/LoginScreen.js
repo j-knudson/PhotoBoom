@@ -23,6 +23,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import customStyle from "../components/styles";
 
 import axios from 'axios';
+import stringifySafe from "react-native/Libraries/Utilities/stringifySafe";
 
 
 
@@ -32,8 +33,8 @@ WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
 
-
-    const [email, setEmail] = useState('');
+//TODO change useSate back to ''
+    const [email, setEmail] = useState('guy1@email.com');
     const [password, setPassword] =  useState('');
 
     const onLoginPress = () => {
@@ -146,6 +147,29 @@ const LoginScreen = ({navigation}) => {
             setForgotCounter(forgotCounter + 1);
         }
 
+    const cookies = async (cookieName) => {
+        await AsyncStorage.getItem(cookieName).then(function(result){
+            console.log("This is result in cookies function " + result);
+            if (result === null) AsyncStorage.setItem(cookieName, stringifySafe(1));
+            else {
+                const newRes = Number(result) + 1;
+                AsyncStorage.setItem(cookieName, stringifySafe(newRes));
+            }
+        })
+    }
+
+    const importData = async () => {
+        try {
+            const keys = await AsyncStorage.getAllKeys();
+            const result = await AsyncStorage.multiGet(keys);
+            const map1 = result.map(element => element = {name: element[0], value: element[1]});
+            console.log(map1);
+            const res = axios.put('http://10.0.2.2:3000/cookies', {user: email, cArray: map1});
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
     // </Cookies> -------------------------------------------------------------------------------------------------
 
 const [hidePassword, setHidePassword] = useState(true);
@@ -248,12 +272,16 @@ const [hidePassword, setHidePassword] = useState(true);
             </TouchableOpacity>
 
             {showUserInfo()}
-
+            <Button
+                title="Console.log all cookies"
+                color="blue"
+                onPress = {()=>{importData();}}/>
             <Button
                 title="Login"
                 color="red"
                 onPress={()=>{
-                    incrementLoginCounter();
+                    cookies('@loginCount');
+                    /*incrementLoginCounter();*/
                     const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
@@ -284,10 +312,25 @@ const [hidePassword, setHidePassword] = useState(true);
         </View>
     );
 
-   /*  onbeforeunload(This is where we need to send the information (cookies) somewhere
-   we will send each individual button clicks
-    */
-}
+/*   window.onbeforeunload = (event) => {
+       console.log("In beforeunload");
+       const cookieArray = importData();
+       cookieArray.forEach(function(cookie){axios.put('http://10.0.2.2:3000/cookies', {user: email, cName: cookie.name, cValue: cookie.value})})
+   }*/
+
+/*    React.useEffect(() => {
+        React.AppState.addEventListener('change', handleAppStateChange);
+
+        return () => {
+            React.AppState.removeEventListener('change', handleAppStateChange);
+        };
+    }, []);
+
+    const handleAppStateChange = (nextAppState) => {
+        if (nextAppState === 'inactive') {
+            console.log('the app is closed');
+        }
+    }*/
 
 //*** Regextest
 const loginValidationSchema = yup.object().shape({
@@ -299,7 +342,7 @@ const loginValidationSchema = yup.object().shape({
         .string()
         .min(8, ({ min }) => `Password must be at least ${min} characters`)
         .required('Password is required'),
-})
+})}
 
 const styles = StyleSheet.create({
     container: {
