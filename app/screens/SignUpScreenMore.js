@@ -1,23 +1,27 @@
 
-import {Image, ImageBackground, Platform, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, Platform, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 import SignUpStyles from "../components/SignupStyles";
 import {StatusBar} from "expo-status-bar";
 import * as yup from "yup";
 import {Octicons} from "@expo/vector-icons";
 import {Formik} from "formik";
-import styled from 'styled-components/native';
 
 
 
-import {Colors} from "../components/styles";
-//import {Title} from "../components/styledcontainers";
+
+import {Colors} from "../components/Colors";
+
+//Custom styled-components
+import * as styled from "../components/styledcontainers";
+
+import {StyledContainer, InnerContainer, PhotoboomLogo, StyledFormArea } from "../components/styledcontainers";
+
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
+import {MsgBox} from "../components/styledcontainers";
 const SignUpScreenMore = ( {route, navigation} ) => {
-
-
 
     const {u_email} = route.params
 
@@ -26,15 +30,16 @@ const SignUpScreenMore = ( {route, navigation} ) => {
     const [date, setDate] = useState(new Date(2000, 0, 1))
 
     const [isWeb, setIsWeb] = useState(true);
-    const webCheck = () => {
+    async function webCheck (){
         if (Platform.OS === 'web') {
             setIsWeb(true)
             console.log("web check found a web")
+            return true;
         }
         else {
             setIsWeb(false)
         }
-        console.log(u_email)
+        console.log("web check value is: "+isWeb)
     }
 
     React.useEffect(webCheck)
@@ -56,11 +61,10 @@ const SignUpScreenMore = ( {route, navigation} ) => {
 
 
     return (
-        <View style={SignUpStyles.container}>
+        <StyledContainer>
             <StatusBar style="auto" />
             <View style={SignUpStyles.innerContainer}>
-                <Text>Email: {JSON.stringify(u_email)}</Text>
-
+                <Text>Test Output Email is: {JSON.stringify(u_email)}</Text>
                 <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomText}
@@ -68,11 +72,12 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                 />
 {/*            </View>*/}
 {/*            <View style={SignUpStyles.innerContainer}>*/}
-                <Image
+{/*                <Image
                     resizeMode={"contain"}
                     style={SignUpStyles.photoboomLogo}
                     source={require("../assets/photoboom_logo.png")}
-                />
+                />*/}
+                <PhotoboomLogo source={require('../assets/photoboom_logo.png')}/>
 {/*            </View>*/}
             <View style={SignUpStyles.loginContainer}>
                 {show && (
@@ -109,6 +114,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 onChangeText={handleChange('firstName')}
                                 onBlur={handleBlur('firstName')}
                                 value={values.firstName}
+                                i
                                 //keyboardType="email-address"
                             />
                             <MyTextInput
@@ -120,6 +126,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 onChangeText={handleChange('lastName')}
                                 onBlur={handleBlur('lastName')}
                                 value={values.lastName}
+
                             />
                             <MyTextInput
                                 label="Date of Birth"
@@ -132,29 +139,43 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
                                 isDate={true}
                                 editable={isWeb}
-                                //editable={true}
                                 showDatePicker={showDatePicker}
+                                isPassword={true}
                             />
-                            <View style={SignUpStyles.errorMessageBox}>
-                               {/* <Text> ... </Text>*/}
+{/*                            <View style={SignUpStyles.errorMessageBox}>
+                                <Text> ... </Text>
                                 {errors.firstName &&
                                     <Text style={customStyle.errorText}>{errors.firstName}</Text>
                                 }
                                 {errors.lastName &&
                                     <Text style={customStyle.errorText}>{errors.lastName}</Text>
                                 }
-                            </View>
+                            </View>*/}
+                            <styled.MsgBox>
 
-                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={handleSubmit}>
-                                <Text style={SignUpStyles.text}> Submit Registration </Text>
-                            </TouchableOpacity>
+                                {errors.firstName &&
+                                    <Text style={customStyle.errorText}>{errors.firstName}</Text>
+                                }
+                                {errors.lastName &&
+                                    <Text style={customStyle.errorText}>{errors.lastName}</Text>
+                                }
+                            </styled.MsgBox>
+                            <styled.StyledButton2 onPress={handleSubmit}>
+                                    <styled.ButtonText>
+                                        Submit Registration
+                                    </styled.ButtonText>
+                            </styled.StyledButton2>
+                            <styled.Line />
+{/*                                <View><TouchableOpacity style={SignUpStyles.StyledButton} onPress={handleSubmit}>
+                                    <Text style={SignUpStyles.text}> Submit Registration </Text>
+                                </TouchableOpacity></View>*/}
                             </>
                         )}
                     </Formik>
 
             </View>
             </View>
-        </View>
+        </StyledContainer>
     );
 }
 const SignUpValidationSchema = yup.object().shape({
@@ -168,8 +189,10 @@ const SignUpValidationSchema = yup.object().shape({
 
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
+    console.log("end of mytext, is web: "+isWeb)
+    console.log("end of mytext, is date: "+isDate)
     return (
-        <View style={SignUpStyles.StyledContainer}>
+  /*      <View style={SignUpStyles.StyledContainer}>
             <Text style={SignUpStyles.InputLabel}>{label}:</Text>
 
                 <View style={SignUpStyles.TextInputArea}>
@@ -190,11 +213,11 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                             />
                         </TouchableOpacity>
                     )}
-                    {/*blank area so content lines up correctly with password area below*/}
+                    {/!*blank area so content lines up correctly with password area below*!/}
                     <View style={SignUpStyles.rightIcon}>
                         {isPassword && (
                             <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
-                            {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
+                            {/!*<TouchableOpacity onPress={PasswordVisibility}>*!/}
                                 <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
                             </TouchableOpacity>
                         )}
@@ -202,16 +225,36 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                     </View>
 
                 </View>
-        </View>
-
-
-
-/*        <View>
-            <View style={SignUpStyles.leftIcon}>
-                <Octicons name={icon} size={25} color={Colors.primaryGreen}/>
-            </View>
-
         </View>*/
+
+
+
+        <View style={{width: "75%", flex: 2}}>
+            <styled.StyledInputLabel> {label} </styled.StyledInputLabel>
+            <styled.LeftIcon2>
+                <Octicons name={icon} size={25} color={Colors.iconColors}/>
+                {(!isDate || Platform.OS=='web') && (
+                        <styled.StyledTextInput3 {...props} />
+                 )}
+                {isDate && Platform.OS!='web' && (
+                    <TouchableOpacity  onPress={showDatePicker}>
+                        <styled.StyledTextInput2 {...props} />
+                    </TouchableOpacity>
+                )}
+                {isPassword && (
+                    <styled.RightIcon onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
+                        <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color={Colors.iconColors}/>
+                    </styled.RightIcon>
+                )}
+                {!isPassword && (
+                    <View>
+                        <Octicons  name="thumbsup" size={25} color={Colors.primaryBlue}/>
+                    </View>
+                )}
+            </styled.LeftIcon2>
+
+
+        </View>
 
     );
 };

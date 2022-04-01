@@ -205,6 +205,8 @@ const SignUpScreen = ({navigation}) => {
                     <View style={customStyle.innerContainer}></View>
                 </View>
             </View>
+            <View style={customStyle.innerContainer}>
+            </View>
         </View>
     );
 }
@@ -281,8 +283,8 @@ const styles = StyleSheet.create({
 
     image2: {
         flex: 1,
-        width: '30%',
-        height: '30%',
+        width: '50%',
+        height: '50%',
         resizeMode: 'contain'
     },
 

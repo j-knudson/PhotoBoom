@@ -243,42 +243,42 @@ const [hidePassword, setHidePassword] = useState(true);
             </View>
             <View style={customStyle.innerContainer}>
 
-            <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
+                    <Text style={styles.forgot_button}>Forgot Password?</Text>
+                </TouchableOpacity>
 
-            {showUserInfo()}
+                {showUserInfo()}
 
-            <Button
-                title="Login"
-                color="red"
-                onPress={()=>{
-                    incrementLoginCounter();
-                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
-                        let rep = result.data;
-                        console.log("This is rep: "+rep);
-                        if (rep === "SUCCESS"){
-                            navigation.navigate('Login')}
-                        else if (rep === "DNE"){
-                            Alert.alert("That Username and/or email is not correct");
-                            navigation.navigate('Sign Up');
-                        }
-                        else if (rep === "BADPW"){
-                            Alert.alert("That Username and/or email is not correct");}
-                        else{
-                            Alert.alert("An error occured "+result.data);
-                            navigation.navigate('Sign Up');
-                    }});
-                    onLoginPress()}}
-            />
-
-
-            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
-                <Image
-                    style={styles.googleButtonImage}
-                    source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
+                <Button
+                    title="Login"
+                    color="red"
+                    onPress={()=>{
+                        incrementLoginCounter();
+                        const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                            let rep = result.data;
+                            console.log("This is rep: "+rep);
+                            if (rep === "SUCCESS"){
+                                navigation.navigate('Login')}
+                            else if (rep === "DNE"){
+                                Alert.alert("That Username and/or email is not correct");
+                                navigation.navigate('Sign Up');
+                            }
+                            else if (rep === "BADPW"){
+                                Alert.alert("That Username and/or email is not correct");}
+                            else{
+                                Alert.alert("An error occured "+result.data);
+                                navigation.navigate('Sign Up');
+                        }});
+                        onLoginPress()}}
                 />
-            </TouchableOpacity>
+
+
+                <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
+                    <Image
+                        style={styles.googleButtonImage}
+                        source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
+                    />
+                </TouchableOpacity>
 
             </View>
         </View>
