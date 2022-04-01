@@ -20,6 +20,7 @@ const SignUpStyles = StyleSheet.create ({
         backgroundColor: "whitesmoke",
         alignItems: "center",
         justifyContent: "center",
+
     },
     errorMessageBox: {
         textAlign: "center",

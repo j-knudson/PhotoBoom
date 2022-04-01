@@ -13,8 +13,10 @@ export const Colors = {
 
     customBackground: '#f5f5f5',  //smoke
     textColor: '#ffffff',
+    textError: '#ff0000',
     iconColors: '#ff0000',
     submitButtons: '#ff0000',
+    inputBackground: '#0000ff',
 
     testPurple: "purple"
 }
