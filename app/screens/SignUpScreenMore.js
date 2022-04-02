@@ -41,7 +41,6 @@ const SignUpScreenMore = ( {route, navigation} ) => {
 
     const {u_email} = route.params
 
-    const [hidePassword, setHidePassword] = useState(false);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000, 0, 1))
 
@@ -66,13 +65,12 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         setShow(false);
         setDate(currentDate);
         setDob(currentDate);
-        console.log(show);
+        console.log(dob);
     }
 
     const showDatePicker = () => {
         setShow(true);
     }
-
 
     return (
         <StyledContainer>
@@ -90,7 +88,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     <DateTimePicker
                         testId="datetimePicker"
                         value={date}
-                        mode='date'
+                        mode="date"
                         is24hour={true}
                         display={"default"}
                         onChange={onChange}
@@ -98,7 +96,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: ''}}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '1'}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={onFormikSubmit}
                     >
@@ -174,7 +172,6 @@ const SignUpValidationSchema = yup.object().shape({
         .required('Last name is required'),
 })
 
-
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
     return (
         <View style={{width: "75%", flex: 2}}>
@@ -200,14 +197,11 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, is
                     </View>
                 )}
             </StyledInputArea>
-
-
         </View>
-
     );
 };
 
-const onFormikSubmit = values => {
+const onFormikSubmit = (values, dob) => {
     console.log(values)
     console.log("Sign up More Submitted")
 }
