@@ -300,12 +300,6 @@ const [hidePassword, setHidePassword] = useState(true);
             />
 
 
-            <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
-                <Image
-                    style={styles.googleButtonImage}
-                    source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
-
-                />
                <GoogleButtonContainer onPress={accessToken ? getUserData : () => { promptAsync() }}>
                     <GoogleSignIn source={require('../assets/btn_google_signin_dark_normal_web2x.png')}/>
                 </GoogleButtonContainer>
