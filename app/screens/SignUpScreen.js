@@ -65,7 +65,7 @@ const SignUpScreen = ({navigation}) => {
 
     //*** Regextest
     const loginValidationSchema = yup.object().shape({
-        email: yup
+/*        email: yup
             .string()
             .email("Please enter valid email")
             .required('Email Address is Required'),
@@ -76,7 +76,7 @@ const SignUpScreen = ({navigation}) => {
         confirm_password: yup
             .string()
             .oneOf([yup.ref('password'), null], 'Your passwords do not match')
-            .required('Confirm password is required'),
+            .required('Confirm password is required'),*/
     })
 
 

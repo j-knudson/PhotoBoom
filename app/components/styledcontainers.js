@@ -21,15 +21,14 @@ export const GoogleButtonContainer = styled.TouchableOpacity`
     flex: 1;
     resize-mode: contain;
     width: 100%;
-    height: 10%;
     justify-content: center;
     align-items: center; 
 `;
 
 export const GoogleSignIn = styled.Image`
     resize-mode: contain; 
-    width: 50%; 
-    height: 50%; 
+    width: 75%; 
+    height: 75%; 
 `;
 
 export const InnerContainer = styled.View`
