@@ -39,7 +39,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
 const SignUpScreenMore = ( {route, navigation} ) => {
 
-    const {u_email} = route.params
+    const {u_email, u_password} = route.params
 
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000, 0, 1))
@@ -96,7 +96,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: '1'}}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: '123'}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={onFormikSubmit}
                     >

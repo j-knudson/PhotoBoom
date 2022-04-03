@@ -48,6 +48,7 @@ const SignUpScreen = ({navigation}) => {
         console.log(values)
         navigation.navigate('SignUpMore', {
             u_email: values.email,
+            u_password: values.password
         });
     }
 /*    navigation.navigate('Landing', {

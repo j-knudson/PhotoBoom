@@ -49,8 +49,16 @@ app.put("/users",async function (request,response){
         // -------------------------------user sign up backend functions -------------------------------------------
         let email = request.body.email;
         let pw = request.body.password;
+        let fname = request.body.firstName;
+        let lname = request.body.lastName;
+        let DOB = request.body.DOB;
 
-        let sql = "INSERT INTO users(userEmail,userPassword) VALUES ('" + email + "','" + pw + "');";
+        let sql = "INSERT INTO users(userEmail,userPassword,firstName,lastName,DOB) VALUES ('"
+            + email + "','"
+            + pw + "','"
+            +fname+"','"
+            +lname+"','"
+            +DOB+"');";
         await conn.query(sql, function (err, result) {
             if (err) {
                 if(err.errno == 1062){
