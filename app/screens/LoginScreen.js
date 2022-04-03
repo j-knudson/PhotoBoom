@@ -24,6 +24,26 @@ import customStyle from "../components/styles";
 
 import axios from 'axios';
 
+import {
+    BackgroundContainer_withHeader,
+    StyledContainer,
+    InnerContainer,
+    Line,
+    LoginContainer,
+    MsgBox,
+    PhotoBoomLogo,
+    PhotoBoomText,
+    RightIcon,
+    StyledFormArea,
+    StyledInputArea,
+    StyledInputLabel,
+    SubmitButton,
+    TextButton,
+    TextError,
+    TextInputArea, GoogleButtonContainer, GoogleSignIn,
+} from "../components/styledcontainers";
+import {Colors} from "../components/Colors";
+
 
 
 
@@ -153,28 +173,17 @@ const [hidePassword, setHidePassword] = useState(true);
 
 
     return (
-        <View style={styles.container}>
-            <View style={customStyle.innerContainer}>
-                <Image
-                resizeMode={"contain"}
-                style={styles.photoboomText}
-                source={require("../assets/photo_boom_text.png")}
-                />
-            </View>
-            <View style={customStyle.innerContainer}>
-                <Image
-                    resizeMode={"contain"}
-                    style={styles.image2}
-                    source={require("../assets/photoboom_logo.png")}
-                />
-            </View>
+        <StyledContainer>
+            <StatusBar style="auto" />
+            <InnerContainer>
+                <PhotoBoomText source={require('../assets/photo_boom_text.png')}/>
+            </InnerContainer>
 
-            <View style={customStyle.innerContainer}>
+            <InnerContainer>
+                <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
+            </InnerContainer>
 
-                    <StatusBar style="auto" />
-
-
-                <View style={customStyle.loginContainer}>
+            <LoginContainer>
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}
@@ -189,12 +198,9 @@ const [hidePassword, setHidePassword] = useState(true);
                               isValid,
                             }) => (
                             <>
-                            <View style={customStyle.TextInputArea}>
-                                <View style={customStyle.leftIcon}>
-                                    <Octicons name="mail" size={20} color="red"/>
-                                </View>
-                                <TextInput
-                                    style={customStyle.text}
+                                <MyTextInput
+                                    label="Email Address"
+                                    icon = "mail"
                                     name="email"
                                     placeholder="Email Address"
                                     placeholderTextColor="gray"
@@ -203,44 +209,36 @@ const [hidePassword, setHidePassword] = useState(true);
                                     value={values.email}
                                     keyboardType="email-address"
                                 />
-                                {/*blank area so content lines up correctly with password area below*/}
-                                <View style={customStyle.rightIcon}/>
-                            </View>
-                            <View style={customStyle.TextInputArea}>
-                                <View style={customStyle.leftIcon}>
-                                    <Octicons name="lock" size={20} color="red"/>
-                                </View>
-                                <TextInput
+                                <MyTextInput
+                                    label="Password"
+                                    icon="lock"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="* * * * * "
                                     placeholderTextColor="gray"
-                                    style={customStyle.text}
                                     onChangeText={handleChange('password')}
                                     onBlur={handleBlur('password')}
                                     value={values.password}
                                     secureTextEntry={hidePassword}
+                                    isPassword={true}
+                                    hidePassword={hidePassword}
+                                    setHidePassword={{setHidePassword}}
                                 />
-                                <View style={customStyle.rightIcon}>
-                                    <Octicons onPress={() => setHidePassword(!hidePassword)} name={hidePassword ? 'eye' : 'eye-closed'} size={20} color="red"/>
-                                </View>
-                            </View>
-                                <View style={customStyle.errorMessageBox}>
-                                    {errors.email &&
-                                        <Text style={customStyle.errorText}>{errors.email}</Text>
+                                <MsgBox>
+                                    {errors.firstName &&
+                                        <TextError>{errors.firstName}</TextError>
                                     }
-                                    {errors.password &&
-                                        <Text style={customStyle.errorText}>{errors.password}</Text>
+                                    {errors.lastName &&
+                                        <TextError>{errors.lastName}</TextError>
                                     }
-                                </View>
-                                <TouchableOpacity style={customStyle.StyledButton} onPress={()=> {handleSubmit,incrementLoginCounter();}}>
-                                    <Text style={customStyle.text}> Login </Text>
-                                </TouchableOpacity>
+                                </MsgBox>
+
+                                <SubmitButton onPress={handleSubmit}>
+                                    <TextButton>Submit Registration </TextButton>
+                                </SubmitButton>
                             </>
                             )}
                     </Formik>
-                </View>
-
-            </View>
+            </LoginContainer>
             <View style={customStyle.innerContainer}>
 
                 <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
@@ -271,17 +269,11 @@ const [hidePassword, setHidePassword] = useState(true);
                         }});
                         onLoginPress()}}
                 />
-
-
-                <TouchableOpacity style={styles.googleButtonContainer} onPress={accessToken ? getUserData : () => { promptAsync() }}>
-                    <Image
-                        style={styles.googleButtonImage}
-                        source={require("../assets/btn_google_signin_dark_normal_web2x.png")}
-                    />
-                </TouchableOpacity>
-
+               <GoogleButtonContainer onPress={accessToken ? getUserData : () => { promptAsync() }}>
+                    <GoogleSignIn source={require('../assets/btn_google_signin_dark_normal_web2x.png')}/>
+                </GoogleButtonContainer>
             </View>
-        </View>
+        </StyledContainer>
     );
 
    /*  onbeforeunload(This is where we need to send the information (cookies) somewhere
@@ -300,6 +292,30 @@ const loginValidationSchema = yup.object().shape({
         .min(8, ({ min }) => `Password must be at least ${min} characters`)
         .required('Password is required'),
 })
+
+const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {
+    return (
+        <View style={{width: "75%", flex: 2}}>
+            <StyledInputLabel> {label} </StyledInputLabel>
+            <StyledInputArea>
+                <Octicons name={icon} size={25} color={Colors.iconColors}/>
+                <TextInputArea {...props} />
+                {isPassword && (
+                    <RightIcon onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
+                        <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color={Colors.iconColors}/>
+                    </RightIcon>
+                )}
+                {!isPassword && (
+                    <View>
+                        <Octicons  name="thumbsup" size={25} color={Colors.inputBackground}/>
+                    </View>
+                )}
+            </StyledInputArea>
+        </View>
+    );
+};
+
+
 
 const styles = StyleSheet.create({
     container: {
