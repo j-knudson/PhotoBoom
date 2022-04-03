@@ -1,40 +1,58 @@
 
-import {Image, ImageBackground, Platform, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, Platform, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 import SignUpStyles from "../components/SignupStyles";
 import {StatusBar} from "expo-status-bar";
 import * as yup from "yup";
 import {Octicons} from "@expo/vector-icons";
 import {Formik} from "formik";
-import styled from 'styled-components/native';
 
 
 
-import {Colors} from "../components/styles";
-//import {Title} from "../components/styledcontainers";
+
+import {Colors} from "../components/Colors";
+
+//Custom styled-components
+import * as styled from "../components/styledcontainers";
+
+import {
+    BackgroundContainer_withHeader,
+    StyledContainer,
+    InnerContainer,
+    Line,
+    LoginContainer,
+    MsgBox,
+    PhotoBoomLogo,
+    PhotoBoomText,
+    RightIcon,
+    StyledFormArea,
+    StyledInputArea,
+    StyledInputLabel,
+    SubmitButton,
+    TextButton,
+    TextError,
+    TextInputArea,
+} from "../components/styledcontainers";
+
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
 const SignUpScreenMore = ( {route, navigation} ) => {
 
-
-
     const {u_email} = route.params
 
-    const [hidePassword, setHidePassword] = useState(false);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000, 0, 1))
 
     const [isWeb, setIsWeb] = useState(true);
-    const webCheck = () => {
+    async function webCheck (){
         if (Platform.OS === 'web') {
             setIsWeb(true)
-            console.log("web check found a web")
+            return true;
         }
         else {
             setIsWeb(false)
         }
-        console.log(u_email)
     }
 
     React.useEffect(webCheck)
@@ -47,39 +65,30 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         setShow(false);
         setDate(currentDate);
         setDob(currentDate);
-        console.log(show);
+        console.log(dob);
     }
 
     const showDatePicker = () => {
         setShow(true);
     }
 
-
     return (
-        <View style={SignUpStyles.container}>
+        <StyledContainer>
             <StatusBar style="auto" />
-            <View style={SignUpStyles.innerContainer}>
-                <Text>Email: {JSON.stringify(u_email)}</Text>
+            <InnerContainer>
+                <PhotoBoomText source={require('../assets/photo_boom_text.png')}/>
+            </InnerContainer>
 
-                <Image
-                    resizeMode={"contain"}
-                    style={SignUpStyles.photoboomText}
-                    source={require("../assets/photo_boom_text.png")}
-                />
-{/*            </View>*/}
-{/*            <View style={SignUpStyles.innerContainer}>*/}
-                <Image
-                    resizeMode={"contain"}
-                    style={SignUpStyles.photoboomLogo}
-                    source={require("../assets/photoboom_logo.png")}
-                />
-{/*            </View>*/}
-            <View style={SignUpStyles.loginContainer}>
+            <InnerContainer>
+                <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
+            </InnerContainer>
+
+            <LoginContainer>
                 {show && (
                     <DateTimePicker
                         testId="datetimePicker"
                         value={date}
-                        mode='date'
+                        mode="date"
                         is24hour={true}
                         display={"default"}
                         onChange={onChange}
@@ -87,7 +96,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: ''}}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '1'}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={onFormikSubmit}
                     >
@@ -109,7 +118,6 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 onChangeText={handleChange('firstName')}
                                 onBlur={handleBlur('firstName')}
                                 value={values.firstName}
-                                //keyboardType="email-address"
                             />
                             <MyTextInput
                                 label="Last Name"
@@ -120,6 +128,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 onChangeText={handleChange('lastName')}
                                 onBlur={handleBlur('lastName')}
                                 value={values.lastName}
+
                             />
                             <MyTextInput
                                 label="Date of Birth"
@@ -132,29 +141,26 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
                                 isDate={true}
                                 editable={isWeb}
-                                //editable={true}
                                 showDatePicker={showDatePicker}
                             />
-                            <View style={SignUpStyles.errorMessageBox}>
-                               {/* <Text> ... </Text>*/}
+                            <MsgBox>
                                 {errors.firstName &&
-                                    <Text style={customStyle.errorText}>{errors.firstName}</Text>
+                                    <TextError>{errors.firstName}</TextError>
                                 }
                                 {errors.lastName &&
-                                    <Text style={customStyle.errorText}>{errors.lastName}</Text>
+                                    <TextError>{errors.lastName}</TextError>
                                 }
-                            </View>
+                            </MsgBox>
 
-                            <TouchableOpacity style={SignUpStyles.StyledButton} onPress={handleSubmit}>
-                                <Text style={SignUpStyles.text}> Submit Registration </Text>
-                            </TouchableOpacity>
+                            <SubmitButton onPress={handleSubmit}>
+                                <TextButton>Submit Registration </TextButton>
+                            </SubmitButton>
+                            <Line />
                             </>
                         )}
                     </Formik>
-
-            </View>
-            </View>
-        </View>
+            </LoginContainer>
+        </StyledContainer>
     );
 }
 const SignUpValidationSchema = yup.object().shape({
@@ -166,57 +172,36 @@ const SignUpValidationSchema = yup.object().shape({
         .required('Last name is required'),
 })
 
-
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, isDate, isWeb, showDatePicker, ...props}) => {
     return (
-        <View style={SignUpStyles.StyledContainer}>
-            <Text style={SignUpStyles.InputLabel}>{label}:</Text>
-
-                <View style={SignUpStyles.TextInputArea}>
-                    <View style={SignUpStyles.leftIcon}>
-                        <Octicons name={icon} size={25} color="red"/>
+        <View style={{width: "75%", flex: 2}}>
+            <StyledInputLabel> {label} </StyledInputLabel>
+            <StyledInputArea>
+                <Octicons name={icon} size={25} color={Colors.iconColors}/>
+                {(!isDate || Platform.OS=='web') && (
+                        <TextInputArea {...props} />
+                 )}
+                {isDate && Platform.OS!='web' && (
+                    <TouchableOpacity  onPress={showDatePicker}>
+                        <TextInputArea {...props} />
+                    </TouchableOpacity>
+                )}
+                {isPassword && (
+                    <RightIcon onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
+                        <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color={Colors.iconColors}/>
+                    </RightIcon>
+                )}
+                {!isPassword && (
+                    <View>
+                        <Octicons  name="thumbsup" size={25} color={Colors.inputBackground}/>
                     </View>
-                    {!isDate && !isWeb && (
-                        <TextInput
-                            style={SignUpStyles.text}
-                            {...props}
-                        />
-                    )}
-                    {isDate && (
-                        <TouchableOpacity  onPress={showDatePicker}>
-                            <TextInput
-                                style={SignUpStyles.textCalendar}
-                                {...props}
-                            />
-                        </TouchableOpacity>
-                    )}
-                    {/*blank area so content lines up correctly with password area below*/}
-                    <View style={SignUpStyles.rightIcon}>
-                        {isPassword && (
-                            <TouchableOpacity onPress={()=> {setHidePassword.setHidePassword(!hidePassword)}}>
-                            {/*<TouchableOpacity onPress={PasswordVisibility}>*/}
-                                <Octicons  name={hidePassword ? 'eye' : 'eye-closed'} size={25} color="red"/>
-                            </TouchableOpacity>
-                        )}
-
-                    </View>
-
-                </View>
+                )}
+            </StyledInputArea>
         </View>
-
-
-
-/*        <View>
-            <View style={SignUpStyles.leftIcon}>
-                <Octicons name={icon} size={25} color={Colors.primaryGreen}/>
-            </View>
-
-        </View>*/
-
     );
 };
 
-const onFormikSubmit = values => {
+const onFormikSubmit = (values, dob) => {
     console.log(values)
     console.log("Sign up More Submitted")
 }

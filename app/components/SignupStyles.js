@@ -20,6 +20,7 @@ const SignUpStyles = StyleSheet.create ({
         backgroundColor: "whitesmoke",
         alignItems: "center",
         justifyContent: "center",
+
     },
     errorMessageBox: {
         textAlign: "center",
@@ -57,6 +58,7 @@ const SignUpStyles = StyleSheet.create ({
         flex: 1,
         width: '70%',
         height: '25%',
+        flexShrink: 2,
     },
     rightIcon: {
         right: 15,
