@@ -96,7 +96,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     )}
                 <Formik
                         validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: '123'}}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: u_password}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={onFormikSubmit}
                     >

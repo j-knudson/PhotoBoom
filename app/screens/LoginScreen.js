@@ -184,7 +184,7 @@ const LoginScreen = ({navigation}) => {
             const result = await AsyncStorage.multiGet(keys);
             const map1 = result.map(element => element = {name: element[0], value: element[1]});
             console.log(map1);
-            const res = axios.put('http://10.0.2.2:3000/cookies', {user: email, cArray: map1});
+            const res = axios.put('http://localhost:3000/cookies', {user: email, cArray: map1});
 
         } catch (error) {
             console.error(error)
@@ -281,7 +281,7 @@ const [hidePassword, setHidePassword] = useState(true);
                 onPress={()=>{
                     cookies('@loginCount');
                     /*incrementLoginCounter();*/
-                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                    const res = axios.post('http://localhost:3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
                         if (rep === "SUCCESS"){
