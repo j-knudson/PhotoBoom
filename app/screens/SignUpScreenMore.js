@@ -1,5 +1,16 @@
 
-import {Image, ImageBackground, Platform, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Alert,
+    Button,
+    Image,
+    ImageBackground,
+    Platform,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import React, {useState} from "react";
 import SignUpStyles from "../components/SignupStyles";
 import {StatusBar} from "expo-status-bar";
@@ -37,7 +48,15 @@ import {
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import customStyle from "../components/styles";
+import axios from "axios";
+
+
 const SignUpScreenMore = ( {route, navigation} ) => {
+
+    const testPress = (screen) => {
+        navigation.navigate(screen)
+    }
+
 
     const {u_email, u_password} = route.params
 
@@ -98,7 +117,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         validationSchema={SignUpValidationSchema}
                         initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: u_password}}
                         //onSubmit={values => console.log(values)}
-                        onSubmit={onFormikSubmit}
+                        onSubmit= {valuesToDb}
                     >
                         {({
                               handleChange,
@@ -205,5 +224,48 @@ const onFormikSubmit = (values, dob) => {
     console.log(values)
     console.log("Sign up More Submitted")
 }
+
+const valuesToDb = (values) => {
+        console.log(values)
+        console.log("In valuesToDB")
+
+        console.log(
+            values.email,
+            values.password,
+            values.firstName,
+            values.lastName,
+            values.dateOfBirth,
+        )
+
+
+        const res = axios.put('http://10.0.2.2:3000/users',
+            {email: values.email,
+                password: values.password,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                dob: values.dateOfBirth,
+                }).then(function(result) {
+            let rep = result.data;
+
+            console.log("This is rep: "+rep);
+            if (rep === "SUCCESS"){
+                navigation.navigate('Landing')
+            }
+            else if (rep === "DNE"){
+                Alert.alert("That Username and/or email is not correct");
+                navigation.navigate('Sign Up');
+            }
+            else if (rep === "BADPW"){
+                Alert.alert("That Username and/or email is not correct");
+            }
+            else {
+                Alert.alert("An error occured " + result.data);
+                navigation.navigate('SignUpMore');
+            }})
+}
+
+
+
+
 
 export default SignUpScreenMore;

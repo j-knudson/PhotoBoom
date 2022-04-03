@@ -136,12 +136,12 @@ const SignUpScreen = ({navigation}) => {
                                 <MyTextInput
                                     label="Re-enter Password"
                                     icon="lock"
-                                    name="password"
+                                    name="confirm_password"
                                     placeholder="* * * * * "
                                     placeholderTextColor="gray"
-                                    onChangeText={handleChange('password')}
-                                    onBlur={handleBlur('password')}
-                                    value={values.password}
+                                    onChangeText={handleChange('confirm_password')}
+                                    onBlur={handleBlur('confirm_password')}
+                                    value={values.confirm_password}
                                     secureTextEntry={hidePassword}
                                     isPassword={true}
                                     hidePassword={hidePassword}
