@@ -1,5 +1,16 @@
 
-import {Image, ImageBackground, Platform, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Alert,
+    Button,
+    Image,
+    ImageBackground,
+    Platform,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import React, {useState} from "react";
 import SignUpStyles from "../components/SignupStyles";
 import {StatusBar} from "expo-status-bar";
@@ -12,8 +23,6 @@ import {Formik} from "formik";
 
 import {Colors} from "../components/Colors";
 
-//Custom styled-components
-import * as styled from "../components/styledcontainers";
 
 import {
     BackgroundContainer_withHeader,
@@ -36,8 +45,54 @@ import {
 
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import customStyle from "../components/styles";
+import axios from "axios";
+
 const SignUpScreenMore = ( {route, navigation} ) => {
+
+
+    const valuesToDb = (values) => {
+        console.log(values)
+        console.log("In valuesToDB")
+        console.log("Dob check "+dob.toDateString())
+
+
+        console.log(
+            values.email,
+            values.password,
+            values.firstName,
+            values.lastName,
+            values.dateOfBirth,
+        )
+
+
+        const res = axios.put('http://10.0.2.2:3000/users',
+            {email: values.email,
+                password: values.password,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                dob: values.dateOfBirth,
+            }).then(function(result) {
+            let rep = result.data;
+
+            console.log("This is rep: "+rep);
+            if (rep === "SUCCESS"){
+                navigation.navigate('Landing')
+            }
+            else if (rep === "DNE"){
+                Alert.alert("That Username and/or email is not correct");
+                navigation.navigate('Sign Up');
+            }
+            else if (rep === "BADPW"){
+                Alert.alert("That Username and/or email is not correct");
+            }
+            else {
+                Alert.alert("An error occured " + result.data);
+                navigation.navigate('SignUpMore', {
+                    u_email: values.email,
+                    u_password: values.password
+                });
+            }})
+    }
 
     const {u_email, u_password} = route.params
 
@@ -94,11 +149,12 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         onChange={onChange}
                     />
                     )}
+                {/*//TODO add on submit loading spinner */}
                 <Formik
-                        validationSchema={SignUpValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: '123'}}
+                        validationSchema={SignUpMoreValidationSchema}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
                         //onSubmit={values => console.log(values)}
-                        onSubmit={onFormikSubmit}
+                        onSubmit={valuesToDb}
                     >
                         {({
                               handleChange,
@@ -107,6 +163,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                               values,
                               errors,
                               isValid,
+                              touched,
                           }) => (
                             <>
                             <MyTextInput
@@ -130,6 +187,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 value={values.lastName}
 
                             />
+                            {/*//TODO datepicker values not submitting correctly with dob for mobile */}
                             <MyTextInput
                                 label="Date of Birth"
                                 icon = "calendar"
@@ -144,10 +202,10 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 showDatePicker={showDatePicker}
                             />
                             <MsgBox>
-                                {errors.firstName &&
+                                {errors.firstName && touched.firstName &&
                                     <TextError>{errors.firstName}</TextError>
                                 }
-                                {errors.lastName &&
+                                {errors.lastName && touched.lastName &&
                                     <TextError>{errors.lastName}</TextError>
                                 }
                             </MsgBox>
@@ -163,7 +221,8 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         </StyledContainer>
     );
 }
-const SignUpValidationSchema = yup.object().shape({
+
+const SignUpMoreValidationSchema = yup.object().shape({
     firstName: yup
         .string()
         .required('First name is required'),
@@ -205,5 +264,9 @@ const onFormikSubmit = (values, dob) => {
     console.log(values)
     console.log("Sign up More Submitted")
 }
+
+
+
+
 
 export default SignUpScreenMore;

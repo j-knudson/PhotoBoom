@@ -1,4 +1,5 @@
 import {
+    ActivityIndicator,
     View,
     Alert,
 } from "react-native";
@@ -64,8 +65,8 @@ const SignUpScreen = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
 
     //*** Regextest
-    const loginValidationSchema = yup.object().shape({
-        /*email: yup
+    const SignUpValidationSchema = yup.object().shape({
+        email: yup
             .string()
             .email("Please enter valid email")
             .required('Email Address is Required'),
@@ -76,7 +77,7 @@ const SignUpScreen = ({navigation}) => {
         confirm_password: yup
             .string()
             .oneOf([yup.ref('password'), null], 'Your passwords do not match')
-            .required('Confirm password is required'),*/
+            .required('Confirm password is required'),
     })
 
 
@@ -92,19 +93,26 @@ const SignUpScreen = ({navigation}) => {
             </InnerContainer>
 
             <LoginContainer>
-                    <Formik
-                        validationSchema={loginValidationSchema}
+                {/*//TODO Check on Submit with backend submissions and a timeout*/}
+                <Formik
+                        validationSchema={SignUpValidationSchema}
                         initialValues={{email: '', password: '', confirm_password: ''}}
-                        //onSubmit={values => console.log(values)}
-                        onSubmit={onSignInPress}
+                        onSubmit={(values, { setSubmitting }) => {
+                          onSignInPress(values);
+                          setSubmitting(false);
+                        }}
+                        //onSubmit={onSignInPress}
+
                     >
-                        {({
+                    {({
                               handleChange,
                               handleBlur,
                               handleSubmit,
                               values,
                               errors,
                               isValid,
+                              touched,
+                              isSubmitting,
                           }) => (
                             <>
                                 <MyTextInput
@@ -136,12 +144,12 @@ const SignUpScreen = ({navigation}) => {
                                 <MyTextInput
                                     label="Re-enter Password"
                                     icon="lock"
-                                    name="password"
+                                    name="confirm_password"
                                     placeholder="* * * * * "
                                     placeholderTextColor="gray"
-                                    onChangeText={handleChange('password')}
-                                    onBlur={handleBlur('password')}
-                                    value={values.password}
+                                    onChangeText={handleChange('confirm_password')}
+                                    onBlur={handleBlur('confirm_password')}
+                                    value={values.confirm_password}
                                     secureTextEntry={hidePassword}
                                     isPassword={true}
                                     hidePassword={hidePassword}
@@ -149,16 +157,24 @@ const SignUpScreen = ({navigation}) => {
                                 />
 
                                 <MsgBox>
-                                    {errors.firstName &&
-                                        <TextError>{errors.firstName}</TextError>
+                                    {errors.email && touched.email &&
+                                        <TextError>{errors.email}</TextError>
                                     }
-                                    {errors.lastName &&
-                                        <TextError>{errors.lastName}</TextError>
+                                    {errors.password && touched.password &&
+                                        <TextError>{errors.password}</TextError>
+                                    }
+                                    {errors.confirm_password && touched.confirm_password &&
+                                        <TextError>{errors.confirm_password}</TextError>
                                     }
                                 </MsgBox>
 
                                 <SubmitButton onPress={handleSubmit}>
-                                    <TextButton>Submit Registration </TextButton>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextButton>Submit Registration </TextButton>
+                                    }
                                 </SubmitButton>
                                 <Line />
                             </>

@@ -49,7 +49,7 @@ const App = () => {
                 <Stack.Screen
                     name="SignUpMore"
                     component={SignUpScreenMore}
-                    //options={{ headerShown: true, marginTop: 20}}
+                    options={({ route }) => ({title: route.params.u_email})}
                 />
                 <Stack.Screen
                     name={"Landing"}

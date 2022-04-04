@@ -22,7 +22,7 @@ app.get("/users",async function(request,response){
 
 
         // setting query statement
-        let sql = "SELECT * FROM cookies";
+        let sql = "SELECT * FROM users";
         // do query
         await conn.query(sql,function(err,result){
             if (err) {
@@ -42,6 +42,7 @@ app.get("/users",async function(request,response){
 
 app.put("/users",async function (request,response){
     try {
+        console.log("In /users .put");
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         // connect/open to given connection "conn"
         await conn.connect();
@@ -51,7 +52,7 @@ app.put("/users",async function (request,response){
         let pw = request.body.password;
         let fname = request.body.firstName;
         let lname = request.body.lastName;
-        let DOB = request.body.DOB;
+        let DOB = request.body.dob;
 
         let sql = "INSERT INTO users(userEmail,userPassword,firstName,lastName,DOB) VALUES ('"
             + email + "','"
