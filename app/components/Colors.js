@@ -32,5 +32,5 @@ export const Colors = {
     testPurple: "purple"
 }
 
-const {customBackground, primaryGreen, primaryRed, darkLight, white, submitButtons, iconColors, textColor} = Colors;
+
 
