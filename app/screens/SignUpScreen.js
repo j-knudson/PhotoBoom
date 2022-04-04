@@ -11,7 +11,8 @@ import {Formik} from "formik";
 import {Octicons} from "@expo/vector-icons";
 import * as yup from "yup";
 
-
+//keyboard avoiding view
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 import {
     BackgroundContainer_withHeader,
@@ -91,7 +92,7 @@ const SignUpScreen = ({navigation}) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-
+            <KeyboardAvoidingWrapper>
             <LoginContainer>
                 {/*//TODO Check on Submit with backend submissions and a timeout*/}
                 <Formik
@@ -173,7 +174,7 @@ const SignUpScreen = ({navigation}) => {
                                         <ActivityIndicator size="large" color={Colors.primaryGreen} />
                                     }
                                     {!isSubmitting &&
-                                        <TextButton>Submit Registration </TextButton>
+                                        <TextButton>Continue Registration </TextButton>
                                     }
                                 </SubmitButton>
                                 <Line />
@@ -181,7 +182,9 @@ const SignUpScreen = ({navigation}) => {
                         )}
                     </Formik>
             </LoginContainer>
+            </KeyboardAvoidingWrapper>
         </StyledContainer>
+
     );
 }
 
