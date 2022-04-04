@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 const port = 3000;
 
-
+const cors = require('cors');
+app.use(cors());
 
 
 app.get("/users",async function(request,response){
