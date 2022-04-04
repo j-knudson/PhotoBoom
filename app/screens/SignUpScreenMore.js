@@ -162,6 +162,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                               values,
                               errors,
                               isValid,
+                              touched,
                           }) => (
                             <>
                             <MyTextInput
@@ -199,10 +200,10 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 showDatePicker={showDatePicker}
                             />
                             <MsgBox>
-                                {errors.firstName &&
+                                {errors.firstName && touched.firstName &&
                                     <TextError>{errors.firstName}</TextError>
                                 }
-                                {errors.lastName &&
+                                {errors.lastName && touched.lastName &&
                                     <TextError>{errors.lastName}</TextError>
                                 }
                             </MsgBox>
