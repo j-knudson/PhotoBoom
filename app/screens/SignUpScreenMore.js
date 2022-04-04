@@ -18,7 +18,8 @@ import * as yup from "yup";
 import {Octicons} from "@expo/vector-icons";
 import {Formik} from "formik";
 
-
+//keyboard avoiding view
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 
 import {Colors} from "../components/Colors";
@@ -137,7 +138,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-
+            <KeyboardAvoidingWrapper>
             <LoginContainer>
                 {show && (
                     <DateTimePicker
@@ -218,6 +219,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         )}
                     </Formik>
             </LoginContainer>
+            </KeyboardAvoidingWrapper>
         </StyledContainer>
     );
 }

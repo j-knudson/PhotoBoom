@@ -45,9 +45,8 @@ import {
 } from "../components/styledcontainers";
 import {Colors} from "../components/Colors";
 
-
-
-
+//keyboard avoiding view
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -216,7 +215,7 @@ const [hidePassword, setHidePassword] = useState(true);
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-
+            <KeyboardAvoidingWrapper>
             <LoginContainer>
                     {/*//TODO add on submit loading spinner */}
                     <Formik
@@ -275,6 +274,7 @@ const [hidePassword, setHidePassword] = useState(true);
                             )}
                     </Formik>
             </LoginContainer>
+            </KeyboardAvoidingWrapper>
             <View style={customStyle.innerContainer}>
 
 
