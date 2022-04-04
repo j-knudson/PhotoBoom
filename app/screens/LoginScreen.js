@@ -218,6 +218,7 @@ const [hidePassword, setHidePassword] = useState(true);
             </InnerContainer>
 
             <LoginContainer>
+                    {/*//TODO add on submit loading spinner */}
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}

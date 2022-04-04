@@ -1,4 +1,5 @@
 import {
+    ActivityIndicator,
     View,
     Alert,
 } from "react-native";
@@ -92,13 +93,18 @@ const SignUpScreen = ({navigation}) => {
             </InnerContainer>
 
             <LoginContainer>
-                    <Formik
+                {/*//TODO Check on Submit with backend submissions and a timeout*/}
+                <Formik
                         validationSchema={SignUpValidationSchema}
                         initialValues={{email: '', password: '', confirm_password: ''}}
-                        //onSubmit={values => console.log(values)}
-                        onSubmit={onSignInPress}
+                        onSubmit={(values, { setSubmitting }) => {
+                          onSignInPress(values);
+                          setSubmitting(false);
+                        }}
+                        //onSubmit={onSignInPress}
+
                     >
-                        {({
+                    {({
                               handleChange,
                               handleBlur,
                               handleSubmit,
@@ -106,6 +112,7 @@ const SignUpScreen = ({navigation}) => {
                               errors,
                               isValid,
                               touched,
+                              isSubmitting,
                           }) => (
                             <>
                                 <MyTextInput
@@ -162,7 +169,12 @@ const SignUpScreen = ({navigation}) => {
                                 </MsgBox>
 
                                 <SubmitButton onPress={handleSubmit}>
-                                    <TextButton>Submit Registration </TextButton>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextButton>Submit Registration </TextButton>
+                                    }
                                 </SubmitButton>
                                 <Line />
                             </>

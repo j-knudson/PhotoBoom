@@ -1,8 +1,19 @@
 //colors
-export const Colors = {
-    primaryRed: '#ff0000',
-    primaryGreen: '#008000',
+
+export const ColorCodes = {
     primaryBlue: '#0000ff',
+    primaryRed: '#ff0000',
+    primaryGreen: '#00ff00',
+    secondaryGreen: "#008000",
+    white: '#ffffff',
+    background: '#f5f5f5',
+}
+
+export const Colors = {
+    primaryRed: ColorCodes.primaryRed,
+    primaryGreen: ColorCodes.primaryGreen,
+    secondaryGreen: ColorCodes.secondaryGreen,
+    primaryBlue: ColorCodes.primaryBlue,
     darkLight: '#9CA3AF',
 
     brand: "#6D28D9",
@@ -11,14 +22,15 @@ export const Colors = {
     white: '#ffffff',
 
 
-    customBackground: '#f5f5f5',  //smoke
-    textColor: '#ffffff',
-    textError: '#ff0000',
-    iconColors: '#ff0000',
-    submitButtons: '#ff0000',
-    inputBackground: '#0000ff',
+    customBackground: ColorCodes.background,  //smoke
+    textColor: ColorCodes.white,
+    textError: ColorCodes.primaryRed,
+    iconColors: ColorCodes.primaryRed,
+    submitButtons: ColorCodes.primaryRed,
+    inputBackground: ColorCodes.primaryBlue,
 
     testPurple: "purple"
 }
 
 const {customBackground, primaryGreen, primaryRed, darkLight, white, submitButtons, iconColors, textColor} = Colors;
+

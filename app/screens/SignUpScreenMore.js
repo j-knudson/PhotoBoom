@@ -149,6 +149,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         onChange={onChange}
                     />
                     )}
+                {/*//TODO add on submit loading spinner */}
                 <Formik
                         validationSchema={SignUpMoreValidationSchema}
                         initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
@@ -186,6 +187,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                                 value={values.lastName}
 
                             />
+                            {/*//TODO datepicker values not submitting correctly with dob for mobile */}
                             <MyTextInput
                                 label="Date of Birth"
                                 icon = "calendar"
