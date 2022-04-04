@@ -194,7 +194,17 @@ const LoginScreen = ({navigation}) => {
 
 const [hidePassword, setHidePassword] = useState(true);
 
-
+//*** Regextest
+    const loginValidationSchema = yup.object().shape({
+        email: yup
+            .string()
+            .email("Please enter valid email")
+            .required('Email Address is Required'),
+        password: yup
+            .string()
+            .min(8, ({ min }) => `Password must be at least ${min} characters`)
+            .required('Password is required'),
+    })
 
     return (
         <StyledContainer>
@@ -220,6 +230,7 @@ const [hidePassword, setHidePassword] = useState(true);
                               values,
                               errors,
                               isValid,
+                              touched,
                             }) => (
                             <>
                                 <MyTextInput
@@ -248,11 +259,11 @@ const [hidePassword, setHidePassword] = useState(true);
                                     setHidePassword={{setHidePassword}}
                                 />
                                 <MsgBox>
-                                    {errors.firstName &&
-                                        <TextError>{errors.firstName}</TextError>
+                                    {errors.email && touched.email &&
+                                        <TextError>{errors.email}</TextError>
                                     }
-                                    {errors.lastName &&
-                                        <TextError>{errors.lastName}</TextError>
+                                    {errors.password && touched.password &&
+                                        <TextError>{errors.password}</TextError>
                                     }
                                 </MsgBox>
 
@@ -327,17 +338,7 @@ const [hidePassword, setHidePassword] = useState(true);
         }
     }*/
 
-//*** Regextest
-const loginValidationSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email("Please enter valid email")
-        .required('Email Address is Required'),
-    password: yup
-        .string()
-        .min(8, ({ min }) => `Password must be at least ${min} characters`)
-        .required('Password is required'),
-})}
+}
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {
     return (

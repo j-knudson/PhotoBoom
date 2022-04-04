@@ -64,8 +64,8 @@ const SignUpScreen = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
 
     //*** Regextest
-    const loginValidationSchema = yup.object().shape({
-/*        email: yup
+    const SignUpValidationSchema = yup.object().shape({
+        email: yup
             .string()
             .email("Please enter valid email")
             .required('Email Address is Required'),
@@ -76,7 +76,7 @@ const SignUpScreen = ({navigation}) => {
         confirm_password: yup
             .string()
             .oneOf([yup.ref('password'), null], 'Your passwords do not match')
-            .required('Confirm password is required'),*/
+            .required('Confirm password is required'),
     })
 
 
@@ -93,7 +93,7 @@ const SignUpScreen = ({navigation}) => {
 
             <LoginContainer>
                     <Formik
-                        validationSchema={loginValidationSchema}
+                        validationSchema={SignUpValidationSchema}
                         initialValues={{email: '', password: '', confirm_password: ''}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={onSignInPress}
@@ -105,6 +105,7 @@ const SignUpScreen = ({navigation}) => {
                               values,
                               errors,
                               isValid,
+                              touched,
                           }) => (
                             <>
                                 <MyTextInput
@@ -149,13 +150,13 @@ const SignUpScreen = ({navigation}) => {
                                 />
 
                                 <MsgBox>
-                                    {errors.email &&
+                                    {errors.email && touched.email &&
                                         <TextError>{errors.email}</TextError>
                                     }
-                                    {errors.password &&
+                                    {errors.password && touched.password &&
                                         <TextError>{errors.password}</TextError>
                                     }
-                                    {errors.confirm_password &&
+                                    {errors.confirm_password && touched.confirm_password &&
                                         <TextError>{errors.confirm_password}</TextError>
                                     }
                                 </MsgBox>

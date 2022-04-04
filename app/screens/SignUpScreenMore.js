@@ -150,7 +150,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     />
                     )}
                 <Formik
-                        validationSchema={SignUpValidationSchema}
+                        validationSchema={SignUpMoreValidationSchema}
                         initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
                         //onSubmit={values => console.log(values)}
                         onSubmit={valuesToDb}
@@ -220,7 +220,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
     );
 }
 
-const SignUpValidationSchema = yup.object().shape({
+const SignUpMoreValidationSchema = yup.object().shape({
     firstName: yup
         .string()
         .required('First name is required'),
