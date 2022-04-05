@@ -9,6 +9,7 @@ import ParentsScreen from "./app/screens/Parents";
 import ProfessionalsScreen from "./app/screens/Professionals";
 
 import Header from "./app/components/Header";
+import {Colors} from "./app/components/Colors";
 
 import SplashScreen from "./app/screens/SplashScreen";
 
@@ -64,7 +65,10 @@ function AuthenticatedStack() {
                                         right="Parents"
                                         navigation={navigation}
                                     />,
-                                headerBackVisible: false
+                                headerBackVisible: false,
+                                headerStyle: {
+                                    backgroundColor: Colors.secondaryGreen,
+                                }
                             }
                         }}
                     />
@@ -80,7 +84,10 @@ function AuthenticatedStack() {
                                         right="Professionals"
                                         navigation={navigation}
                                     />,
-                                headerBackVisible: false
+                                headerBackVisible: false,
+                                headerStyle: {
+                                    backgroundColor: Colors.primaryBlue,
+                                }
                             }
                         }}
                     />
@@ -96,7 +103,10 @@ function AuthenticatedStack() {
                                         right="Peers"
                                         navigation={navigation}
                                     />,
-                                headerBackVisible: false
+                                headerBackVisible: false,
+                                headerStyle: {
+                                    backgroundColor: Colors.primaryRed,
+                                }
                             }
                         }}
                     />
