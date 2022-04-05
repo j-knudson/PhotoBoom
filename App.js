@@ -133,7 +133,7 @@ function AnimatedAppLoader({ children, image }) {
 
     const startAsync = useCallback(
         // If you use a local image with require(...), use `Asset.fromModule`
-        () => Asset.fromURI(image).downloadAsync(),
+        () => Asset.fromModule(image).downloadAsync(),
         [image]
     );
 
@@ -197,8 +197,10 @@ function AnimatedSplashScreen({ children, image }) {
                 >
                     <Animated.Image
                         style={{
-                            width: "100%",
-                            height: "100%",
+                            paddingTop: 798,
+                            alignSelf: "center",
+                            width: "90%",
+                            height: "90%",
                             resizeMode: Constants.manifest.splash.resizeMode || "contain",
                             transform: [
                                 {
@@ -211,6 +213,7 @@ function AnimatedSplashScreen({ children, image }) {
                         fadeDuration={0}
                     />
                 </Animated.View>
+
             )}
         </View>
     );
