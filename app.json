@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./app/assets/photoboom_logo_1024.png",
     "splash": {
-      "image": "./app/assets/splash_photoboom.png",
+      "image": "./app/assets/splash2_photoboom.png",
       "resizeMode": "contain",
       "backgroundColor": "#f5f5f5",
     },
