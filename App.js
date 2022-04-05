@@ -8,12 +8,15 @@ import PeersScreen from "./app/screens/Peers";
 import ParentsScreen from "./app/screens/Parents";
 import ProfessionalsScreen from "./app/screens/Professionals";
 
+import Header from "./app/components/Header";
+
 import SplashScreen from "./app/screens/SplashScreen";
 
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import {StyleSheet, Text, TextComponent} from "react-native";
+import {Button, StyleSheet, Text, TextComponent} from "react-native";
+import React from 'react';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -52,14 +55,50 @@ function AuthenticatedStack() {
                     <Stack.Screen
                         name="Peers"
                         component={PeersScreen}
+                        options={ ( {navigation}) => {
+                            return {
+                                headerTitle: () =>
+                                    <Header
+                                        title="Peers"
+                                        left="Professionals"
+                                        right="Parents"
+                                        navigation={navigation}
+                                    />,
+                                headerBackVisible: false
+                            }
+                        }}
                     />
                     <Stack.Screen
                         name="Parents"
                         component={ParentsScreen}
+                        options={ ( {navigation}) => {
+                            return {
+                                headerTitle: () =>
+                                    <Header
+                                        title="Parents"
+                                        left="Peers"
+                                        right="Professionals"
+                                        navigation={navigation}
+                                    />,
+                                headerBackVisible: false
+                            }
+                        }}
                     />
                     <Stack.Screen
                         name="Professionals"
                         component={ProfessionalsScreen}
+                        options={ ( {navigation}) => {
+                            return {
+                                headerTitle: () =>
+                                    <Header
+                                        title="Professionals"
+                                        left="Parents"
+                                        right="Peers"
+                                        navigation={navigation}
+                                    />,
+                                headerBackVisible: false
+                            }
+                        }}
                     />
                 </Stack.Group>
             </Stack.Group>
@@ -77,8 +116,8 @@ const App = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="SignIn"
-                    component={LoginSignIn}
-                    //component={AuthenticatedStack}
+                    //component={LoginSignIn}
+                    component={AuthenticatedStack}
                     //component={SignUpScreenMore}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}
