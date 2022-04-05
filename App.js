@@ -18,6 +18,10 @@ import {StyleSheet, Text, TextComponent} from "react-native";
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
+export let Authenticated = false;
+
+
+
 function LoginSignIn() {
     return (
         <Tab.Navigator style={styles.tabItems}
@@ -64,14 +68,17 @@ function AuthenticatedStack() {
     )
 }
 
+//TODO authenticaiton workflow
+/*Authenticated ? AuthenticatedStack : LoginSignIn*/
+
 const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
                     name="SignIn"
-                    //component={LoginSignIn}
-                    component={AuthenticatedStack}
+                    component={LoginSignIn}
+                    //component={AuthenticatedStack}
                     //component={SignUpScreenMore}
                     //options={{title:'PhotoBoom'}}
                     //options={{title:''}}

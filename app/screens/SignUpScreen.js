@@ -92,7 +92,7 @@ const SignUpScreen = ({navigation}) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
+            {/*<KeyboardAvoidingWrapper>*/}
             <LoginContainer>
                 {/*//TODO Check on Submit with backend submissions and a timeout*/}
                 <Formik
@@ -182,7 +182,7 @@ const SignUpScreen = ({navigation}) => {
                         )}
                     </Formik>
             </LoginContainer>
-            </KeyboardAvoidingWrapper>
+            {/*</KeyboardAvoidingWrapper>*/}
         </StyledContainer>
 
     );

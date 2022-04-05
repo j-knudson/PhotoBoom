@@ -7,7 +7,7 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image, Button,
+    Image, Button, Platform,
 } from 'react-native';
 
 //icons
@@ -45,6 +45,8 @@ import {
 } from "../components/styledcontainers";
 import {Colors} from "../components/Colors";
 
+import {Authenticated} from "../../App";
+
 //keyboard avoiding view
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
@@ -56,6 +58,21 @@ const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('guy1@email.com');
     const [password, setPassword] =  useState('');
 
+    //***********Testing
+    const [isWeb, setIsWeb] = useState(true);
+    async function webCheck (){
+        if (Platform.OS === 'web') {
+            setIsWeb(true)
+        }
+        else {
+            setIsWeb(false)
+        }
+    }
+
+    React.useEffect(webCheck)
+
+
+    ///  </ TESTING **************************
     const onLoginPress = () => {
         Alert.alert('Login Press', "You pressed the log me in button")
         navigation.navigate('Landing', {
@@ -215,15 +232,79 @@ const [hidePassword, setHidePassword] = useState(true);
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
-            <LoginContainer>
+            {/*<KeyboardAvoidingWrapper>*/}
+            {!isWeb &&
+                <KeyboardAvoidingWrapper>
+                    <LoginContainer>
+                        {/*//TODO add on submit loading spinner */}
+                        <Formik
+                            validationSchema={loginValidationSchema}
+                            initialValues={{email: '', password: ''}}
+                            onSubmit={values => console.log(values)}
+                        >
+                            {({
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit,
+                                  values,
+                                  errors,
+                                  isValid,
+                                  touched,
+                              }) => (
+                                <>
+                                    <MyTextInput
+                                        label="Email Address"
+                                        icon="mail"
+                                        name="email"
+                                        placeholder="Email Address"
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('email')}
+                                        onBlur={handleBlur('email')}
+                                        value={values.email}
+                                        keyboardType="email-address"
+                                    />
+                                    <MyTextInput
+                                        label="Password"
+                                        icon="lock"
+                                        name="password"
+                                        placeholder="* * * * * "
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('password')}
+                                        onBlur={handleBlur('password')}
+                                        value={values.password}
+                                        secureTextEntry={hidePassword}
+                                        isPassword={true}
+                                        hidePassword={hidePassword}
+                                        setHidePassword={{setHidePassword}}
+                                    />
+                                    <MsgBox>
+                                        {errors.email && touched.email &&
+                                            <TextError>{errors.email}</TextError>
+                                        }
+                                        {errors.password && touched.password &&
+                                            <TextError>{errors.password}</TextError>
+                                        }
+                                    </MsgBox>
+
+                                    <SubmitButton onPress={handleSubmit}>
+                                        <TextButton>Submit Registration </TextButton>
+                                    </SubmitButton>
+                                </>
+                            )}
+                        </Formik>
+                    </LoginContainer>
+                </KeyboardAvoidingWrapper>
+            }
+
+            {isWeb &&
+                <LoginContainer>
                     {/*//TODO add on submit loading spinner */}
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}
                         onSubmit={values => console.log(values)}
                     >
-                            {({
+                        {({
                               handleChange,
                               handleBlur,
                               handleSubmit,
@@ -231,11 +312,11 @@ const [hidePassword, setHidePassword] = useState(true);
                               errors,
                               isValid,
                               touched,
-                            }) => (
+                          }) => (
                             <>
                                 <MyTextInput
                                     label="Email Address"
-                                    icon = "mail"
+                                    icon="mail"
                                     name="email"
                                     placeholder="Email Address"
                                     placeholderTextColor="gray"
@@ -271,10 +352,11 @@ const [hidePassword, setHidePassword] = useState(true);
                                     <TextButton>Submit Registration </TextButton>
                                 </SubmitButton>
                             </>
-                            )}
+                        )}
                     </Formik>
-            </LoginContainer>
-            </KeyboardAvoidingWrapper>
+                </LoginContainer>
+            }
+
             <View style={customStyle.innerContainer}>
 
 

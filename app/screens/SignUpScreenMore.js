@@ -104,7 +104,6 @@ const SignUpScreenMore = ( {route, navigation} ) => {
     async function webCheck (){
         if (Platform.OS === 'web') {
             setIsWeb(true)
-            return true;
         }
         else {
             setIsWeb(false)
@@ -138,7 +137,8 @@ const SignUpScreenMore = ( {route, navigation} ) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
+            {/*{Platform.OS !=='web' &&*/}
+            {/*<KeyboardAvoidingWrapper>*/}
             <LoginContainer>
                 {show && (
                     <DateTimePicker
@@ -219,7 +219,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         )}
                     </Formik>
             </LoginContainer>
-            </KeyboardAvoidingWrapper>
+            {/*</KeyboardAvoidingWrapper>*/}
         </StyledContainer>
     );
 }
