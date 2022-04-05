@@ -7,7 +7,7 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image, Button,
+    Image, Button, ActivityIndicator, Platform,
 } from 'react-native';
 
 //icons
@@ -215,15 +215,81 @@ const [hidePassword, setHidePassword] = useState(true);
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
-            <LoginContainer>
-                    {/*//TODO add on submit loading spinner */}
+            {Platform.OS !=='web' &&
+                <KeyboardAvoidingWrapper>
+                <LoginContainer>
+                        <Formik
+                            validationSchema={loginValidationSchema}
+                            initialValues={{email: '', password: ''}}
+                            onSubmit={values => console.log(values)}
+                        >
+                                {({
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit,
+                                  values,
+                                  errors,
+                                  isValid,
+                                  touched,
+                                  isSubmitting,
+                                }) => (
+                                <>
+                                    <MyTextInput
+                                        label="Email Address"
+                                        icon = "mail"
+                                        name="email"
+                                        placeholder="Email Address"
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('email')}
+                                        onBlur={handleBlur('email')}
+                                        value={values.email}
+                                        keyboardType="email-address"
+                                    />
+                                    <MyTextInput
+                                        label="Password"
+                                        icon="lock"
+                                        name="password"
+                                        placeholder="* * * * * "
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('password')}
+                                        onBlur={handleBlur('password')}
+                                        value={values.password}
+                                        secureTextEntry={hidePassword}
+                                        isPassword={true}
+                                        hidePassword={hidePassword}
+                                        setHidePassword={{setHidePassword}}
+                                    />
+                                    <MsgBox>
+                                        {errors.email && touched.email &&
+                                            <TextError>{errors.email}</TextError>
+                                        }
+                                        {errors.password && touched.password &&
+                                            <TextError>{errors.password}</TextError>
+                                        }
+                                    </MsgBox>
+
+                                    <SubmitButton onPress={handleSubmit}>
+                                        {isSubmitting &&
+                                            <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                        }
+                                        {!isSubmitting &&
+                                            <TextButton>Login </TextButton>
+                                        }
+                                    </SubmitButton>
+                                </>
+                                )}
+                        </Formik>
+                </LoginContainer>
+                </KeyboardAvoidingWrapper>
+            }
+            {Platform.OS ==='web' &&
+                <LoginContainer>
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}
                         onSubmit={values => console.log(values)}
                     >
-                            {({
+                        {({
                               handleChange,
                               handleBlur,
                               handleSubmit,
@@ -231,7 +297,8 @@ const [hidePassword, setHidePassword] = useState(true);
                               errors,
                               isValid,
                               touched,
-                            }) => (
+                              isSubmitting,
+                          }) => (
                             <>
                                 <MyTextInput
                                     label="Email Address"
@@ -268,13 +335,18 @@ const [hidePassword, setHidePassword] = useState(true);
                                 </MsgBox>
 
                                 <SubmitButton onPress={handleSubmit}>
-                                    <TextButton>Submit Registration </TextButton>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextButton>Login </TextButton>
+                                    }
                                 </SubmitButton>
                             </>
-                            )}
+                        )}
                     </Formik>
-            </LoginContainer>
-            </KeyboardAvoidingWrapper>
+                </LoginContainer>
+            }
             <View style={customStyle.innerContainer}>
 
 

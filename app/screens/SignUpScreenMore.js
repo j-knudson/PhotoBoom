@@ -1,5 +1,6 @@
 
 import {
+    ActivityIndicator,
     Alert,
     Button,
     Image,
@@ -138,20 +139,21 @@ const SignUpScreenMore = ( {route, navigation} ) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
-            <LoginContainer>
-                {show && (
-                    <DateTimePicker
-                        testId="datetimePicker"
-                        value={date}
-                        mode="date"
-                        is24hour={true}
-                        display={"default"}
-                        onChange={onChange}
-                    />
+            {!isWeb &&
+                <KeyboardAvoidingWrapper>
+                <LoginContainer>
+                    {show && (
+                        <DateTimePicker
+                            testId="datetimePicker"
+                            value={date}
+                            mode="date"
+                            is24hour={true}
+                            display={"default"}
+                            onChange={onChange}
+                        />
                     )}
-                {/*//TODO add on submit loading spinner */}
-                <Formik
+                    {/*//TODO add on submit loading spinner */}
+                    <Formik
                         validationSchema={SignUpMoreValidationSchema}
                         initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
                         //onSubmit={values => console.log(values)}
@@ -165,61 +167,156 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                               errors,
                               isValid,
                               touched,
+                              isSubmitting,
                           }) => (
                             <>
-                            <MyTextInput
-                                label="First Name"
-                                icon = "person"
-                                name="firstName"
-                                placeholder="Joe"
-                                placeholderTextColor="gray"
-                                onChangeText={handleChange('firstName')}
-                                onBlur={handleBlur('firstName')}
-                                value={values.firstName}
-                            />
-                            <MyTextInput
-                                label="Last Name"
-                                icon = "person"
-                                name="lastName"
-                                placeholder="Sixpack"
-                                placeholderTextColor="gray"
-                                onChangeText={handleChange('lastName')}
-                                onBlur={handleBlur('lastName')}
-                                value={values.lastName}
+                                <MyTextInput
+                                    label="First Name"
+                                    icon = "person"
+                                    name="firstName"
+                                    placeholder="Joe"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('firstName')}
+                                    onBlur={handleBlur('firstName')}
+                                    value={values.firstName}
+                                />
+                                <MyTextInput
+                                    label="Last Name"
+                                    icon = "person"
+                                    name="lastName"
+                                    placeholder="Sixpack"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('lastName')}
+                                    onBlur={handleBlur('lastName')}
+                                    value={values.lastName}
 
-                            />
-                            {/*//TODO datepicker values not submitting correctly with dob for mobile */}
-                            <MyTextInput
-                                label="Date of Birth"
-                                icon = "calendar"
-                                name="dateOfBirth"
-                                placeholder="YYYY - MM - DD"
-                                placeholderTextColor="gray"
-                                onChangeText={handleChange('dateOfBirth')}
-                                onBlur={handleBlur('dateOfBirth')}
-                                value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
-                                isDate={true}
-                                editable={isWeb}
-                                showDatePicker={showDatePicker}
-                            />
-                            <MsgBox>
-                                {errors.firstName && touched.firstName &&
-                                    <TextError>{errors.firstName}</TextError>
-                                }
-                                {errors.lastName && touched.lastName &&
-                                    <TextError>{errors.lastName}</TextError>
-                                }
-                            </MsgBox>
+                                />
+                                {/*//TODO datepicker values not submitting correctly with dob for mobile */}
+                                <MyTextInput
+                                    label="Date of Birth"
+                                    icon = "calendar"
+                                    name="dateOfBirth"
+                                    placeholder="YYYY - MM - DD"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('dateOfBirth')}
+                                    onBlur={handleBlur('dateOfBirth')}
+                                    value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
+                                    isDate={true}
+                                    editable={isWeb}
+                                    showDatePicker={showDatePicker}
+                                />
+                                <MsgBox>
+                                    {errors.firstName && touched.firstName &&
+                                        <TextError>{errors.firstName}</TextError>
+                                    }
+                                    {errors.lastName && touched.lastName &&
+                                        <TextError>{errors.lastName}</TextError>
+                                    }
+                                </MsgBox>
 
-                            <SubmitButton onPress={handleSubmit}>
-                                <TextButton>Submit Registration </TextButton>
-                            </SubmitButton>
-                            <Line />
+                                <SubmitButton onPress={handleSubmit}>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextButton>Submit Registration </TextButton>
+                                    }
+                                </SubmitButton>
+                                <Line />
                             </>
                         )}
                     </Formik>
-            </LoginContainer>
-            </KeyboardAvoidingWrapper>
+                </LoginContainer>
+                </KeyboardAvoidingWrapper>
+            }
+            {isWeb &&
+                <LoginContainer>
+                    {show && (
+                        <DateTimePicker
+                            testId="datetimePicker"
+                            value={date}
+                            mode="date"
+                            is24hour={true}
+                            display={"default"}
+                            onChange={onChange}
+                        />
+                        )}
+                    {/*//TODO add on submit loading spinner */}
+                    <Formik
+                            validationSchema={SignUpMoreValidationSchema}
+                            initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
+                            //onSubmit={values => console.log(values)}
+                            onSubmit={valuesToDb}
+                        >
+                            {({
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit,
+                                  values,
+                                  errors,
+                                  isValid,
+                                  touched,
+                                  isSubmitting,
+                              }) => (
+                                <>
+                                <MyTextInput
+                                    label="First Name"
+                                    icon = "person"
+                                    name="firstName"
+                                    placeholder="Joe"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('firstName')}
+                                    onBlur={handleBlur('firstName')}
+                                    value={values.firstName}
+                                />
+                                <MyTextInput
+                                    label="Last Name"
+                                    icon = "person"
+                                    name="lastName"
+                                    placeholder="Sixpack"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('lastName')}
+                                    onBlur={handleBlur('lastName')}
+                                    value={values.lastName}
+
+                                />
+                                {/*//TODO datepicker values not submitting correctly with dob for mobile */}
+                                <MyTextInput
+                                    label="Date of Birth"
+                                    icon = "calendar"
+                                    name="dateOfBirth"
+                                    placeholder="YYYY - MM - DD"
+                                    placeholderTextColor="gray"
+                                    onChangeText={handleChange('dateOfBirth')}
+                                    onBlur={handleBlur('dateOfBirth')}
+                                    value={isWeb ? values.dateOfBirth : dob ? dob.toDateString() : ''}
+                                    isDate={true}
+                                    editable={isWeb}
+                                    showDatePicker={showDatePicker}
+                                />
+                                <MsgBox>
+                                    {errors.firstName && touched.firstName &&
+                                        <TextError>{errors.firstName}</TextError>
+                                    }
+                                    {errors.lastName && touched.lastName &&
+                                        <TextError>{errors.lastName}</TextError>
+                                    }
+                                </MsgBox>
+
+                                <SubmitButton onPress={handleSubmit}>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextButton>Submit Registration </TextButton>
+                                    }
+                                </SubmitButton>
+                                <Line />
+                                </>
+                            )}
+                        </Formik>
+                </LoginContainer>
+            }
         </StyledContainer>
     );
 }

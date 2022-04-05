@@ -1,7 +1,7 @@
 import {
     ActivityIndicator,
     View,
-    Alert,
+    Alert, Platform,
 } from "react-native";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
@@ -92,20 +92,113 @@ const SignUpScreen = ({navigation}) => {
             <InnerContainer>
                 <PhotoBoomLogo source={require('../assets/photoboom_logo.png')}/>
             </InnerContainer>
-            <KeyboardAvoidingWrapper>
-            <LoginContainer>
-                {/*//TODO Check on Submit with backend submissions and a timeout*/}
-                <Formik
+            {Platform.OS !=='web' &&
+                <KeyboardAvoidingWrapper>
+                <LoginContainer>
+                    {/*//TODO Check on Submit with backend submissions and a timeout*/}
+                    <Formik
+                            validationSchema={SignUpValidationSchema}
+                            initialValues={{email: '', password: '', confirm_password: ''}}
+                            onSubmit={(values, { setSubmitting }) => {
+                              onSignInPress(values);
+                              setSubmitting(false);
+                            }}
+                            //onSubmit={onSignInPress}
+
+                        >
+                        {({
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit,
+                                  values,
+                                  errors,
+                                  isValid,
+                                  touched,
+                                  isSubmitting,
+                              }) => (
+                                <>
+                                    <MyTextInput
+                                        label="Email Address"
+                                        icon = "mail"
+                                        name="email"
+                                        placeholder="Email Address"
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('email')}
+                                        onBlur={handleBlur('email')}
+                                        value={values.email}
+                                        keyboardType="email-address"
+                                    />
+                                    <MyTextInput
+                                        label="Password"
+                                        icon="lock"
+                                        name="password"
+                                        placeholder="* * * * * "
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('password')}
+                                        onBlur={handleBlur('password')}
+                                        value={values.password}
+                                        secureTextEntry={hidePassword}
+                                        isPassword={true}
+                                        hidePassword={hidePassword}
+                                        setHidePassword={{setHidePassword}}
+                                    />
+
+                                    <MyTextInput
+                                        label="Re-enter Password"
+                                        icon="lock"
+                                        name="confirm_password"
+                                        placeholder="* * * * * "
+                                        placeholderTextColor="gray"
+                                        onChangeText={handleChange('confirm_password')}
+                                        onBlur={handleBlur('confirm_password')}
+                                        value={values.confirm_password}
+                                        secureTextEntry={hidePassword}
+                                        isPassword={true}
+                                        hidePassword={hidePassword}
+                                        setHidePassword={{setHidePassword}}
+                                    />
+
+                                    <MsgBox>
+                                        {errors.email && touched.email &&
+                                            <TextError>{errors.email}</TextError>
+                                        }
+                                        {errors.password && touched.password &&
+                                            <TextError>{errors.password}</TextError>
+                                        }
+                                        {errors.confirm_password && touched.confirm_password &&
+                                            <TextError>{errors.confirm_password}</TextError>
+                                        }
+                                    </MsgBox>
+
+                                    <SubmitButton onPress={handleSubmit}>
+                                        {isSubmitting &&
+                                            <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                        }
+                                        {!isSubmitting &&
+                                            <TextButton>Continue Registration </TextButton>
+                                        }
+                                    </SubmitButton>
+                                    <Line />
+                                </>
+                            )}
+                        </Formik>
+                </LoginContainer>
+                </KeyboardAvoidingWrapper>
+            }
+            {Platform.OS ==='web' &&
+                <LoginContainer>
+                    {/*//TODO Check on Submit with backend submissions and a timeout*/}
+                    <Formik
                         validationSchema={SignUpValidationSchema}
                         initialValues={{email: '', password: '', confirm_password: ''}}
                         onSubmit={(values, { setSubmitting }) => {
-                          onSignInPress(values);
-                          setSubmitting(false);
+                            onSignInPress(values);
+                            setSubmitting(false);
                         }}
                         //onSubmit={onSignInPress}
 
                     >
-                    {({
+                        {({
                               handleChange,
                               handleBlur,
                               handleSubmit,
@@ -181,8 +274,8 @@ const SignUpScreen = ({navigation}) => {
                             </>
                         )}
                     </Formik>
-            </LoginContainer>
-            </KeyboardAvoidingWrapper>
+                </LoginContainer>
+            }
         </StyledContainer>
 
     );
