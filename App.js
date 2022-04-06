@@ -7,7 +7,9 @@ import {NavigationContainer} from "@react-navigation/native";
 
 import {StyleSheet, Text, TextComponent, Animated, Button, Platform, View,} from "react-native";
 
-//avigators
+import Splash2 from './app/screens/SplashScreen'
+
+//Navigators
 import SignInNavigator from './app/routes/SignUp'
 import AuthenticatedNavigator from "./app/routes/Authenticated";
 
@@ -20,7 +22,6 @@ function AnimatedAppLoader({ children, image }) {
     const [isSplashReady, setSplashReady] = useState(false);
 
     const startAsync = useCallback(
-        // If you use a local image with require(...), use `Asset.fromModule`
         () => Asset.fromModule(image).downloadAsync(),
         [image]
     );
@@ -40,6 +41,7 @@ function AnimatedAppLoader({ children, image }) {
     }
 
     return <AnimatedSplashScreen image={image}>{children}</AnimatedSplashScreen>;
+
 }
 
 function AnimatedSplashScreen({ children, image }) {
@@ -108,7 +110,7 @@ function AnimatedSplashScreen({ children, image }) {
 }
 //TODO authentication workflow  replace authenticated with secure store token
 
-let Authenticated = false;
+let Authenticated = true;
 
     export default function App() {
         return (
