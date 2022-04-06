@@ -1,4 +1,5 @@
 import {Button, FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+//import Carousel from "react-native-snap-carousel";
 
 import React, { useState} from "react";
 
@@ -6,6 +7,7 @@ import {Colors} from "../components/Colors";
 
 
 const PeersScreen = ({route, navigation} ) => {
+
 
     const [image2, setImage2] = useState([
         {
@@ -71,6 +73,37 @@ const PeersScreen = ({route, navigation} ) => {
         },
 
     ])
+    const [boom, setBoom] = useState([
+        {
+            name: 'Party1',
+            id: '1',
+            cost: '$5.00',
+            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
+            image: require("../assets/peers/leo_party.jpg")
+        },
+        {
+            name: 'Star Wars',
+            id: '2',
+            cost: '$5.00',
+            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
+            image: require("../assets/peers/a_new_hope.jpg")
+        },
+        {
+            name: 'Party3',
+            id: '3',
+            cost: '$10.00',
+            description: 'Ewok the Line',
+            image: require("../assets/peers/dwight_party.jpeg")
+        },
+        {
+            name: 'Spaceballs',
+            id: '4',
+            cost: '$8.00',
+            description: 'Ludicrous Speed',
+            image: require("../assets/peers/spaceballs.jpg")
+        },
+    ])
+
 
 
     const pressHandler = (item) => {
@@ -81,7 +114,7 @@ const PeersScreen = ({route, navigation} ) => {
     return (
         <View style={styles.background}>
             <View style={styles.container}>
-                <FlatList
+{/*                <FlatList
                     numColumns = {1}
                     keyExtractor={
                         item => item.id
@@ -96,7 +129,41 @@ const PeersScreen = ({route, navigation} ) => {
                             />
                         </TouchableOpacity>
                     )}
+                />*/}
+            <View >
+                <FlatList
+                    keyExtractor={
+                        item => item.id
+                    }
+                    data={boom}
+                    horizontal
+                    renderItem={({ item }) => (
+                      <View style={{width: '50%'}}>
+                        <Image
+                            style={styles.tinyLogo2}
+                            source={item.image}
+                        />
+                          <Text>{item.id}</Text>
+                          <FlatList
+                              numColumns = {1}
+                              keyExtractor={
+                                  item => item.id
+                              }
+                              data={image2}
+                              renderItem={({ item }) => (
+                                  <TouchableOpacity style={styles.moviesItem} onPress={()=> pressHandler(item)}>
+                                      <Text style={styles.text}> {item.name} </Text>
+                                      <Image
+                                          style={styles.tinyLogo}
+                                          source={item.image}
+                                      />
+                                  </TouchableOpacity>
+                              )}
+                          />
+                      </View>
+                    )}
                 />
+            </View>
             </View>
         </View>
     );
@@ -105,15 +172,15 @@ const PeersScreen = ({route, navigation} ) => {
 
 const styles = StyleSheet.create ({
     background:{
-      flex: 1,
+      //flex: 1,
       //backgroundColor: Colors.secondaryGreen,
       backgroundColor: "whitesmoke",
     },
 
     container: {
-        flex: 1,
+        //flex: 1,
         paddingTop: 30,
-        width: "80%",
+        //width: "80%",
         backgroundColor: "darkgray",
         //backgroundColor: Colors.secondaryGreen,
         alignSelf: "center",
@@ -121,8 +188,10 @@ const styles = StyleSheet.create ({
     },
     horizontal: {
         flexDirection: 'row',
+        //height: "100%",
         justifyContent: 'space-around',
         padding: 10,
+        backgroundColor: Colors.testPurple
     },
     moviesItem: {
         flex: 1,
@@ -135,9 +204,17 @@ const styles = StyleSheet.create ({
         resizeMode: 'contain'
     },
     tinyLogo: {
-
         width: '90%',
         height: 300,
+        resizeMode: 'contain'
+    },
+    tinyLogo2: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain'
+    },
+    tinyLogo3: {
+        width: "100%",
         resizeMode: 'contain'
     },
 })
