@@ -4,7 +4,7 @@ import {useEffect} from "react";
 
 
 
-const SplashScreen = ( navigation) => {
+const SplashScreen = () => {
 
     const opacity = useSharedValue(0);
     const scale = useSharedValue(1);
