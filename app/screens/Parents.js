@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     StyleSheet,
     Text,
@@ -7,50 +7,75 @@ import {
     SectionList,
     SafeAreaView,
     Image,
-    FlatList,
+    FlatList, TouchableOpacity,
 } from 'react-native';
 
-const ListItem = ({ item }) => {
-    return (
-        <View style={styles.item}>
-            <Image
-                source={{
-                    uri: item.uri,
-                }}
-                style={styles.itemPhoto}
-                resizeMode="cover"
-            />
-            <Text style={styles.itemText}>{item.text}</Text>
-        </View>
-    );
-};
+
+
 
 
 
 const ParentsScreen = ({route, navigation} ) => {
+
+    const jData = require("../assets/parents.json");
+
+
+
+    const [data1, setData1] = React.useState();
+
+    function dataLoader() {
+        setData1(jData)
+    }
+    useEffect(dataLoader);
+
     const testPress2 = () => {
         console.log("Pressed navigate to Profs")
         navigation.navigate('Professionals')
     }
+
+    const pressHandler = (item) => {
+        alert("Likes: " + item.likes)
+    }
+
+    const ListItem = ({item}) => {
+        console.log(item.likes)
+        return (
+            <View style={styles.item}>
+                <TouchableOpacity onPress={()=> pressHandler(item)}>
+                    <Image
+
+                        source={{uri: item.image}}
+                        style={styles.itemPhoto}
+                        resizeMode="cover"
+                    />
+                    <Text style={styles.itemText}>{item.comments}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
     return (
         <View style={styles.container}>
             <StatusBar style="light" />
             <SafeAreaView style={{ flex: 1 }}>
                 <SectionList
+                    horizontal
                     contentContainerStyle={{ paddingHorizontal: 10 }}
                     stickySectionHeadersEnabled={false}
-                    sections={SECTIONS}
+                    sections={data1}
                     renderSectionHeader={({ section }) => (
                         <>
-                            <Text style={styles.sectionHeader}>{section.title}</Text>
-                            {section.horizontal ? (
-                                <FlatList
-                                    horizontal
-                                    data={section.data}
-                                    renderItem={({ item }) => <ListItem item={item} />}
-                                    showsHorizontalScrollIndicator={false}
-                                />
-                            ) : null}
+                            <View style={{flex: 1, flexDirection: "column"}}>
+                                <Text style={styles.sectionHeader}>{section.title}</Text>
+                                {section.horizontal ? (
+                                    <FlatList
+                                        //horizontal
+                                        data={section.data}
+                                        renderItem={({ item }) => <ListItem item={item} />}
+                                        showsHorizontalScrollIndicator={false}
+                                    />
+                                ) : null}
+                            </View>
                         </>
                     )}
                     renderItem={({ item, section }) => {
@@ -97,23 +122,23 @@ const SECTIONS = [
             {
                 key: '1',
                 text: 'Item text 1',
-                uri: 'https://picsum.photos/id/1/200',
+                image: 'https://picsum.photos/id/1/200',
             },
             {
                 key: '2',
                 text: 'Item text 2',
-                uri: 'https://picsum.photos/id/10/200',
+                image: 'https://picsum.photos/id/10/200',
             },
 
             {
                 key: '3',
                 text: 'Item text 3',
-                uri: 'https://picsum.photos/id/1002/200',
+                image: 'https://picsum.photos/id/1002/200',
             },
             {
                 key: '4',
                 text: 'Item text 4',
-                uri: 'https://picsum.photos/id/1006/200',
+                image: 'https://picsum.photos/id/1006/200',
             },
             {
                 key: '5',
@@ -129,12 +154,12 @@ const SECTIONS = [
             {
                 key: '1',
                 text: 'Item text 1',
-                uri: 'https://picsum.photos/id/1011/200',
+                image: 'https://picsum.photos/id/1011/200',
             },
             {
                 key: '2',
                 text: 'Item text 2',
-                uri: 'https://picsum.photos/id/1012/200',
+                image: 'https://picsum.photos/id/1012/200',
             },
 
             {
@@ -161,28 +186,28 @@ const SECTIONS = [
             {
                 key: '1',
                 text: 'Item text 1',
-                uri: 'https://picsum.photos/id/1020/200',
+                image: 'https://picsum.photos/id/1020/200',
             },
             {
                 key: '2',
                 text: 'Item text 2',
-                uri: 'https://picsum.photos/id/1024/200',
+                image: 'https://picsum.photos/id/1024/200',
             },
 
             {
                 key: '3',
                 text: 'Item text 3',
-                uri: 'https://picsum.photos/id/1027/200',
+                image: 'https://picsum.photos/id/1027/200',
             },
             {
                 key: '4',
                 text: 'Item text 4',
-                uri: 'https://picsum.photos/id/1035/200',
+                image: 'https://picsum.photos/id/1035/200',
             },
             {
                 key: '5',
                 text: 'Item text 5',
-                uri: 'https://picsum.photos/id/1038/200',
+                image: 'https://picsum.photos/id/1038/200',
             },
         ],
     },
@@ -199,16 +224,20 @@ const styles = StyleSheet.create({
         color: '#f4f4f4',
         marginTop: 20,
         marginBottom: 5,
+        textAlign: "center"
     },
     item: {
         margin: 10,
     },
     itemPhoto: {
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
+        resizeMode: "contain"
+
     },
     itemText: {
         color: 'rgba(255, 255, 255, 0.5)',
         marginTop: 5,
+        textAlign: "center"
     },
 });

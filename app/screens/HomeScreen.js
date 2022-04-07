@@ -5,8 +5,8 @@ import React from "react";
 
 const HomeScreen = ( {route, navigation} ) => {
     const testPress2 = () => {
-        console.log("Pressed navigate to Friends")
-        navigation.navigate('Peers')
+        console.log("Pressed navigate to Parents")
+        navigation.navigate('Parents')
     }
 
     return(
