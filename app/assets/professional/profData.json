@@ -8,7 +8,8 @@
         "id": "1",
         "cost": "$5.00",
         "description": "Desc 1.1.",
-        "image": "https://github.com/j-knudson/PhotoBoom/blob/7b93a8a8ab1ca804de774f716240c2b4feea3e0d/app/assets/peers/spaceballs.jpg?raw=true"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/a_new_hope.jpg?raw=true",
+        "comments": "The top comment"
       },
       {
         "name": "Empire Strikes Back",
@@ -22,14 +23,14 @@
         "id": "3",
         "cost": "$10.00",
         "description": "Desc 1.3",
-        "image": "require('../assets/peers/jedi.jpg')"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/jedi.jpg?raw=true"
       },
       {
         "name": "Spaceballs",
         "id": "4",
         "cost": "$8.00",
         "description": "Desc 1.4",
-        "image": "require('../assets/peers/spaceballs.jpg')"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/7b93a8a8ab1ca804de774f716240c2b4feea3e0d/app/assets/peers/spaceballs.jpg?raw=true"
       }
     ]
   },
@@ -49,21 +50,21 @@
         "id": "2",
         "cost": "$20.00",
         "description": "Desc 2.2",
-        "image": "require('../assets/peers/bean_party.jpg')"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/bean_party.jpg?raw=true"
         },
       {
         "name": "Party3",
         "id": "3",
         "cost": "$10.00",
         "description": "Desc 2.3",
-        "image": "require('../assets/peers/dwight_party.jpeg')"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/dwight_party.jpeg?raw=true"
         },
       {
         "name": "Party4",
         "id": "4",
         "cost": "$8.00",
         "description": "Desc 2.4",
-        "image": "require('../assets/peers/party_hard.jpg')"
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/party_hard.jpg?raw=true"
       }
     ]
   }
