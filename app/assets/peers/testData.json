@@ -1,0 +1,18 @@
+ {
+    "data": [
+      {
+        "name": "Name from JSON",
+        "id": "1",
+        "cost": "$5.00",
+        "description": "Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.",
+        "image": "require('app/assets/peers/spaceballs.jpg')"
+      },
+      {
+        "name": "Party1",
+        "id": "2",
+        "cost": "$5.00",
+        "description": "Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.",
+        "image": "https://github.com/j-knudson/PhotoBoom/blob/7b93a8a8ab1ca804de774f716240c2b4feea3e0d/app/assets/peers/spaceballs.jpg?raw=true"
+      }
+    ]
+}

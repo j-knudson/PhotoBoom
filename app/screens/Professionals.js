@@ -11,9 +11,14 @@ import {
 } from 'react-native';
 
 
+
+
 const ProfessionalsScreen = ({route, navigation} ) => {
+
+    const dataTest = require("../assets/peers/testData.json");
+
     const ListItem = ({ item }) => {
-        console.log(item.image)
+        console.log(item.description)
         return (
             <View style={styles.item}>
                 <Image
@@ -42,7 +47,7 @@ const ProfessionalsScreen = ({route, navigation} ) => {
                                     horizontal
                                     data={section.data}
                                     renderItem={({ item }) => <ListItem item={item} />}
-                                    showsHorizontalScrollIndicator={false}
+                                    //showsHorizontalScrollIndicator={false}
                                 />
                             ) : null}
                         </>

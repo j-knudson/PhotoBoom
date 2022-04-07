@@ -1,12 +1,30 @@
 import {Button, FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 //import Carousel from "react-native-snap-carousel";
 
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {Colors} from "../components/Colors";
+import dataTest from "../assets/peers/testData.json";
 
 
 const PeersScreen = ({route, navigation} ) => {
+    const dataTest = require("../assets/peers/testData.json");
+
+/*    const dataCheck = () => {
+        console.log("In json checker")
+        console.log(dataTest.data)
+    }
+    useEffect(dataCheck);*/
+
+    const [data1, setdata1] = React.useState();
+
+     function dataLoader () {
+        setdata1(dataTest.data)
+        //console.log(data1)
+        console.log("In data loader")
+        console.log("data1 ", data1)
+    }
+    useEffect(dataLoader);
 
 
     const [image2, setImage2] = useState([
@@ -107,7 +125,9 @@ const PeersScreen = ({route, navigation} ) => {
 
 
     const pressHandler = (item) => {
-        console.log(item.id);
+        console.log(item.description);
+        console.log("data1 ",data1.description)
+        console.log("dataTest ", dataTest.data.description)
         alert(item.description+"\n\n"+item.cost)
     }
 
@@ -149,13 +169,15 @@ const PeersScreen = ({route, navigation} ) => {
                               keyExtractor={
                                   item => item.id
                               }
-                              data={image2}
+                              data={data1}
                               renderItem={({ item }) => (
                                   <TouchableOpacity style={styles.moviesItem} onPress={()=> pressHandler(item)}>
                                       <Text style={styles.text}> {item.name} </Text>
                                       <Image
-                                          style={styles.tinyLogo}
-                                          source={item.image}
+
+                                          //source={item.image}
+                                          source={{uri: item.image}}
+                                          style={{width: 400, height:400}}
                                       />
                                   </TouchableOpacity>
                               )}

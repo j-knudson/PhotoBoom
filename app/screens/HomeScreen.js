@@ -1,4 +1,5 @@
-import {Button, StyleSheet, Text, View} from "react-native";
+import {Button, Image, StyleSheet, Text, View} from "react-native";
+import React from "react";
 
 
 
@@ -15,8 +16,6 @@ const HomeScreen = ( {route, navigation} ) => {
                 title="Home to Friends"
                 onPress={testPress2}
             />
-
-
         </View>
     );
 }
