@@ -2,11 +2,13 @@
   {
     "title": "Boom1",
     "horizontal": true,
+    "likes": 0,
     "data": [
       {
         "name": "Star Wars",
+        "group": "Peer",
         "id": "1",
-        "cost": "$5.00",
+        "likes": 0,
         "description": "Desc 1.1.",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/a_new_hope.jpg?raw=true",
         "comments": "The top comment"

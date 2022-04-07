@@ -101,13 +101,15 @@ const PeersScreen = ({route, navigation} ) => {
         console.log(item.cost)
         return (
             <View style={styles.item}>
-                <Image
+                <TouchableOpacity onPress={()=> pressHandler(item)}>
+                    <Image
 
-                    source={{uri: item.image}}
-                    style={styles.itemPhoto}
-                    resizeMode="cover"
-                />
-                <Text style={styles.itemText}>{item.comments}</Text>
+                        source={{uri: item.image}}
+                        style={styles.itemPhoto}
+                        resizeMode="cover"
+                    />
+                    <Text style={styles.itemText}>{item.comments}</Text>
+                </TouchableOpacity>
             </View>
         );
     };
@@ -115,7 +117,7 @@ const PeersScreen = ({route, navigation} ) => {
     return (
         <View style={styles.container}>
             <StatusBar style="light"/>
-            <SafeAreaView style={{flex: 1}}>
+            <View style={{flex: 1}}>
                 <SectionList
                     horizontal
                     contentContainerStyle={{paddingHorizontal: 10}}
@@ -143,7 +145,7 @@ const PeersScreen = ({route, navigation} ) => {
                         return <ListItem item={item}/>;
                     }}
                 />
-            </SafeAreaView>
+            </View>
         </View>
     );
 }
@@ -165,8 +167,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     itemPhoto: {
-        width: 500,
-        height: 500,
+        width: 300,
+        height: 300,
         resizeMode: "contain"
 
     },
