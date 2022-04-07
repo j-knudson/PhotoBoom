@@ -14,10 +14,12 @@ import {
 
 //testing for importing JSON
 import {p_data} from "../assets/professional/pData2";
+import jData from "../assets/professional/profData.json";
 
 
 const ProfessionalsScreen = ({route, navigation} ) => {
 
+   //TODO replace require with JSON from db query
     const jData = require("../assets/professional/profData.json");
 
 
@@ -25,20 +27,18 @@ const ProfessionalsScreen = ({route, navigation} ) => {
     const [data1, setdata1] = React.useState();
 
     function dataLoader () {
-        setdata1(jData.data)
-        //console.log(data1)
+        setdata1(jData)
         console.log("In data loader")
-        console.log("data1 ", data1)
     }
     useEffect(dataLoader);
 
     const ListItem = ({ item }) => {
-        console.log(item.description)
+        console.log(item.cost)
         return (
             <View style={styles.item}>
                 <Image
-                    source={item.image}
-                    //source={{uri: item.image}}
+                    //source={item.image}
+                    source={{uri: item.image}}
                     style={styles.itemPhoto}
                     resizeMode="cover"
                 />
@@ -55,11 +55,11 @@ const ProfessionalsScreen = ({route, navigation} ) => {
                     contentContainerStyle={{ paddingHorizontal: 10 }}
                     stickySectionHeadersEnabled={false}
                     //sections={SECTIONS}
-                    sections={p_data}
+                    sections={data1}
                     renderSectionHeader={({ section }) => (
                         <>
                             <Text style={styles.sectionHeader}>{section.title}</Text>
-                            {section.data ? (
+                            {section.horizontal ? (
                                 <FlatList
                                     horizontal
                                     data={section.data}

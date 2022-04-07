@@ -9,6 +9,7 @@ import dataTest from "../assets/peers/testData.json";
 
 const PeersScreen = ({route, navigation} ) => {
     const dataTest = require("../assets/peers/testData.json");
+    //const dataTest = require("../assets/professional/profData.json")
 
 /*    const dataCheck = () => {
         console.log("In json checker")
@@ -22,7 +23,7 @@ const PeersScreen = ({route, navigation} ) => {
         setdata1(dataTest.data)
         //console.log(data1)
         console.log("In data loader")
-        console.log("data1 ", data1)
+        //console.log("data1 ", data1)
     }
     useEffect(dataLoader);
 
@@ -158,10 +159,10 @@ const PeersScreen = ({route, navigation} ) => {
                     data={boom}
                     horizontal
                     renderItem={({ item }) => (
-                      <View style={{width: '50%'}}>
+                      <View style={{ flex: 1}}>
                         <Image
-                            style={styles.tinyLogo2}
                             source={item.image}
+                            style={{width: 500, height: 500, margin: 5}}
                         />
                           <Text>{item.id}</Text>
                           <FlatList

@@ -1,7 +1,7 @@
  {
     "data": [
       {
-        "name": "Name from JSON",
+        "name": "testData.json",
         "id": "1",
         "cost": "$5.00",
         "description": "Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.",
