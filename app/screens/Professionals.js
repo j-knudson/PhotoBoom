@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     StyleSheet,
     Text,
@@ -12,10 +12,25 @@ import {
 
 
 
+//testing for importing JSON
+import {p_data} from "../assets/professional/pData2";
+
 
 const ProfessionalsScreen = ({route, navigation} ) => {
 
-    const dataTest = require("../assets/peers/testData.json");
+    const jData = require("../assets/professional/profData.json");
+
+
+
+    const [data1, setdata1] = React.useState();
+
+    function dataLoader () {
+        setdata1(jData.data)
+        //console.log(data1)
+        console.log("In data loader")
+        console.log("data1 ", data1)
+    }
+    useEffect(dataLoader);
 
     const ListItem = ({ item }) => {
         console.log(item.description)
@@ -23,6 +38,7 @@ const ProfessionalsScreen = ({route, navigation} ) => {
             <View style={styles.item}>
                 <Image
                     source={item.image}
+                    //source={{uri: item.image}}
                     style={styles.itemPhoto}
                     resizeMode="cover"
                 />
@@ -38,11 +54,12 @@ const ProfessionalsScreen = ({route, navigation} ) => {
                 <SectionList
                     contentContainerStyle={{ paddingHorizontal: 10 }}
                     stickySectionHeadersEnabled={false}
-                    sections={SECTIONS}
+                    //sections={SECTIONS}
+                    sections={p_data}
                     renderSectionHeader={({ section }) => (
                         <>
                             <Text style={styles.sectionHeader}>{section.title}</Text>
-                            {section.horizontal ? (
+                            {section.data ? (
                                 <FlatList
                                     horizontal
                                     data={section.data}
