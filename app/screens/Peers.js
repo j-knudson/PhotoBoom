@@ -117,35 +117,37 @@ const PeersScreen = ({route, navigation} ) => {
     return (
         <View style={styles.container}>
             <StatusBar style="light"/>
-            <View style={{flex: 1}}>
-                <SectionList
-                    horizontal
-                    contentContainerStyle={{paddingHorizontal: 10}}
-                    stickySectionHeadersEnabled={false}
-                    sections={data1}
-                    renderSectionHeader={({section}) => (
-                        <>
-                            <View style={{flex: 1, flexDirection: "column"}}>
-                                <Text style={styles.sectionHeader}>{section.title}</Text>
-                                {section.horizontal ? (
-                                    <FlatList
+            {data1 &&
+                <View style={{flex: 1}}>
+                    <SectionList
+                        horizontal
+                        contentContainerStyle={{paddingHorizontal: 10}}
+                        stickySectionHeadersEnabled={false}
+                        sections={data1}
+                        renderSectionHeader={({section}) => (
+                            <>
+                                <View style={{flex: 1, flexDirection: "column"}}>
+                                    <Text style={styles.sectionHeader}>{section.title}</Text>
+                                    {section.horizontal ? (
+                                        <FlatList
 
-                                        data={section.data}
-                                        renderItem={({item}) => <ListItem item={item}/>}
+                                            data={section.data}
+                                            renderItem={({item}) => <ListItem item={item}/>}
 
-                                    />
-                                ) : null}
-                            </View>
-                        </>
-                    )}
-                    renderItem={({item, section}) => {
-                        if (section.horizontal) {
-                            return null;
-                        }
-                        return <ListItem item={item}/>;
-                    }}
-                />
-            </View>
+                                        />
+                                    ) : null}
+                                </View>
+                            </>
+                        )}
+                        renderItem={({item, section}) => {
+                            if (section.horizontal) {
+                                return null;
+                            }
+                            return <ListItem item={item}/>;
+                        }}
+                    />
+                </View>
+            }
         </View>
     );
 }

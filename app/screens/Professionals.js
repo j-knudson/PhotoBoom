@@ -50,33 +50,35 @@ const ProfessionalsScreen = ({route, navigation} ) => {
     return (
         <View style={styles.container}>
             <StatusBar style="light" />
-            <SafeAreaView style={{ flex: 1 }}>
-                <SectionList
-                    contentContainerStyle={{ paddingHorizontal: 10 }}
-                    stickySectionHeadersEnabled={false}
-                    //sections={SECTIONS}
-                    sections={data1}
-                    renderSectionHeader={({ section }) => (
-                        <>
-                            <Text style={styles.sectionHeader}>{section.title}</Text>
-                            {section.horizontal ? (
-                                <FlatList
-                                    horizontal
-                                    data={section.data}
-                                    renderItem={({ item }) => <ListItem item={item} />}
-                                    //showsHorizontalScrollIndicator={false}
-                                />
-                            ) : null}
-                        </>
-                    )}
-                    renderItem={({ item, section }) => {
-                        if (section.horizontal) {
-                            return null;
-                        }
-                        return <ListItem item={item} />;
-                    }}
-                />
-            </SafeAreaView>
+            {data1 &&
+                <SafeAreaView style={{flex: 1}}>
+                    <SectionList
+                        contentContainerStyle={{paddingHorizontal: 10}}
+                        stickySectionHeadersEnabled={false}
+                        //sections={SECTIONS}
+                        sections={data1}
+                        renderSectionHeader={({section}) => (
+                            <>
+                                <Text style={styles.sectionHeader}>{section.title}</Text>
+                                {section.horizontal ? (
+                                    <FlatList
+                                        horizontal
+                                        data={section.data}
+                                        renderItem={({item}) => <ListItem item={item}/>}
+                                        //showsHorizontalScrollIndicator={false}
+                                    />
+                                ) : null}
+                            </>
+                        )}
+                        renderItem={({item, section}) => {
+                            if (section.horizontal) {
+                                return null;
+                            }
+                            return <ListItem item={item}/>;
+                        }}
+                    />
+                </SafeAreaView>
+            }
         </View>
     );
 };

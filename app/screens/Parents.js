@@ -21,7 +21,7 @@ const ParentsScreen = ({route, navigation} ) => {
 
 
 
-    const [data1, setData1] = React.useState();
+    const [data1, setData1] = React.useState(null);
 
     function dataLoader() {
         setData1(jData)
@@ -57,35 +57,37 @@ const ParentsScreen = ({route, navigation} ) => {
     return (
         <View style={styles.container}>
             <StatusBar style="light" />
-            <SafeAreaView style={{ flex: 1 }}>
-                <SectionList
-                    horizontal
-                    contentContainerStyle={{ paddingHorizontal: 10 }}
-                    stickySectionHeadersEnabled={false}
-                    sections={data1}
-                    renderSectionHeader={({ section }) => (
-                        <>
-                            <View style={{flex: 1, flexDirection: "column"}}>
-                                <Text style={styles.sectionHeader}>{section.title}</Text>
-                                {section.horizontal ? (
-                                    <FlatList
-                                        //horizontal
-                                        data={section.data}
-                                        renderItem={({ item }) => <ListItem item={item} />}
-                                        showsHorizontalScrollIndicator={false}
-                                    />
-                                ) : null}
-                            </View>
-                        </>
-                    )}
-                    renderItem={({ item, section }) => {
-                        if (section.horizontal) {
-                            return null;
-                        }
-                        return <ListItem item={item} />;
-                    }}
-                />
-            </SafeAreaView>
+            {data1 &&
+                <SafeAreaView style={{flex: 1}}>
+                    <SectionList
+                        horizontal
+                        contentContainerStyle={{paddingHorizontal: 10}}
+                        stickySectionHeadersEnabled={false}
+                        sections={data1}
+                        renderSectionHeader={({section}) => (
+                            <>
+                                <View style={{flex: 1, flexDirection: "column"}}>
+                                    <Text style={styles.sectionHeader}>{section.title}</Text>
+                                    {section.horizontal ? (
+                                        <FlatList
+                                            //horizontal
+                                            data={section.data}
+                                            renderItem={({item}) => <ListItem item={item}/>}
+                                            showsHorizontalScrollIndicator={false}
+                                        />
+                                    ) : null}
+                                </View>
+                            </>
+                        )}
+                        renderItem={({item, section}) => {
+                            if (section.horizontal) {
+                                return null;
+                            }
+                            return <ListItem item={item}/>;
+                        }}
+                    />
+                </SafeAreaView>
+            }
         </View>
     );
 };
