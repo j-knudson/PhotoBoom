@@ -13,10 +13,18 @@ import {
 //import Carousel from "react-native-snap-carousel";
 
 import React, {useEffect, useState} from "react";
-
-import {Colors} from "../components/Colors";
-
 import {StatusBar} from "expo-status-bar";
+
+//Containers
+import {
+    BackgroundContainer_3p,
+    BackgroundContainer_Zoom,
+    BoomContainer,
+    BoomImage,
+    TextBoom,
+    TextSectionHeader,
+    ZoomImage,
+} from "../components/AuthenticatedStyles";
 
 
 const PeersScreen = ({route, navigation} ) => {
@@ -29,9 +37,6 @@ const PeersScreen = ({route, navigation} ) => {
 
     function dataLoader() {
         setdata1(dataTest)
-        //console.log(data1)
-        //console.log("In data loader")
-        //console.log("data1 ", data1)
     }
 
     useEffect(dataLoader);
@@ -50,48 +55,35 @@ const PeersScreen = ({route, navigation} ) => {
     //!********HORIZONTAL ***********************
 
     const ZoomView = ({item}) => {
-        console.log("In ZoomView id: ",item.id);
-        console.log("In ZoomView imageID: ",modalImage);
         return (
-            <View>
-                <TouchableOpacity onPress={()=> setModalOpen(false)}>
-                    <Image
+        <BackgroundContainer_3p>
+            <BackgroundContainer_Zoom>
 
-                        source={{uri: modalImage.image}}
-                        style={styles.itemPhoto}
-                        resizeMode="cover"
-                    />
-                    <Text> BOOM COUNTER: {modalImage.likes}</Text>
-                </TouchableOpacity>
-            </View>
+                    <TouchableOpacity onPress={()=> setModalOpen(false)}>
+                        <ZoomImage source={{uri: modalImage.image}}/>
+
+                    </TouchableOpacity>
+            </BackgroundContainer_Zoom>
+        </BackgroundContainer_3p>
         )
     }
 
     const ListItem = ({item}) => {
-        //console.log("in ListItem id is: ",item.id);
         return (
-            <View style={styles.item}>
-
-                    <Modal visible={modelOpen}>
-                            <ZoomView item={{modalImage}}/>
-                    </Modal>
-
-
+            <BoomContainer>
+                <Modal visible={modelOpen}>
+                        <ZoomView item={{modalImage}}/>
+                </Modal>
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
-                    <Image
-
-                        source={{uri: item.image}}
-                        style={styles.itemPhoto}
-                        resizeMode="cover"
-                    />
-                    <Text style={styles.itemText}>{item.comments}</Text>
+                    <BoomImage source={{uri: item.image}} />
+                    <TextBoom>{item.comments}</TextBoom>
                 </TouchableOpacity>
-            </View>
+            </BoomContainer>
         );
     };
 
     return (
-        <View style={styles.container}>
+        <BackgroundContainer_3p>
             <StatusBar style="light"/>
             {data1 &&
                 <View style={{flex: 1}}>
@@ -103,7 +95,7 @@ const PeersScreen = ({route, navigation} ) => {
                         renderSectionHeader={({section}) => (
                             <>
                                 <View style={{flex: 1, flexDirection: "column"}}>
-                                    <Text style={styles.sectionHeader}>{section.title}</Text>
+                                    <TextSectionHeader>{section.title}</TextSectionHeader>
                                     {section.horizontal ? (
                                         <FlatList
 
@@ -124,7 +116,7 @@ const PeersScreen = ({route, navigation} ) => {
                     />
                 </View>
             }
-        </View>
+        </BackgroundContainer_3p>
     );
 }
 
@@ -156,65 +148,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
 });
-
-
-
-
-/*const styles = StyleSheet.create ({
-    background:{
-      //flex: 1,
-      //backgroundColor: Colors.secondaryGreen,
-      backgroundColor: "whitesmoke",
-    },
-
-    container: {
-        //flex: 1,
-        paddingTop: 30,
-        //width: "80%",
-        backgroundColor: "darkgray",
-        //backgroundColor: Colors.secondaryGreen,
-        alignSelf: "center",
-
-    },
-    horizontal: {
-        flexDirection: 'row',
-        //height: "100%",
-        justifyContent: 'space-around',
-        padding: 10,
-        backgroundColor: Colors.testPurple
-    },
-    moviesItem: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        //height: 80,
-        //margin: 2,
-        backgroundColor: "whitesmoke",
-        //backgroundColor: Colors.secondaryGreen,
-        resizeMode: 'contain'
-    },
-    sectionHeader: {
-        fontWeight: '800',
-        fontSize: 18,
-        color: '#f4f4f4',
-        marginTop: 20,
-        marginBottom: 5,
-    },
-    tinyLogo: {
-        width: '90%',
-        height: 300,
-        resizeMode: 'contain'
-    },
-    tinyLogo2: {
-        width: 100,
-        height: 100,
-        resizeMode: 'contain'
-    },
-    tinyLogo3: {
-        width: "100%",
-        resizeMode: 'contain'
-    },
-})*/
 
 export default PeersScreen;
 

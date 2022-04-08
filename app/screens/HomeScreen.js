@@ -9,7 +9,7 @@ const dTest = {"name":"John","image": "https://github.com/j-knudson/PhotoBoom/bl
 const HomeScreen = ( {route, navigation} ) => {
     const testPress2 = () => {
         console.log("Pressed navigate to Parents")
-        navigation.navigate('Parents')
+        navigation.navigate('Peers')
     }
 
     const [data1, setData1] = React.useState(null);
