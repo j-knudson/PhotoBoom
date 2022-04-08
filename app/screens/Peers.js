@@ -2,6 +2,7 @@ import {
     Button,
     FlatList,
     Image,
+    Modal,
     SafeAreaView,
     SectionList,
     StyleSheet,
@@ -14,26 +15,22 @@ import {
 import React, {useEffect, useState} from "react";
 
 import {Colors} from "../components/Colors";
-import dataTest from "../assets/peers/testData.json";
+
 import {StatusBar} from "expo-status-bar";
 
 
 const PeersScreen = ({route, navigation} ) => {
-    //const dataTest = require("../assets/peers/testData.json");
-    const dataTest = require("../assets/professional/profData.json")
-
-    /*    const dataCheck = () => {
-            console.log("In json checker")
-            console.log(dataTest.data)
-        }
-        useEffect(dataCheck);*/
+    const dataTest = require("../assets/peers/PeerData.json")
 
     const [data1, setdata1] = React.useState();
 
+    const [modelOpen, setModalOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
+
     function dataLoader() {
         setdata1(dataTest)
-        console.log(data1)
-        console.log("In data loader")
+        //console.log(data1)
+        //console.log("In data loader")
         //console.log("data1 ", data1)
     }
 
@@ -41,66 +38,45 @@ const PeersScreen = ({route, navigation} ) => {
 
 
     const pressHandler = (item) => {
-        //console.log(item.description);
+        console.log("in presshandler id is: ",item.id);
         //console.log("data1 ",data1.description)
         //console.log("dataTest ", dataTest.data.description)
-        alert(item.description + "\n\n" + item.cost)
+        //alert(item.description + "\n\n" + item.cost)
+        setModalImage(item)
+        setModalOpen(!modelOpen)
     }
-
-
-/*        return (
-            <View style={styles.background}>
-                <View style={styles.container}>
-                    <View >
-                        <FlatList
-                            keyExtractor={
-                                item => item.data.id
-                            }
-                            data={data1}
-                            horizontal
-                            renderItem={({ item }) => (
-                                <View style={{ flex: 1}}>
-                                    <Text> {item.title}</Text>
-                                    <Image
-                                        source={item.data.image}
-                                        style={{width: 500, height: 500, margin: 5}}
-                                    />
-
-                                    <FlatList
-                                        numColumns = {1}
-                                        keyExtractor={
-                                            item => item.id
-                                        }
-                                        data={item.data}
-                                        renderItem={({ item }) => (
-                                            <TouchableOpacity style={styles.moviesItem} onPress={()=> pressHandler(item)}>
-                                                <Text style={styles.text}> {item.name} </Text>
-                                                <Image
-
-                                                    //source={item.image}
-                                                    source={{uri: item.image}}
-                                                    style={{width: 400, height:400}}
-                                                />
-                                            </TouchableOpacity>
-                                        )}
-                                    />
-                                </View>
-                            )}
-                        />
-                    </View>
-                </View>
-            </View>
-        );
-
-    }*/
 
 
     //!********HORIZONTAL ***********************
 
+    const ZoomView = ({item}) => {
+        console.log("In ZoomView id: ",item.id);
+        console.log("In ZoomView imageID: ",modalImage);
+        return (
+            <View>
+                <TouchableOpacity onPress={()=> setModalOpen(false)}>
+                    <Image
+
+                        source={{uri: modalImage.image}}
+                        style={styles.itemPhoto}
+                        resizeMode="cover"
+                    />
+                    <Text> BOOM COUNTER: {modalImage.likes}</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     const ListItem = ({item}) => {
-        console.log(item.cost)
+        //console.log("in ListItem id is: ",item.id);
         return (
             <View style={styles.item}>
+
+                    <Modal visible={modelOpen}>
+                            <ZoomView item={{modalImage}}/>
+                    </Modal>
+
+
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <Image
 
@@ -169,8 +145,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     itemPhoto: {
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 400,
         resizeMode: "contain"
 
     },
