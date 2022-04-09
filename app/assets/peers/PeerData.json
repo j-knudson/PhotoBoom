@@ -110,7 +110,7 @@
         "likes": 4,
         "dislikes": 3,
         "comments": [
-          {"username": "", "comment": ""}
+          {"username": "super user 5", "comment": "a really pertinent observation"}
         ],
         "description": "Desc 2.4",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/party_hard.jpg?raw=true"

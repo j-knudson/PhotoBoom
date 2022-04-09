@@ -101,8 +101,10 @@ const PeersScreen = ({route, navigation} ) => {
                 </Modal>
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <BoomImage source={{uri: item.image}} />
-                    <TextBoom>{item.comments[0].username, " ",item.comments[0].comment}</TextBoom>
                 </TouchableOpacity>
+                {item.comments[0].username !== "" &&
+                    <TextBoom>{item.comments[0].username}: {item.comments[0].comment}</TextBoom>
+                }
             </BoomContainer>
         );
     };
