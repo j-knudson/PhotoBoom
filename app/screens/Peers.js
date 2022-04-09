@@ -24,9 +24,14 @@ import {
     BackgroundContainer_Zoom,
     BoomContainer,
     BoomImage,
-    TextBoom, TextComments, TextRating,
-    TextSectionHeader, ZoomClose,
-    ZoomImage, ZoomRating, ZoomRatingContainer,
+    TextBoom,
+    TextComments,
+    TextRating,
+    TextSectionHeader,
+    ZoomClose,
+    ZoomImage,
+    ZoomRating,
+    ZoomRatingContainer,
 } from "../components/AuthenticatedStyles";
 import {Colors} from "../components/Colors";
 import modal from "react-native-web/dist/exports/Modal";
@@ -54,47 +59,45 @@ const PeersScreen = ({route, navigation} ) => {
 
     const CommentHandler = () => {
         console.log("im comment handler")
-        return (
-            <FlatList
-                //KeyExtractor={modalImage => modalImage.username}
-                data={modalImage.comments}
-                KeyExtractor={item => item.username}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                    <TextComments> {item.username}: {item.comment} </TextComments>
-                )}
-            />
-        )
+
+            return (
+                <FlatList
+                    //KeyExtractor={modalImage => modalImage.username}
+                    data={modalImage.comments}
+                    KeyExtractor={item => item.username}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <TextComments> {item.username}: {item.comment} </TextComments>
+                    )}
+                />
+            )
 
     }
 
 
     //!********HORIZONTAL ***********************
 
-    const ZoomView = ({item}) => {
-        console.log("zoomview 0 on item: ", modalImage.likes);
+    const ZoomView = (color) => {
+        //console.log("zoomview colors: ",color, "Colors.js color: ",Colors.secondaryGreen);
         return (
         <BackgroundContainer_3p>
             <BackgroundContainer_Zoom nestedScrollEnabled={true}>
                 <ZoomClose onPress={()=> setModalOpen(false)}>
-                    <AntDesign name="closesquare" size={24} color={Colors.secondaryGreen} />
+                    <AntDesign name="closesquare" size={24} color={color.color} />
                 </ZoomClose>
                 <ZoomImage source={{uri: modalImage.image}}/>
-
                 <ZoomRatingContainer>
                     <ZoomRating>
-                        <AntDesign name="like2" size={24} color={Colors.secondaryGreen} style={{width: 25, marginRight: 5}} />
+                        <AntDesign name="like2" size={24} color={color.color} style={{width: 25, marginRight: 5}} />
                     </ZoomRating>
                     <TextRating > {modalImage.likes}</TextRating>
                     <ZoomRating>
-                        <AntDesign name="dislike1" size={24} color={Colors.secondaryGreen} />
+                        <AntDesign name="dislike1" size={24} color={color.color} />
                     </ZoomRating>
                     <TextRating > {modalImage.dislikes}</TextRating>
 
                 </ZoomRatingContainer>
                 <CommentHandler/>
-
-
             </BackgroundContainer_Zoom>
         </BackgroundContainer_3p>
         )
@@ -104,11 +107,11 @@ const PeersScreen = ({route, navigation} ) => {
         return (
             <BoomContainer>
                 <Modal visible={modelOpen}>
-                        <ZoomView item={{modalImage}}/>
+                        <ZoomView color={Colors.secondaryGreen}/>
                 </Modal>
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <BoomImage source={{uri: item.image}} />
-                    {/*<TextBoom>{item.comments}</TextBoom>*/}
+                    {/*<TextBoom>{item.comments[0]}</TextBoom>*/}
                 </TouchableOpacity>
             </BoomContainer>
         );
