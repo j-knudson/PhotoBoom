@@ -1,12 +1,7 @@
 import {
-    Button,
     FlatList,
-    Image,
     Modal,
-    SafeAreaView,
     SectionList,
-    StyleSheet,
-    Text,
     TouchableOpacity,
     View
 } from "react-native";
@@ -58,8 +53,6 @@ const PeersScreen = ({route, navigation} ) => {
     }
 
     const CommentHandler = () => {
-        console.log("im comment handler")
-
             return (
                 <FlatList
                     //KeyExtractor={modalImage => modalImage.username}
@@ -71,14 +64,12 @@ const PeersScreen = ({route, navigation} ) => {
                     )}
                 />
             )
-
     }
 
 
     //!********HORIZONTAL ***********************
 
     const ZoomView = (color) => {
-        //console.log("zoomview colors: ",color, "Colors.js color: ",Colors.secondaryGreen);
         return (
         <BackgroundContainer_3p>
             <BackgroundContainer_Zoom nestedScrollEnabled={true}>
@@ -95,7 +86,6 @@ const PeersScreen = ({route, navigation} ) => {
                         <AntDesign name="dislike1" size={24} color={color.color} />
                     </ZoomRating>
                     <TextRating > {modalImage.dislikes}</TextRating>
-
                 </ZoomRatingContainer>
                 <CommentHandler/>
             </BackgroundContainer_Zoom>
@@ -111,7 +101,7 @@ const PeersScreen = ({route, navigation} ) => {
                 </Modal>
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <BoomImage source={{uri: item.image}} />
-                    {/*<TextBoom>{item.comments[0]}</TextBoom>*/}
+                    <TextBoom>{item.comments[0].username, " ",item.comments[0].comment}</TextBoom>
                 </TouchableOpacity>
             </BoomContainer>
         );
@@ -133,10 +123,8 @@ const PeersScreen = ({route, navigation} ) => {
                                     <TextSectionHeader>{section.title}</TextSectionHeader>
                                     {section.horizontal ? (
                                         <FlatList
-
                                             data={section.data}
                                             renderItem={({item}) => <ListItem item={item}/>}
-
                                         />
                                     ) : null}
                                 </View>
@@ -154,132 +142,4 @@ const PeersScreen = ({route, navigation} ) => {
         </BackgroundContainer_3p>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#121212',
-    },
-    sectionHeader: {
-        fontWeight: '800',
-        fontSize: 18,
-        color: '#f4f4f4',
-        marginTop: 20,
-        marginBottom: 5,
-        textAlign: "center"
-    },
-    item: {
-        margin: 10,
-    },
-    itemPhoto: {
-        width: 400,
-        height: 400,
-        resizeMode: "contain"
-
-    },
-    itemText: {
-        color: 'rgba(255, 255, 255, 0.5)',
-        marginTop: 5,
-        textAlign: "center"
-    },
-});
-
 export default PeersScreen;
-
-/*
-
-    const [image2, setImage2] = useState([
-        {
-            name: 'Party1',
-            id: '1',
-            cost: '$5.00',
-            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
-            image: require("../assets/peers/leo_party.jpg")
-        },
-        {
-            name: 'Party2',
-            id: '2',
-            cost: '$20.00',
-            description: 'Some Like it Hoth',
-            image: require("../assets/peers/bean_party.jpg")
-        },
-        {
-            name: 'Party3',
-            id: '3',
-            cost: '$10.00',
-            description: 'Ewok the Line',
-            image: require("../assets/peers/dwight_party.jpeg")
-        },
-        {
-            name: 'Party4',
-            id: '4',
-            cost: '$8.00',
-            description: 'Ludicrous Speed',
-            image: require("../assets/peers/party_hard.jpg")
-        },
-
-
-    ])
-
-    const [image, setImage] = useState([
-        {
-            name: 'Star Wars',
-            id: '1',
-            cost: '$5.00',
-            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
-            image: require("../assets/peers/a_new_hope.jpg")
-        },
-        {
-            name: 'Empire Strikes Back',
-            id: '2',
-            cost: '$20.00',
-            description: 'Some Like it Hoth',
-            image: require("../assets/peers/empire.jpg")
-        },
-        {
-            name: 'Return of the Jedi',
-            id: '3',
-            cost: '$10.00',
-            description: 'Ewok the Line',
-            image: require("../assets/peers/jedi.jpg")
-        },
-        {
-            name: 'Spaceballs',
-            id: '4',
-            cost: '$8.00',
-            description: 'Ludicrous Speed',
-            image: require("../assets/peers/spaceballs.jpg")
-        },
-
-    ])
-    const [boom, setBoom] = useState([
-        {
-            name: 'Party1',
-            id: '1',
-            cost: '$5.00',
-            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
-            image: require("../assets/peers/leo_party.jpg")
-        },
-        {
-            name: 'Star Wars',
-            id: '2',
-            cost: '$5.00',
-            description: 'Which program do Jedi use to open PDF files?\nAdobe Wan Kenobi.',
-            image: require("../assets/peers/a_new_hope.jpg")
-        },
-        {
-            name: 'Party3',
-            id: '3',
-            cost: '$10.00',
-            description: 'Ewok the Line',
-            image: require("../assets/peers/dwight_party.jpeg")
-        },
-        {
-            name: 'Spaceballs',
-            id: '4',
-            cost: '$8.00',
-            description: 'Ludicrous Speed',
-            image: require("../assets/peers/spaceballs.jpg")
-        },
-    ])
- */
