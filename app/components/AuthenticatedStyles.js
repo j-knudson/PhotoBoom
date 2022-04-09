@@ -15,9 +15,7 @@ export const BackgroundContainer_3p = styled.View `
     
 `;
 export const BackgroundContainer_Zoom = styled.ScrollView `
-    flex: 1;
-    background-color: ${Colors.primaryRed}
-    padding: 10px;
+    flex: 1; 
     width: 100%; 
     height: 100%; 
     resize-mode: contain; 
@@ -38,7 +36,12 @@ export const TextBoom = styled.Text`
     text-align: center;
     
 `;
-//color: '#f4f4f4',
+export const TextComments = styled.Text`
+    color: ${Colors.textBoom}; 
+    margin-top: 20px;
+    margin-left: 20px;
+    
+`;
 export const TextSectionHeader = styled.Text`
     font-weight: 800;
     font-size: 18px;
@@ -49,11 +52,30 @@ export const TextSectionHeader = styled.Text`
     text-align: center;
 `;
 
-export const ZoomImage = styled.Image `
-
-    height: ${WindowHeight-25}px; 
-    resize-mode: contain;
-    background-color: ${Colors.testPurple}   
+export const TextRating = styled.Text`
+    color: ${Colors.textBoom}; 
+    margin-right: 25px;
 `;
 
-expo
+export const ZoomClose = styled.TouchableOpacity `
+    align-self: flex-end;
+    z-index: 1;   
+    width: 24px; 
+    position: relative;
+    top: 15px; 
+`;
+
+export const ZoomImage = styled.Image `
+    height: ${WindowHeight-25}px; 
+    resize-mode: contain;
+`;
+export const ZoomRatingContainer = styled.View `
+    position: absolute;
+    top: ${WindowHeight-30}px
+    z-index: 1; 
+    flex-direction: row;
+    padding-left: 15px; 
+`;
+export const ZoomRating = styled.TouchableOpacity `
+    margin-right: 2px;
+`;
