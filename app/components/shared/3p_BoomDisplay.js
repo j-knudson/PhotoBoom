@@ -28,7 +28,7 @@ const BoomDisplay = ({data1, iconColors}) => {
                 {data && (
                     <View>
                         {data.map((item) => (
-                            <TextComments key={item.username}> {item.comment}</TextComments>
+                            <TextComments key={item.username}> {item.username}: {item.comment}</TextComments>
                         ))}
                     </View>
                 )}
@@ -72,6 +72,7 @@ const BoomDisplay = ({data1, iconColors}) => {
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <BoomImage source={{uri: item.image}} />
                 </TouchableOpacity>
+                {/*TODO add touchable opacity and function to add a comment*/}
                 {item.comments[0].username !== "" &&
                     <TextBoom>{item.comments[0].username}: {item.comments[0].comment}</TextBoom>
                 }
