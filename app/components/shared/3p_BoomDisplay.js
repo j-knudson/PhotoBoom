@@ -22,17 +22,18 @@ const BoomDisplay = ({data1, iconColors}) => {
     }
 
     const CommentHandler = () => {
+        const data = modalImage.comments;
         return (
-            <FlatList
-                //KeyExtractor={modalImage => modalImage.username}
-                data={modalImage.comments}
-                KeyExtractor={item => item.username}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                    <TextComments> {item.username}: {item.comment} </TextComments>
+            <View>
+                {data && (
+                    <View>
+                        {data.map((item) => (
+                            <TextComments key={item.username}> {item.comment}</TextComments>
+                        ))}
+                    </View>
                 )}
-            />
-        )
+            </View>
+        );
     }
 
 

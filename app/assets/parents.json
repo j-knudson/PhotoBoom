@@ -5,50 +5,71 @@
     "likes": 0,
     "data": [
       {
-        "name": "Far Side 1",
-        "category": "",
-        "description": "",
-        "group": "Parent",
         "id": "2.1",
+        "name": "Far Side 1",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/fs1.png?raw=true",
-        "comments": "The top comment"
+        "comments": [
+          {"username":"user1", "comment": "The top comment"},
+          {"username":"user2", "comment": "So funny"},
+          {"username":"user3", "comment":"just another comment"}
+        ]
       },
       {
-        "name": "Far Side 2",
-        "category": "",
-        "description": "",
         "id": "2.2",
+        "name": "Far Side 2",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/fs2.jpg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       },
       {
-        "name": "Far Side 3",
-        "category": "",
-        "description": "",
         "id": "2.3",
+        "name": "Far Side 3",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/fs3.jpg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       },
       {
-        "name": "Far Side 4",
-        "category": "",
-        "description": "",
         "id": "2.4",
+        "name": "Far Side 4",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/fs4.jpg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       },
       {
-        "name": "Far Side 5",
-        "category": "",
-        "description": "",
         "id": "2.5",
+        "name": "Far Side 5",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/fs5.jpg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       }
     ]
   },
@@ -57,22 +78,30 @@
     "horizontal": true,
     "data": [
       {
-        "name": "Family 1",
-        "category": "",
-        "description": "",
         "id": "2.6",
+        "name": "Family 1",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/family1.jpeg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       },
       {
-        "name": "Far Side 2",
-        "category": "",
-        "description": "",
         "id": "2.7",
+        "name": "Far Side 2",
+        "group": "Parent",
+        "category": "",
         "likes": 0,
+        "dislikes": 0,
+        "description": "",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/878b1e19e024907693e1a8b19a1655c6fc6bde5a/app/assets/db_images/family2.jpg?raw=true",
-        "comments": ""
+        "comments": [
+          {"username": "", "comment": ""}
+        ]
       }
     ]
   }
