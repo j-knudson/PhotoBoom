@@ -1,4 +1,4 @@
-import {FlatList, Modal, SectionList, TouchableOpacity, View} from "react-native";
+import {FlatList, Modal, SectionList, TouchableOpacity, Text, View} from "react-native";
 import {
     BackgroundContainer_3p,
     BackgroundContainer_Zoom, BoomContainer, BoomImage, TextBoom,
@@ -12,7 +12,7 @@ import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
 
 
-const BoomDisplay = ({data1, color}) => {
+const BoomDisplay = ({data1, iconColors}) => {
     const [modelOpen, setModalOpen] = useState(false);
     const [modalImage, setModalImage] = useState(null);
 
@@ -38,21 +38,21 @@ const BoomDisplay = ({data1, color}) => {
 
     //!********HORIZONTAL ***********************
 
-    const ZoomView = (color) => {
+    const ZoomView = () => {
         return (
             <BackgroundContainer_3p>
                 <BackgroundContainer_Zoom nestedScrollEnabled={true}>
                     <ZoomClose onPress={()=> setModalOpen(false)}>
-                        <AntDesign name="closesquare" size={24} color={color.color} />
+                        <AntDesign name="closesquare" size={24} color={iconColors} />
                     </ZoomClose>
                     <ZoomImage source={{uri: modalImage.image}}/>
                     <ZoomRatingContainer>
                         <ZoomRating>
-                            <AntDesign name="like2" size={24} color={color.color} style={{width: 25, marginRight: 5}} />
+                            <AntDesign name="like2" size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
                         </ZoomRating>
                         <TextRating > {modalImage.likes}</TextRating>
                         <ZoomRating>
-                            <AntDesign name="dislike1" size={24} color={color.color} />
+                            <AntDesign name="dislike1" size={24} color={iconColors} />
                         </ZoomRating>
                         <TextRating > {modalImage.dislikes}</TextRating>
                     </ZoomRatingContainer>
@@ -66,7 +66,7 @@ const BoomDisplay = ({data1, color}) => {
         return (
             <BoomContainer>
                 <Modal visible={modelOpen}>
-                    <ZoomView color={color}/>
+                    <ZoomView />
                 </Modal>
                 <TouchableOpacity onPress={()=> pressHandler(item)}>
                     <BoomImage source={{uri: item.image}} />
@@ -80,6 +80,7 @@ const BoomDisplay = ({data1, color}) => {
 
     return (
         <BackgroundContainer_3p>
+
             <StatusBar style="light"/>
             <View style={{flex: 1}}>
                 <SectionList
@@ -94,7 +95,7 @@ const BoomDisplay = ({data1, color}) => {
                                 {section.horizontal ? (
                                     <FlatList
                                         data={section.data}
-                                        renderItem={({item}) => <ListItem item={item}/>}
+                                        renderItem={({item}) => <ListItem item={item} />}
                                     />
                                 ) : null}
                             </View>
