@@ -16,7 +16,6 @@ export const BackgroundContainer_withHeader = styled.View`
     padding-bottom: ${StatusBarHeight}+500px;
     
 `;
-
 export const GoogleButtonContainer = styled.TouchableOpacity`
     flex: 1;
     resize-mode: contain;
@@ -104,13 +103,6 @@ export const StyledInputLabel = styled.Text`
 `;
 
 
-export const TextButton = styled.Text`
-    color: ${Colors.textColor};
-    font-size: 16px; 
-    font-weight: bold;
-`;
-
-
 export const SubmitButton = styled.TouchableOpacity`
     flex: 1;
     background-color: ${Colors.submitButtons};
@@ -119,6 +111,12 @@ export const SubmitButton = styled.TouchableOpacity`
     width: 70%;
     align-items: center;  
     margin-top: 5px;
+`;
+
+export const TextButton = styled.Text`
+    color: ${Colors.textColor};
+    font-size: 16px; 
+    font-weight: bold;
 `;
 
 export const TextError = styled.Text `

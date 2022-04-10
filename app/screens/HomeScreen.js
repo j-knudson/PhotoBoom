@@ -9,11 +9,16 @@ const dTest = {"name":"John","image": "https://github.com/j-knudson/PhotoBoom/bl
 const HomeScreen = ( {route, navigation} ) => {
     const testPress2 = () => {
         console.log("Pressed navigate to Parents")
-        navigation.navigate('Parents')
+        navigation.navigate('Peers')
     }
 
     const [data1, setData1] = React.useState(null);
 
+    const users=['John', 'Mitchell', 'Jake', 'Abdul'];
+
+    users.map((item)=>{
+        console.log("my name is ",item)
+    })
     function dataLoader () {
         setData1(dTest)
         console.log("In data loader")
@@ -45,6 +50,10 @@ const HomeScreen = ( {route, navigation} ) => {
                     style={{width: 400, height: 400}}
                 />
             }
+
+            {users.map((item)=>
+                <Text>{item}</Text>
+            )}
 
 
         </View>
