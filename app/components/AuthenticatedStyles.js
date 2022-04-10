@@ -11,7 +11,7 @@ export const BackgroundContainer_3p = styled.View `
     flex: 1;
     background-color: ${Colors.auth_background};
     justify-content: center;
-    align-items: center;
+    align-content: center;
     
 `;
 export const BackgroundContainer_Zoom = styled.ScrollView `

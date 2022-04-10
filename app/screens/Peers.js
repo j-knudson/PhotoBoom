@@ -31,8 +31,12 @@ import {
 import {Colors} from "../components/Colors";
 import modal from "react-native-web/dist/exports/Modal";
 
+import BoomDisplay from "../components/shared/3p_BoomDisplay";
+import {PhotoBoomText} from "../components/styledcontainers";
+
 
 const PeersScreen = ({route, navigation} ) => {
+
     const dataTest = require("../assets/peers/PeerData.json")
 
     const [data1, setdata1] = React.useState();
@@ -47,7 +51,19 @@ const PeersScreen = ({route, navigation} ) => {
     useEffect(dataLoader);
 
 
-    const pressHandler = (item) => {
+    return (
+        <BackgroundContainer_3p>
+            {data1 &&
+                <>
+                    <BoomDisplay data1={data1} color={Colors.secondaryGreen}/>
+                </>
+            }
+            </BackgroundContainer_3p>
+    );
+
+}
+
+/*    const pressHandler = (item) => {
         setModalImage(item)
         setModalOpen(!modelOpen)
     }
@@ -144,4 +160,6 @@ const PeersScreen = ({route, navigation} ) => {
         </BackgroundContainer_3p>
     );
 }
+
+ */
 export default PeersScreen;
