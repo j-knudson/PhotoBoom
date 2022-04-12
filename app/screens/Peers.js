@@ -18,7 +18,7 @@ const PeersScreen = ({route, navigation} ) => {
         <BackgroundContainer_3p>
             {data1 &&
                 <>
-                    <BoomDisplay data1={data1} iconColors={Colors.secondaryGreen}/>
+                    <BoomDisplay data1={data1} iconColors={Colors.secondaryGreen} dataChange={dataLoader}/>
                 </>
             }
             </BackgroundContainer_3p>

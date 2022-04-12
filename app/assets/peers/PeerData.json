@@ -11,6 +11,7 @@
         "category": "",
         "likes": 5,
         "dislikes": 0,
+        "rated": 0,
         "description": "Desc 1.1.",
         "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/a_new_hope.jpg?raw=true",
         "comments": [
@@ -26,6 +27,7 @@
         "category": "",
         "likes": 4,
         "dislikes": 1,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -38,6 +40,7 @@
         "category": "",
         "likes": 3,
         "dislikes": 2,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -51,6 +54,7 @@
         "category": "",
         "likes": 2,
         "dislikes": 3,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -70,6 +74,7 @@
         "category": "",
         "likes": 0,
         "dislikes": 3,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -83,6 +88,7 @@
         "category": "",
         "likes": 11,
         "dislikes": 3,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -96,6 +102,7 @@
         "category": "",
         "likes": 0,
         "dislikes": 3,
+        "rated": 0,
         "comments": [
           {"username": "", "comment": ""}
         ],
@@ -109,6 +116,7 @@
         "category": "",
         "likes": 4,
         "dislikes": 3,
+        "rated": 0,
         "comments": [
           {"username": "super user 5", "comment": "a really pertinent observation"}
         ],
