@@ -1,20 +1,85 @@
 import {FlatList, Modal, SectionList, TouchableOpacity, Text, View} from "react-native";
 import {
-    BackgroundContainer_3p,
-    BackgroundContainer_Zoom, BoomContainer, BoomImage, TextBoom,
-    TextComments, TextRating, TextSectionHeader,
-    ZoomClose,
-    ZoomImage, ZoomRating, ZoomRatingContainer
+    BackgroundContainer_3p, BackgroundContainer_Zoom, BoomContainer,
+    BoomImage,
+    TextBoom, TextComments, TextRating, TextSectionHeader,
+    ZoomClose, ZoomImage, ZoomRating, ZoomRatingContainer
 } from "../AuthenticatedStyles";
 import {AntDesign} from "@expo/vector-icons";
-import {Colors} from "../Colors";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
+import LikeHandler from "./LikeHandler";
+import modal from "react-native-web/dist/exports/Modal";
+import ReactionHandler from "./LikeHandler";
 
 
-const BoomDisplay = ({data1, iconColors}) => {
+const BoomDisplay = ({data1, iconColors, dataChange}) => {
     const [modelOpen, setModalOpen] = useState(false);
     const [modalImage, setModalImage] = useState(null);
+    const [filteredData, setFilteredData] = useState(data1)
+
+    function useForceUpdate() {
+        let [value, setState] = useState(true);
+        return () => setState(!value);
+    }
+
+    const likeHandler = () => {
+        let wanted = modalImage.id;
+
+        filteredData.map(post => {
+            post.data.filter((item) =>{
+                if (item.id === wanted) {
+                    console.log(item.likes)
+                    if(item.rated === 0) {
+                        item.likes = item.likes+1;
+                        item.rated = 1;
+                    }
+                    else if (item.rated === 1) {
+                        item.likes = item.likes-1;
+                        item.rated = 0;
+                    }
+                    else {
+                        item.likes = item.likes+1;
+                        item.rated = 1;
+                        if (item.dislikes > 0) {
+                            item.dislikes = item.dislikes-1;
+                        }
+                    }
+                }
+            })
+        })
+        //TODO add axios put to update DB
+        //dataChange(filteredData);
+
+    }
+    const dislikeHandler = () => {
+        let wanted = modalImage.id;
+
+        filteredData.map(post => {
+            post.data.filter((item) =>{
+                if (item.id === wanted) {
+                    console.log(item.likes)
+                    if(item.rated === 0) {
+                        item.dislikes = item.dislikes+1;
+                        item.rated = -1;
+                    }
+                    else if (item.rated === -1) {
+                        item.dislikes = item.dislikes-1;
+                        item.rated = 0;
+                    }
+                    else {
+                        item.dislikes = item.dislikes+1;
+                        item.rated = -1;
+                        if (item.likes > 0) {
+                            item.likes = item.likes-1;
+                        }
+                    }
+                    console.log("updated now: ",item.likes)
+                }
+                //console.log(filteredData)
+            })
+        })
+    }
 
     const pressHandler = (item) => {
         setModalImage(item)
@@ -25,7 +90,7 @@ const BoomDisplay = ({data1, iconColors}) => {
         const data = modalImage.comments;
         return (
             <View>
-                {data && (
+                {data [0].username !="" && (
                     <View>
                         {data.map((item) => (
                             <TextComments key={item.username}> {item.username}: {item.comment}</TextComments>
@@ -35,11 +100,8 @@ const BoomDisplay = ({data1, iconColors}) => {
             </View>
         );
     }
-
-
-    //!********HORIZONTAL ***********************
-
     const ZoomView = () => {
+        let forceUpdate = useForceUpdate();
         return (
             <BackgroundContainer_3p>
                 <BackgroundContainer_Zoom nestedScrollEnabled={true}>
@@ -48,12 +110,18 @@ const BoomDisplay = ({data1, iconColors}) => {
                     </ZoomClose>
                     <ZoomImage source={{uri: modalImage.image}}/>
                     <ZoomRatingContainer>
-                        <ZoomRating>
-                            <AntDesign name="like2" size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
-                        </ZoomRating>
+                        <ZoomRating onPress={() => {
+                            likeHandler();
+                            forceUpdate();
+                        }}>
+                            <AntDesign name={modalImage.rated === 1 ? "like1" : "like2" } size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
+                        </ZoomRating >
                         <TextRating > {modalImage.likes}</TextRating>
-                        <ZoomRating>
-                            <AntDesign name="dislike1" size={24} color={iconColors} />
+                        <ZoomRating onPress={() => {
+                            dislikeHandler();
+                            forceUpdate();
+                        }}>
+                            <AntDesign name={modalImage.rated === -1 ? "dislike1" : "dislike2" } size={24} color={iconColors} />
                         </ZoomRating>
                         <TextRating > {modalImage.dislikes}</TextRating>
                     </ZoomRatingContainer>

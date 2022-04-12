@@ -13,7 +13,6 @@ const ProfessionalsScreen = ({route, navigation} ) => {
 
     function dataLoader () {
         setdata1(jData)
-        console.log("In data loader")
     }
     useEffect(dataLoader);
 
