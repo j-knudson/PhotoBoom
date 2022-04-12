@@ -53,7 +53,6 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
         filteredData.map(post => {
             post.data.filter((item) =>{
                 if (item.id === wanted) {
-                    console.log(item.likes)
                     if(item.rated === 0) {
                         item.dislikes = item.dislikes+1;
                         item.rated = -1;
@@ -69,8 +68,7 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                             item.likes = item.likes-1;
                         }
                     }
-                    console.log("updated now: ",item.likes)
-                }
+               }
             })
         })
     }
