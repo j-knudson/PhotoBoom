@@ -1,4 +1,4 @@
-import {FlatList, Modal, SectionList, TouchableOpacity, Text, View} from "react-native";
+import {FlatList, Modal, SectionList, TouchableOpacity, View} from "react-native";
 import {
     BackgroundContainer_3p, BackgroundContainer_Zoom, BoomContainer,
     BoomImage,
@@ -8,10 +8,6 @@ import {
 import {AntDesign} from "@expo/vector-icons";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
-import LikeHandler from "./LikeHandler";
-import modal from "react-native-web/dist/exports/Modal";
-import ReactionHandler from "./LikeHandler";
-
 
 const BoomDisplay = ({data1, iconColors, dataChange}) => {
     const [modelOpen, setModalOpen] = useState(false);
@@ -29,7 +25,6 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
         filteredData.map(post => {
             post.data.filter((item) =>{
                 if (item.id === wanted) {
-                    console.log(item.likes)
                     if(item.rated === 0) {
                         item.likes = item.likes+1;
                         item.rated = 1;
@@ -76,7 +71,6 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                     }
                     console.log("updated now: ",item.likes)
                 }
-                //console.log(filteredData)
             })
         })
     }
