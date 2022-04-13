@@ -1,7 +1,7 @@
 import {FlatList, Modal, SectionList, TouchableOpacity, View} from "react-native";
 import {
     BackgroundContainer_3p, BackgroundContainer_Zoom, BoomContainer,
-    BoomImage,
+    BoomImage, BoomRating, BoomRatingContainer,
     TextBoom, TextComments, TextRating, TextSectionHeader,
     ZoomClose, ZoomImage, ZoomRating, ZoomRatingContainer
 } from "../AuthenticatedStyles";
@@ -152,8 +152,16 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                     sections={data1}
                     renderSectionHeader={({section}) => (
                         <>
-                            <View style={{flex: 1, flexDirection: "column"}}>
+                            <View style={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
                                 <TextSectionHeader>{section.title}</TextSectionHeader>
+                                <BoomRatingContainer>
+                                    <BoomRating>
+                                        <AntDesign name="like1" size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
+                                    </BoomRating>
+                                    <TextRating>
+                                        {section.likes}
+                                    </TextRating>
+                                </BoomRatingContainer>
                                 {section.horizontal ? (
                                     <FlatList
                                         data={section.data}
