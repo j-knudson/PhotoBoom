@@ -1,13 +1,19 @@
-import {Image, StyleSheet, View} from "react-native";
+import {Button, Image, StyleSheet, View} from "react-native";
 import Animated, {useSharedValue, useAnimatedStyle, withTiming} from 'react-native-reanimated';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import HomeScreen from "./HomeScreen";
 
 
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
 
     const opacity = useSharedValue(0);
     const scale = useSharedValue(1);
+    const [animating, setAnimating] = useState(true);
+
+    const toHome = () => {
+        navigation.navigate('Home')
+    }
 
     const reanimatedImage = useAnimatedStyle(() =>{
         return {
@@ -23,7 +29,8 @@ const SplashScreen = () => {
 
     useEffect(() =>{
         opacity.value = withTiming(1, {duration: 2000});
-        scale.value = withTiming(.5, {duration: 2000})
+        scale.value = withTiming(.5, {duration: 2000});
+        setAnimating(false);
     });
 
     return (
@@ -37,9 +44,16 @@ const SplashScreen = () => {
                 source={require('../assets/photoboom_logo.png')}
             >
             </Animated.Image>
+{/*        <Button
+            title="Press me"
+            onPress={toHome}
+        />*/}
         </View>
 
+
     );
+
+    useEffect(toHome)
 }
 
 const styles = StyleSheet.create ({

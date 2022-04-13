@@ -9,12 +9,19 @@ import React from 'react';
 
 
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import SplashScreen from "../screens/SplashScreen";
 
 const Stack = createNativeStackNavigator();
 
 export default function AuthenticatedStack() {
     return (
         <Stack.Navigator >
+{/*        TODO implemented animated transistion screen for when authentication flow is complete*/}
+                    {/*<Stack.Screen
+                name="Splash"
+                component={SplashScreen}
+                options={{headerShown: false}}
+            />*/}
             <Stack.Group>
                 <Stack.Screen
                     name="Home"

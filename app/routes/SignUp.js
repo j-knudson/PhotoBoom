@@ -7,6 +7,7 @@ import ForgotLoginScreen from "../screens/ForgotLoginScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import {StyleSheet} from "react-native";
+import SplashScreen from "../screens/SplashScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -32,6 +33,11 @@ export default function SignInStack() {
 
     return (
         <Stack.Navigator>
+            <Stack.Screen
+                name="Splash"
+                component={SplashScreen}
+                options={{headerShown: false}}
+            />
             <Stack.Screen
                 name="SignIn"
                 component={LoginSignIn}
