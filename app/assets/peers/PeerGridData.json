@@ -1,0 +1,117 @@
+ {
+   "data": [
+     {
+       "id": "1.1",
+       "name": "Star Wars",
+       "group": "Peer",
+       "category": "",
+       "likes": 5,
+       "dislikes": 0,
+       "rated": 0,
+       "description": "Desc 1.1.",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/a_new_hope.jpg?raw=true",
+       "comments": [
+         {"username":"user1", "comment": "The top comment"},
+         {"username":"user2", "comment": "What a movie"},
+         {"username":"user3", "comment":"Bottom comment"}
+       ]
+     },
+     {
+       "id": "1.2",
+       "name": "Empire Strikes Back",
+       "group": "Peer",
+       "category": "",
+       "likes": 4,
+       "dislikes": 1,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 1.2",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/0f2f3fa7419025769817ecfec26aacfbb2b98244/app/assets/peers/empire.jpg?raw=true"
+     },
+     {
+       "id": "1.3",
+       "name": "Return of the Jedi",
+       "category": "",
+       "likes": 3,
+       "dislikes": 2,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 1.3",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/jedi.jpg?raw=true"
+     },
+     {
+       "id": "1.4",
+       "name": "Spaceballs",
+       "group": "Peer",
+       "category": "",
+       "likes": 2,
+       "dislikes": 3,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 1.4",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/7b93a8a8ab1ca804de774f716240c2b4feea3e0d/app/assets/peers/spaceballs.jpg?raw=true"
+     },
+     {
+       "id": "1.5",
+       "name": "Party1",
+       "group": "Peer",
+       "category": "",
+       "likes": 0,
+       "dislikes": 3,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 2.1",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/0f2f3fa7419025769817ecfec26aacfbb2b98244/app/assets/peers/leo_party.jpg?raw=true"
+     },
+     {
+       "id": "1.6",
+       "name": "Party2",
+       "group": "Peer",
+       "category": "",
+       "likes": 11,
+       "dislikes": 3,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 2.2",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/bean_party.jpg?raw=true"
+     },
+     {
+       "id": "1.7",
+       "name": "Party3",
+       "group": "Peer",
+       "category": "",
+       "likes": 0,
+       "dislikes": 3,
+       "rated": 0,
+       "comments": [
+         {"username": "", "comment": ""}
+       ],
+       "description": "Desc 2.3",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/dwight_party.jpeg?raw=true"
+     },
+     {
+       "id": "1.8",
+       "name": "Party4",
+       "group": "Peer",
+       "category": "",
+       "likes": 4,
+       "dislikes": 3,
+       "rated": 0,
+       "comments": [
+         {"username": "super user 5", "comment": "a really pertinent observation"}
+       ],
+       "description": "Desc 2.4",
+       "image": "https://github.com/j-knudson/PhotoBoom/blob/ecd0e81167e53d75a358e61ecd5f9ffa5627fd61/app/assets/peers/party_hard.jpg?raw=true"
+     }
+   ]
+}

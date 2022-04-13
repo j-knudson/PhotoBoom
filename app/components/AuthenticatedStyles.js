@@ -7,6 +7,11 @@ const WindowHeight = Dimensions.get("window").height;
 
 import {Colors} from "../components/Colors"
 
+
+export const BackgroundContainer = styled.View `
+    background-color: ${Colors.auth_background};  
+`;
+
 export const BackgroundContainer_3p = styled.View `
     flex: 1;
     background-color: ${Colors.auth_background};
@@ -28,6 +33,28 @@ export const BoomImage = styled.Image `
     width: 400px;
     height: 400px;
     resize-mode: contain;
+`;
+export const BoomRating = styled.TouchableOpacity `
+
+`;
+
+export const BoomRatingContainer = styled.View`
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 10px;   
+`;
+
+
+export const GridContainer = styled.ScrollView `
+    height: 100%;
+    margin-top: 30px;
+`;
+
+export const GridImage = styled.Image `
+    width: 200px; 
+    height: 200px; 
+    resize-mode: contain; 
 `;
 
 export const TextBoom = styled.Text`

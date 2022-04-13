@@ -1,17 +1,13 @@
-import {FlatList, Modal, SectionList, TouchableOpacity, Text, View} from "react-native";
+import {FlatList, Modal, SectionList, TouchableOpacity, View} from "react-native";
 import {
     BackgroundContainer_3p, BackgroundContainer_Zoom, BoomContainer,
-    BoomImage,
+    BoomImage, BoomRating, BoomRatingContainer,
     TextBoom, TextComments, TextRating, TextSectionHeader,
     ZoomClose, ZoomImage, ZoomRating, ZoomRatingContainer
 } from "../AuthenticatedStyles";
 import {AntDesign} from "@expo/vector-icons";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
-import LikeHandler from "./LikeHandler";
-import modal from "react-native-web/dist/exports/Modal";
-import ReactionHandler from "./LikeHandler";
-
 
 const BoomDisplay = ({data1, iconColors, dataChange}) => {
     const [modelOpen, setModalOpen] = useState(false);
@@ -29,7 +25,6 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
         filteredData.map(post => {
             post.data.filter((item) =>{
                 if (item.id === wanted) {
-                    console.log(item.likes)
                     if(item.rated === 0) {
                         item.likes = item.likes+1;
                         item.rated = 1;
@@ -58,7 +53,6 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
         filteredData.map(post => {
             post.data.filter((item) =>{
                 if (item.id === wanted) {
-                    console.log(item.likes)
                     if(item.rated === 0) {
                         item.dislikes = item.dislikes+1;
                         item.rated = -1;
@@ -74,9 +68,7 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                             item.likes = item.likes-1;
                         }
                     }
-                    console.log("updated now: ",item.likes)
-                }
-                //console.log(filteredData)
+               }
             })
         })
     }
@@ -160,8 +152,16 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                     sections={data1}
                     renderSectionHeader={({section}) => (
                         <>
-                            <View style={{flex: 1, flexDirection: "column"}}>
+                            <View style={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
                                 <TextSectionHeader>{section.title}</TextSectionHeader>
+                                <BoomRatingContainer>
+                                    <BoomRating>
+                                        <AntDesign name="like1" size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
+                                    </BoomRating>
+                                    <TextRating>
+                                        {section.likes}
+                                    </TextRating>
+                                </BoomRatingContainer>
                                 {section.horizontal ? (
                                     <FlatList
                                         data={section.data}

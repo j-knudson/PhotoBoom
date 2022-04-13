@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": "3.1",
+      "name": "Work 1",
+      "group": "Professionals",
+      "category": "",
+      "likes": 5,
+      "dislikes": 0,
+      "description": "Desc 1.1.",
+      "image": "https://github.com/j-knudson/PhotoBoom/blob/51587e70cd127b8fb4ffcf78240483ac881bdfde/app/assets/db_images/work1.jpeg?raw=true",
+      "comments": [
+        {"username":"user1", "comment": "The top comment"},
+        {"username":"user2", "comment": "Don't we all love work"},
+        {"username":"user3", "comment":"Bottom comment"}
+      ]
+    },
+    {
+      "id": "3.2",
+      "name": "Work 2",
+      "group": "Professionals",
+      "category": "",
+      "likes": 4,
+      "dislikes": 1,
+      "comments": [
+        {"username": "Bubbly Coworker", "comment": "I comment on everything"}
+      ],
+      "description": "Desc 1.2",
+      "image": "https://github.com/j-knudson/PhotoBoom/blob/51587e70cd127b8fb4ffcf78240483ac881bdfde/app/assets/db_images/work2.jpg?raw=true"
+    },
+    {
+      "id": "3.3",
+      "name": "Work 2",
+      "group": "Professionals",
+      "category": "",
+      "likes": 42,
+      "dislikes": 3,
+      "comments": [
+        {"username": "", "comment": ""}
+      ],
+      "description": "Desc 2.1",
+      "image": "https://github.com/j-knudson/PhotoBoom/blob/51587e70cd127b8fb4ffcf78240483ac881bdfde/app/assets/db_images/work3.jpg?raw=true"
+    }
+  ]
+}

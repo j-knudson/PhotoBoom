@@ -35,10 +35,7 @@ const HomeScreen = ( {route, navigation} ) => {
     return(
         <View style={styles.container}>
             <Text> Home Screen</Text>
-            {data1 &&
-                <Text>
-                    {data1.name}
-                </Text>}
+
             <Button
                 title="Home to Friends"
                 onPress={testPress2}
@@ -52,7 +49,7 @@ const HomeScreen = ( {route, navigation} ) => {
             }
 
             {users.map((item)=>
-                <Text>{item}</Text>
+                <Text key={item}>{item}</Text>
             )}
 
 
