@@ -2,7 +2,10 @@
   {
     "title": "Boom1",
     "horizontal": true,
-    "likes": 0,
+    "likes": {
+      "count": 2,
+      "rated": false
+    },
     "data": [
       {
         "id": "3.1",
@@ -37,6 +40,10 @@
   {
     "title": "Boom2",
     "horizontal": true,
+    "likes": {
+      "count": 20,
+      "rated": false
+    },
     "data": [
       {
         "id": "3.3",

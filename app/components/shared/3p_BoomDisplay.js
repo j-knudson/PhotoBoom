@@ -5,9 +5,10 @@ import {
     TextBoom, TextComments, TextRating, TextSectionHeader,
     ZoomClose, ZoomImage, ZoomRating, ZoomRatingContainer
 } from "../AuthenticatedStyles";
-import {AntDesign} from "@expo/vector-icons";
+import {AntDesign, FontAwesome} from "@expo/vector-icons";
 import {StatusBar} from "expo-status-bar";
 import React, {useState} from "react";
+import ReactionHandler from "./ReactionHandler";
 
 const BoomDisplay = ({data1, iconColors, dataChange}) => {
     const [modelOpen, setModalOpen] = useState(false);
@@ -18,6 +19,8 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
         let [value, setState] = useState(true);
         return () => setState(!value);
     }
+
+
 
     const likeHandler = () => {
         let wanted = modalImage.id;
@@ -139,7 +142,7 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
             </BoomContainer>
         );
     };
-
+    let forceUpdate = useForceUpdate();
     return (
         <BackgroundContainer_3p>
 
@@ -155,11 +158,14 @@ const BoomDisplay = ({data1, iconColors, dataChange}) => {
                             <View style={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
                                 <TextSectionHeader>{section.title}</TextSectionHeader>
                                 <BoomRatingContainer>
-                                    <BoomRating>
-                                        <AntDesign name="like1" size={24} color={iconColors} style={{width: 25, marginRight: 5}} />
+                                <BoomRating onPress={() => {
+                                    ReactionHandler(section)
+                                    forceUpdate()
+                                }}>
+                                        <AntDesign name={section.likes.rated ? "like1" : "like2" } size={20} color={iconColors} style={{width: 25, marginRight: 5}} />
                                     </BoomRating>
-                                    <TextRating>
-                                        {section.likes}
+                                    <TextRating style={{fontSize: 18, marginLeft: 5}}>
+                                        {section.likes.count}
                                     </TextRating>
                                 </BoomRatingContainer>
                                 {section.horizontal ? (
