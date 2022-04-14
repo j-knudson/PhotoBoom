@@ -34,11 +34,6 @@ export default function SignInStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Splash"
-                component={SplashScreen}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
                 name="SignIn"
                 component={LoginSignIn}
                 options={{ headerShown: false, marginTop: 20}}

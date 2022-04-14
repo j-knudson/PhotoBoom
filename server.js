@@ -23,7 +23,7 @@ app.get("/users",async function(request,response){
 
 
         // setting query statement
-        let sql = "SELECT * FROM users";
+        let sql = "SELECT * FROM cookies";
         // do query
         await conn.query(sql,function(err,result){
             if (err) {
