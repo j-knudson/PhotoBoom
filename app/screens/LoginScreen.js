@@ -151,6 +151,33 @@ const LoginScreen = ({navigation}) => {
 
 const [hidePassword, setHidePassword] = useState(true);
 
+        const loginHandler  = (values) => {
+
+            console.log(values)
+
+            const res = axios.post('http://35.222.0.171:3000/users',{email: values.email, password: values.password}).then(function(result){
+                let rep = result.data;
+                console.log("This is rep: "+rep);
+                if (rep === "SUCCESS"){
+                    setUserInfo(values)
+                    navigation.navigate('Landing', {
+                        loginData: values
+                    })}
+                else if (rep === "DNE"){
+                    Alert.alert("That Username and/or password is not correct");
+                    navigation.navigate('Sign Up');
+                }
+                else if (rep === "BADPW"){
+                    Alert.alert("That Username and/or password is not correct");}
+                else{
+                    Alert.alert("An error occured "+result.data);
+                    navigation.navigate('Sign Up');
+                }});
+
+        }
+
+
+
 //*** Regextest
     const loginValidationSchema = yup.object().shape({
         email: yup
@@ -179,7 +206,11 @@ const [hidePassword, setHidePassword] = useState(true);
                         <Formik
                             validationSchema={loginValidationSchema}
                             initialValues={{email: '', password: ''}}
-                            onSubmit={values => console.log(values)}
+                            onSubmit={(values, { setSubmitting }) => {
+                                cookies('@loginCount');
+                                loginHandler(values);
+                                setSubmitting(false);
+                            }}
                         >
                                 {({
                                   handleChange,
@@ -245,7 +276,12 @@ const [hidePassword, setHidePassword] = useState(true);
                     <Formik
                         validationSchema={loginValidationSchema}
                         initialValues={{email: '', password: ''}}
-                        onSubmit={values => console.log(values)}
+                        /*onSubmit={values => loginHandler(values)}*/
+                        onSubmit={(values, { setSubmitting }) => {
+                            cookies('@loginCount');
+                            loginHandler(values);
+                            setSubmitting(false);
+                        }}
                     >
                         {({
                               handleChange,

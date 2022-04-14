@@ -156,7 +156,11 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                         validationSchema={SignUpMoreValidationSchema}
                         initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
                         //onSubmit={values => console.log(values)}
-                        onSubmit={valuesToDb}
+                        /*onSubmit={valuesToDb}*/
+                        onSubmit={(values, { setSubmitting }) => {
+                            valuesToDb(values);
+                            setSubmitting(false);
+                        }}
                     >
                         {({
                               handleChange,
