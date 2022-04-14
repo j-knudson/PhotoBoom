@@ -48,7 +48,7 @@ export const BoomRatingContainer = styled.View`
 
 export const GridContainer = styled.ScrollView `
     height: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 `;
 
 export const GridImage = styled.Image `
@@ -68,6 +68,15 @@ export const TextComments = styled.Text`
     margin-top: 20px;
     margin-left: 20px;
     
+`;
+
+
+export const TextGridAdd = styled.Text`
+    
+    padding-top: 45px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 18px;
 `;
 export const TextSectionHeader = styled.Text`
     font-weight: 800;
