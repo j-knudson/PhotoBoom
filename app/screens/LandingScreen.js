@@ -1,5 +1,8 @@
 import {Button, Image, StyleSheet, Text, View} from "react-native";
 import React from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import stringifySafe from "react-native/Libraries/Utilities/stringifySafe";
+import axios from "axios";
 
 
 //function LandingScreen(props) {
@@ -38,6 +41,18 @@ const LandingScreen =( {route, navigation} ) => {
                 title={'Landing Screen Test'}
                 onPress={testPress}
             />
+            <Button
+                title="Cookie button 1"
+                color="green"
+                onPress = {()=>{cookies('button1');}}/>
+            <Button
+                title="Cookie button 2"
+                color="grey"
+                onPress = {()=>{cookies('button 2');}}/>
+            <Button
+                title="Logout"
+                color="blue"
+                onPress = {()=>{cookiesToDb();}}/>
 
         </View>
     );

@@ -67,7 +67,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         )
 
 
-        const res = axios.put('http://10.0.2.2:3000/users',
+        const res = axios.put('http://35.222.0.171:3000/users',
             {email: values.email,
                 password: values.password,
                 firstName: values.firstName,
@@ -78,14 +78,13 @@ const SignUpScreenMore = ( {route, navigation} ) => {
 
             console.log("This is rep: "+rep);
             if (rep === "SUCCESS"){
-                navigation.navigate('Landing')
+                //TODO secure store token set to true
+                navigation.navigate('Landing', {
+                    loginData: values
+                })
             }
-            else if (rep === "DNE"){
-                Alert.alert("That Username and/or email is not correct");
-                navigation.navigate('Sign Up');
-            }
-            else if (rep === "BADPW"){
-                Alert.alert("That Username and/or email is not correct");
+            else if (rep === "DUPEMAIL"){
+                Alert.alert("That username already exists");
             }
             else {
                 Alert.alert("An error occured " + result.data);
@@ -246,7 +245,10 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                             validationSchema={SignUpMoreValidationSchema}
                             initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
                             //onSubmit={values => console.log(values)}
-                            onSubmit={valuesToDb}
+                            onSubmit={(values, { setSubmitting }) => {
+                                valuesToDb(values);
+                                setSubmitting(false);
+                            }}
                         >
                             {({
                                   handleChange,

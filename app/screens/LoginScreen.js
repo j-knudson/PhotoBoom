@@ -51,9 +51,8 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
-
-//TODO change useSate back to ''
-    const [email, setEmail] = useState('guy1@email.com');
+//TODO set email and password back to ''
+    const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
     const onLoginPress = () => {
@@ -124,47 +123,6 @@ const LoginScreen = ({navigation}) => {
     // </Google OAuth> --------------------------------------------------------------------------------------------
 
     // <Cookies> --------------------------------------------------------------------------------------------------
-        const [isLoading, setIsLoading] = React.useState(true);
-        const [loginCounter, setLoginCounter] = React.useState(0);
-        const [forgotCounter, setForgotCounter] = React.useState(0);
-
-    const getData = async () => {
-        //Multiget
-        const values = await AsyncStorage.multiGet(['@forgotCount', '@loginCount']);
-
-        values.forEach(value => {
-            if (value[0] === '@forgotCount') {
-                const count = parseInt(value[1]);
-                setForgotCounter(isNaN(count) ? 0 : count);
-            } else if(value[0] === '@loginCount') {
-                const loginCount = parseInt(value[1]);
-                setLoginCounter(isNaN(loginCount) ? 0: loginCount);
-            }
-        });
-
-        setIsLoading(false);
-    };
-
-
-        React.useEffect(getData);
-
-/*        if (isLoading) {
-            return (
-                <Text style={styles.TextTitle}>Loading...</Text>
-            );
-        }*/
-
-
-        const incrementLoginCounter = async () => {
-            await AsyncStorage.setItem('@loginCount', (loginCounter + 1).toString());
-            setLoginCounter(loginCounter + 1);
-            console.log("increment login pressed")
-        }
-
-        const incrementForgotCounter = async () => {
-            await AsyncStorage.setItem('@forgotCount', (forgotCounter + 1).toString());
-            setForgotCounter(forgotCounter + 1);
-        }
 
     const cookies = async (cookieName) => {
         await AsyncStorage.getItem(cookieName).then(function(result){
@@ -177,13 +135,13 @@ const LoginScreen = ({navigation}) => {
         })
     }
 
-    const importData = async () => {
+    const cookiesToDb = async () => {
         try {
             const keys = await AsyncStorage.getAllKeys();
             const result = await AsyncStorage.multiGet(keys);
             const map1 = result.map(element => element = {name: element[0], value: element[1]});
             console.log(map1);
-            const res = axios.put('http://localhost:3000/cookies', {user: email, cArray: map1});
+            const res = axios.put('http://35.222.0.171:3000/cookies', {user: email, cArray: map1});
 
         } catch (error) {
             console.error(error)
@@ -350,32 +308,33 @@ const [hidePassword, setHidePassword] = useState(true);
             <View style={customStyle.innerContainer}>
 
 
-            <TouchableOpacity onPress={()=>{incrementForgotCounter(), navigation.navigate('Forgot')}}>
+            <TouchableOpacity onPress={()=>{cookies('@forgotCount'), navigation.navigate('Forgot')}}>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
 
             {showUserInfo()}
             <Button
-                title="Console.log all cookies"
+                title="Logout"
                 color="blue"
-                onPress = {()=>{importData();}}/>
+                onPress = {()=>{cookiesToDb();}}/>
             <Button
                 title="Login"
                 color="red"
                 onPress={()=>{
                     cookies('@loginCount');
+                    console.log("Login button clicked");
                     /*incrementLoginCounter();*/
-                    const res = axios.post('http://localhost:3000/users',{email: email, password: password}).then(function(result){
+                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
                         if (rep === "SUCCESS"){
                             navigation.navigate('Login')}
                         else if (rep === "DNE"){
-                            Alert.alert("That Username and/or email is not correct");
+                            Alert.alert("That Username and/or password is not correct");
                             navigation.navigate('Sign Up');
                         }
                         else if (rep === "BADPW"){
-                            Alert.alert("That Username and/or email is not correct");}
+                            Alert.alert("That Username and/or password is not correct");}
                         else{
                             Alert.alert("An error occured "+result.data);
                             navigation.navigate('Sign Up');
