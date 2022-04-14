@@ -154,7 +154,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
                     {/*//TODO add on submit loading spinner */}
                     <Formik
                         validationSchema={SignUpMoreValidationSchema}
-                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: ''}}
+                        initialValues={{firstName: '', lastName: '', dateOfBirth: '', email: u_email, password: u_password}}
                         //onSubmit={values => console.log(values)}
                         /*onSubmit={valuesToDb}*/
                         onSubmit={(values, { setSubmitting }) => {
