@@ -30,7 +30,7 @@ const GridDisplay = ({data1, iconColors}) => {
     return(
         <BackgroundContainer>
             <BoomRating>
-                <TextGridAdd onPress={addPictureHandler} style={{color: iconColors}}>
+                <TextGridAdd onPress={addPictureHandler} style={{backgroundColor: iconColors}}>
                     Add a Picture
                 </TextGridAdd>
             </BoomRating>
