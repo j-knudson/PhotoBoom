@@ -108,6 +108,11 @@ const GridDisplay = ({data1, iconColors}) => {
                             </>
                         )}
                     </Formik>
+                    <SubmitContainer style={{backgroundColor:iconColors}}>
+                        <BoomRating onPress={addPictureHandler}>
+                            <TextSectionHeader> Cancel </TextSectionHeader>
+                        </BoomRating>
+                    </SubmitContainer>
                 </BackgroundContainer_3p>
             </Modal>
             <FlatList
