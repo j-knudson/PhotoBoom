@@ -29,7 +29,7 @@ const PeersScreen = ({route, navigation} ) => {
     const FirstRoute = () => (
         <BackgroundContainer_3p>
             {gridData &&
-                <GridDisplay data1={gridData} iconColors={Colors.secondaryGreen}/>
+                <GridDisplay data1={gridData} iconColors={Colors.secondaryGreen} screen={peers}/>
             }
         </BackgroundContainer_3p>
     )

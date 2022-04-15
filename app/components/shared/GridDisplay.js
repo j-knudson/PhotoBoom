@@ -14,7 +14,7 @@ import {Line, MsgBox, SubmitButton, TextButton, TextError} from "../styledcontai
 import {Colors} from "../Colors";
 
 
-const GridDisplay = ({data1, iconColors}) => {
+const GridDisplay = ({data1, iconColors, screen}) => {
     const [gridData, setGridData] = useState([]);
     const [modelOpen, setModalOpen] = useState(false);
 
@@ -51,7 +51,7 @@ const GridDisplay = ({data1, iconColors}) => {
                 <BackgroundContainer_3p>
                     <Formik
                         //validationSchema={SignUpValidationSchema}
-                        initialValues={{name: '', group: '', category: '', description: '', link: ''}}
+                        initialValues={{name: '', group: {screen}, category: '', description: '', link: ''}}
                         onSubmit={(values, { setSubmitting }) => {
                             submitPicture(values);
                             setSubmitting(false);
