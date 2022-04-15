@@ -9,7 +9,7 @@ import {Colors} from "../components/Colors"
 
 
 export const BackgroundContainer = styled.View `
-    background-color: ${Colors.auth_background};  
+    background-color: ${Colors.auth_background}; 
 `;
 
 export const BackgroundContainer_3p = styled.View `
