@@ -105,11 +105,15 @@ export const TextComments = styled.Text`
     
 `;
 export const TextGridAdd = styled.Text`
-    
-    padding-top: 45px;
+    color: ${Colors.textColor}
+    margin-top: 45px;
     text-align: center;
     font-weight: 800;
     font-size: 18px;
+    width: 70%;
+    height: 30px;
+    border-radius: 5px;
+    align-self: center;
 `;
 
 export const TextSectionHeader = styled.Text`
