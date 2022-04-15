@@ -9,7 +9,7 @@ import {Colors} from "../components/Colors"
 
 
 export const BackgroundContainer = styled.View `
-    background-color: ${Colors.auth_background};  
+    background-color: ${Colors.auth_background}; 
 `;
 
 export const BackgroundContainer_3p = styled.View `
@@ -48,7 +48,7 @@ export const BoomRatingContainer = styled.View`
 
 export const GridContainer = styled.ScrollView `
     height: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 `;
 
 export const GridImage = styled.Image `
@@ -57,18 +57,61 @@ export const GridImage = styled.Image `
     resize-mode: contain; 
 `;
 
+export const InputArea = styled.TextInput `
+    background-color: ${Colors.customBackground};
+    font-weight: bold;
+    align-content: center;
+    width: 100%;
+    height: 100px;
+    justify-content: center; 
+    text-align: center;
+    flex: 1;
+`;
+
+export const InputContainer = styled.View `
+    
+    flex-direction: column;
+    margin-top: 20px; 
+    height: 100px;
+    width: 75%;
+    align-self: center;
+`;
+
+
+export const InputLabel = styled.Text`
+    font-size: 13px; 
+    text-align: left;
+    color:${Colors.textBoom} 
+`;
 export const TextBoom = styled.Text`
     color: ${Colors.textBoom}; 
     margin-top: 5px;
     text-align: center;
     
 `;
+
+export const SubmitContainer = styled.View ` 
+    margin-top: 15px;
+    height: 75px;
+    width: 75%;
+    align-self: center;
+    justify-content: center;
+`;
+
 export const TextComments = styled.Text`
     color: ${Colors.textBoom}; 
     margin-top: 20px;
     margin-left: 20px;
     
 `;
+export const TextGridAdd = styled.Text`
+    
+    padding-top: 45px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 18px;
+`;
+
 export const TextSectionHeader = styled.Text`
     font-weight: 800;
     font-size: 18px;
