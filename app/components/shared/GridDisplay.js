@@ -25,6 +25,7 @@ const GridDisplay = ({data1, iconColors}) => {
     const submitPicture = (values) => {
         console.log("form submitted  values are: ", values)
         setModalOpen(!modelOpen)
+        //TODO add axios command here for sending to DB
     }
     return(
         <BackgroundContainer>
