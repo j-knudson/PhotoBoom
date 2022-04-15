@@ -12,7 +12,7 @@ import React, {useEffect, useState} from "react";
 import {Formik} from "formik";
 import {Line, MsgBox, SubmitButton, TextButton, TextError} from "../styledcontainers";
 import {Colors} from "../Colors";
-
+import axios from 'axios';
 
 const GridDisplay = ({data1, iconColors}) => {
     const [gridData, setGridData] = useState([]);
