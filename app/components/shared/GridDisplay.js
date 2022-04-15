@@ -26,6 +26,15 @@ const GridDisplay = ({data1, iconColors}) => {
         console.log("form submitted  values are: ", values)
         setModalOpen(!modelOpen)
         //TODO add axios command here for sending to DB
+        const res = axios.put('http://10.0.2.2:3000/images',{name: values.name, group: values.group, category: values.category, description: values.description, link: values.link}).then(function(result){
+            let rep = result.data;
+            if (rep === "SUCCESS"){
+                //TODO enter success condition here
+            }
+            else{
+                //TODO enter failure condition here
+            }
+        })
     }
     return(
         <BackgroundContainer>

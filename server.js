@@ -141,6 +141,42 @@ app.put("/cookies",async function (request,response){
     console.log("Ran into error in /cookies path ", error)}
 })
 
+app.put("/images",async function (request, response){
+    try{
+        console.log("Request received in images");
+        let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
+        await conn.connect();
+
+        let imageName = request.body.name;
+        let imageGroup = request.body.group;
+        let imageCat = request.body.category;
+        let imageDesc = request.body.description;
+        let imageLink = request.body.link;
+
+        let sql = "INSERT INTO images(imageName,imageGroup,imageLink,imageDescription,imageCategory) VALUES ('"
+        +imageName+"','"
+        +imageGroup+"','"
+        +imageLink+"','"
+        +imageDesc+"','"
+        +imageCat+"');";
+
+        console.log(sql);
+
+        conn.query(sql,function(err,result){
+            if (err) {
+                console.log("An error occurred "+err);
+                response.send("ERROR");
+            }
+            else{
+                console.log("Success");
+                response.send("SUCCESS");
+            }
+        })
+        conn.end();
+    } catch (error){
+        console.log("Error in /images path ", +error);
+    }
+})
 
 
 app.listen(port,()=> console.log("App listening on ",port));
