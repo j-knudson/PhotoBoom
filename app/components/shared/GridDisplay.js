@@ -1,29 +1,115 @@
-import {Button, FlatList, Image, Modal, Text, TouchableOpacity} from "react-native";
+import {Alert, ActivityIndicator, Button, FlatList, Image, Modal, Text, TouchableOpacity, View} from "react-native";
 import {
     BackgroundContainer,
     BackgroundContainer_3p,
     BoomContainer,
     BoomImage, BoomRating,
     GridContainer,
-    GridImage,
-    TextBoom, TextGridAdd
+    GridImage, InputArea, InputContainer, InputLabel, SubmitContainer,
+    TextBoom, TextGridAdd, TextSectionHeader,
 } from "../AuthenticatedStyles";
 import React, {useEffect, useState} from "react";
+import {Formik} from "formik";
+import {Line, MsgBox, SubmitButton, TextButton, TextError} from "../styledcontainers";
+import {Colors} from "../Colors";
 
 
 const GridDisplay = ({data1, iconColors}) => {
     const [gridData, setGridData] = useState([]);
     const [modelOpen, setModalOpen] = useState(false);
 
+    const tempFunction = () => {
+       console.log('onShow Called...');
+    }
+
     const addPictureHandler  = () =>  {
-        console.log("in add picture")
         setModalOpen(!modelOpen)
+    }
+
+    const submitPicture = (values) => {
+        console.log("form submitted  values are: ", values)
+        setModalOpen(!modelOpen)
+    }
+
+    const UserInputValues = ({label, ...props}) => {
+        return (
+            <InputContainer>
+                <InputLabel>{label}</InputLabel>
+                <InputArea {...props} />
+            </InputContainer>
+
+        )
     }
 
     const PictureInput = () => {
         return (
             <BackgroundContainer_3p>
-                <TextBoom>Hello world</TextBoom>
+                {/*<TextBoom>Hello world</TextBoom>*/}
+                <Formik
+                    //validationSchema={SignUpValidationSchema}
+                    initialValues={{name: '', group: '', category: '', description: '', link: ''}}
+                    onSubmit={(values, { setSubmitting }) => {
+                        submitPicture(values);
+                        setSubmitting(false);
+                    }}
+                >
+                    {({
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          values,
+                          errors,
+                          isValid,
+                          touched,
+                          isSubmitting,
+                      }) => (
+                        <>
+                            <UserInputValues
+                                name="name"
+                                label="Picture Name"
+                                placeholder="Enter a picture name"
+                                onChangeText={handleChange('name')}
+                                onBlue={handleBlur('name')}
+                                value={values.name}
+                            />
+                            <UserInputValues
+                                name="category"
+                                label="Category"
+                                placeholder="Enter a picture category"
+                                onChangeText={handleChange('category')}
+                                onBlue={handleBlur('category')}
+                                value={values.category}
+                            />
+                            <UserInputValues
+                                name="description"
+                                label="Description"
+                                placeholder="Enter a picture description"
+                                onChangeText={handleChange('description')}
+                                onBlue={handleBlur('description')}
+                                value={values.description}
+                            />
+                            <UserInputValues
+                                name="link"
+                                label="Link"
+                                placeholder="Enter a link to a picture"
+                                onChangeText={handleChange('link')}
+                                onBlue={handleBlur('link')}
+                                value={values.link}
+                            />
+                            <SubmitContainer style={{backgroundColor:iconColors}}>
+                                <BoomRating onPress={handleSubmit}>
+                                    {isSubmitting &&
+                                        <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                    }
+                                    {!isSubmitting &&
+                                        <TextSectionHeader> Add Picture </TextSectionHeader>
+                                    }
+                                </BoomRating>
+                            </SubmitContainer>
+                        </>
+                    )}
+                </Formik>
+
             </BackgroundContainer_3p>
         )
 
@@ -36,16 +122,94 @@ const GridDisplay = ({data1, iconColors}) => {
                     Add a Picture
                 </TextGridAdd>
             </BoomRating>
+            <Modal
+                visible={modelOpen}
+                animationType={"slide"}
+                transparent={false}
+                /*onShow={PictureInput}*/
+            >
+                {/*<PictureInput />*/}
+{/*                <InputContainer>
+                    <InputLabel>test</InputLabel>
+                    <InputArea placeholderTest="MY TEST TEXT" />
+                </InputContainer>
+                <PictureInput/>*/}
+                <BackgroundContainer>
+                    <Formik
+                        //validationSchema={SignUpValidationSchema}
+                        initialValues={{name: '', group: '', category: '', description: '', link: ''}}
+                        onSubmit={(values, { setSubmitting }) => {
+                            submitPicture(values);
+                            setSubmitting(false);
+                        }}
+                    >
+                        {({
+                              handleChange,
+                              handleBlur,
+                              handleSubmit,
+                              values,
+                              errors,
+                              isValid,
+                              touched,
+                              isSubmitting,
+                          }) => (
+                            <>
+                               <InputContainer>
+                                    <InputLabel>Picture Name</InputLabel>
+                                    <InputArea
+                                        placeholder="Enter a picture name"
+                                        onChangeText={handleChange('name')}
+                                        onBlue={handleBlur('name')}
+                                        value={values.name}
+                                    />
+                                </InputContainer>
 
-            <Modal visible={modelOpen}>
-                <PictureInput />
-                <Button
-                    title="Close Modal"
-                    onPress={()=> setModalOpen(false)}
-                >
-                </Button>
+                               <InputContainer>
+                                    <InputLabel>Category</InputLabel>
+                                    <InputArea
+                                        placeholder="Enter a picture category"
+                                        onChangeText={handleChange('category')}
+                                        onBlue={handleBlur('category')}
+                                        value={values.category}
+                                    />
+                                </InputContainer>
+
+                                <InputContainer>
+                                    <InputLabel>Picture Description</InputLabel>
+                                    <InputArea
+                                        placeholder="Enter a picture description"
+                                        onChangeText={handleChange('description')}
+                                        onBlue={handleBlur('description')}
+                                        value={values.description}
+                                    />
+                                </InputContainer>
+
+                                <InputContainer>
+                                    <InputLabel>Picture Link</InputLabel>
+                                    <InputArea
+                                        placeholder="Enter a link to a picture"
+                                        onChangeText={handleChange('link')}
+                                        onBlue={handleBlur('link')}
+                                        value={values.link}
+                                    />
+                                </InputContainer>
+
+
+                                <SubmitContainer style={{backgroundColor:iconColors}}>
+                                    <BoomRating onPress={handleSubmit}>
+                                        {isSubmitting &&
+                                            <ActivityIndicator size="large" color={Colors.primaryGreen} />
+                                        }
+                                        {!isSubmitting &&
+                                            <TextSectionHeader> Add Picture </TextSectionHeader>
+                                        }
+                                    </BoomRating>
+                                </SubmitContainer>
+                            </>
+                        )}
+                    </Formik>
+                </BackgroundContainer>
             </Modal>
-
             <FlatList
                 numColumns = {2}
                 keyExtractor={
@@ -63,6 +227,8 @@ const GridDisplay = ({data1, iconColors}) => {
                     </GridContainer>
                 )}
             />
+
+
         </BackgroundContainer>
     )
 }
