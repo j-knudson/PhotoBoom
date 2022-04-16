@@ -3,7 +3,7 @@ import {
     BackgroundContainer,
     BackgroundContainer_3p,
     BoomContainer,
-    BoomImage, BoomRating, GridAddContainer,
+    BoomImage, BoomRating,
     GridContainer,
     GridImage, InputArea, InputContainer, InputLabel, SubmitContainer,
     TextBoom, TextGridAdd, TextSectionHeader,
@@ -40,11 +40,11 @@ const GridDisplay = ({data1, iconColors, screen}) => {
     }
     return(
         <BackgroundContainer>
-            <GridAddContainer>
+            <BoomRating>
                 <TextGridAdd onPress={addPictureHandler} style={{backgroundColor: iconColors}}>
                     Add a Picture
                 </TextGridAdd>
-            </GridAddContainer>
+            </BoomRating>
             <Modal
                 visible={modelOpen}
                 animationType={"slide"}
@@ -70,7 +70,7 @@ const GridDisplay = ({data1, iconColors, screen}) => {
                               isSubmitting,
                           }) => (
                             <>
-                               <InputContainer>
+                                <InputContainer>
                                     <InputLabel>Picture Name</InputLabel>
                                     <InputArea
                                         placeholder="Enter a picture name"
@@ -78,8 +78,8 @@ const GridDisplay = ({data1, iconColors, screen}) => {
                                         onBlue={handleBlur('name')}
                                         value={values.name}
                                     />
-                               </InputContainer>
-                               <InputContainer>
+                                </InputContainer>
+                                <InputContainer>
                                     <InputLabel>Category</InputLabel>
                                     <InputArea
                                         placeholder="Enter a picture category"

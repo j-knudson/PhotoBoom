@@ -110,7 +110,7 @@ function AnimatedSplashScreen({ children, image }) {
 }
 //TODO authentication workflow  replace authenticated with secure store token
 
-let Authenticated = true;
+let Authenticated = true
 
     export default function App() {
         return (
