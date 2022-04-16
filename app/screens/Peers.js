@@ -26,7 +26,7 @@ const PeersScreen = ({route, navigation} ) => {
     useEffect(()=> {
         const loadPost = async () =>{
             setGridLoading(true);
-            const res = await axios.post('http://10.0.2.2:3000/images', {group: 'peers'})
+            const res = await axios.post('http://34.69.54.232:3000/images', {group: 'peers'})
             setGridData(res.data);
             console.log("In useEffect after axios.post ");
             res.data.forEach(function(currentValue){
