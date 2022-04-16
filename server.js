@@ -196,7 +196,7 @@ app.post('/images',async function(request , response){
             }
             else{
                 console.log("Success");
-                console.log("This is the result[0] "+result[0]);
+                console.log("This is the result "+result);
                 response.send(result);
             }
             conn.end()

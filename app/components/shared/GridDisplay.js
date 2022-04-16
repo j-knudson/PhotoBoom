@@ -14,7 +14,7 @@ import {Line, MsgBox, SubmitButton, TextButton, TextError} from "../styledcontai
 import {Colors} from "../Colors";
 import axios from 'axios';
 
-const GridDisplay = ({data1, iconColors}) => {
+const GridDisplay = ({data1, iconColors, screen}) => {
     const [gridData, setGridData] = useState([]);
     const [modelOpen, setModalOpen] = useState(false);
 
@@ -25,9 +25,10 @@ const GridDisplay = ({data1, iconColors}) => {
 
     const submitPicture = (values) => {
         console.log("form submitted  values are: ", values)
+        console.log("values.group.screen is " +values.group.screen);
         setModalOpen(!modelOpen)
         //TODO add axios command here for sending to DB
-        const res = axios.put('http://10.0.2.2:3000/images',{name: values.name, group: data1.data[0].group, category: values.category, description: values.description, link: values.link}).then(function(result){
+        const res = axios.put('http://10.0.2.2:3000/images',{name: values.name, group: values.group.screen, category: values.category, description: values.description, link: values.link}).then(function(result){
             let rep = result.data;
             if (rep === "SUCCESS"){
                 //TODO enter success condition here
@@ -52,7 +53,7 @@ const GridDisplay = ({data1, iconColors}) => {
                 <BackgroundContainer_3p>
                     <Formik
                         //validationSchema={SignUpValidationSchema}
-                        initialValues={{name: '', group: '', category: '', description: '', link: ''}}
+                        initialValues={{name: '', group: {screen}, category: '', description: '', link: ''}}
                         onSubmit={(values, { setSubmitting }) => {
                             submitPicture(values);
                             setSubmitting(false);
@@ -123,17 +124,17 @@ const GridDisplay = ({data1, iconColors}) => {
             <FlatList
                 numColumns = {2}
                 keyExtractor={
-                    (item) => item.id
+                    (item) => item.imageID
                 }
-                data = {data1.data}
+                data = {data1}
                 renderItem={({ item }) => (
                     <GridContainer>
-                            {gridData &&
-                                <>
-                                    <TextBoom> {item.name} </TextBoom>
-                                    <GridImage source={{uri: item.image}} />
-                                </>
-                            }
+                        {gridData &&
+                            <>
+                                <TextBoom> {item.imageName} </TextBoom>
+                                <GridImage source={{uri: item.imageLink}} />
+                            </>
+                        }
                     </GridContainer>
                 )}
             />
