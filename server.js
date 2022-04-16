@@ -143,7 +143,7 @@ app.put("/cookies",async function (request,response){
 
 app.put("/images",async function (request, response){
     try{
-        console.log("Request received in images");
+        console.log("Request received in images put");
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         await conn.connect();
 
@@ -175,6 +175,34 @@ app.put("/images",async function (request, response){
         conn.end();
     } catch (error){
         console.log("Error in /images path ", +error);
+    }
+})
+
+app.post('/images',async function(request , response){
+    try{
+        console.log("Request received in /images post");
+        let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
+        await conn.connect();
+
+        let group = request.group;
+
+        let sql = "SELECT * FROM images WHERE imageGroup = '"+group+"';";
+        console.log(sql);
+
+        conn.query(sql,function(err,result){
+            if (err){
+                console.log("An error occurred "+err);
+                response.send("ERROR");
+            }
+            else{
+                console.log("Success");
+                response.send(result);
+            }
+            conn.end()
+        })
+
+    } catch(error){
+        console.log("Error in /images path "+ error);
     }
 })
 

@@ -51,7 +51,7 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = ({navigation}) => {
-//TODO set email and password back to ''
+
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
