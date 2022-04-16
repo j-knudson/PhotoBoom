@@ -8,6 +8,7 @@ import {Colors} from "../components/Colors";
 import BoomDisplay from "../components/shared/3p_BoomDisplay";
 import {useWindowDimensions, View} from "react-native";
 import GridDisplay from "../components/shared/GridDisplay";
+import axios from 'axios';
 
 const PeersScreen = ({route, navigation} ) => {
     const dataTest = require("../assets/peers/PeerData.json")
@@ -19,6 +20,16 @@ const PeersScreen = ({route, navigation} ) => {
         setGridData(g_data)
     }
     useEffect(dataLoader);
+
+    //Playing with function to bring images in from DB
+    const res = axios.post('http://10.0.2.2:3000/images',{group: 'Peer'}).then(function(result){
+        let rep = result.data;
+        //TODO return "data: "+rep  I think this might return something very similar to what PeerGridData.json is
+        console.log("This is rep "+rep);
+        rep.forEach(function(currentValue){
+            console.log(currentValue)}
+        )
+    })
 
     const layout = useWindowDimensions();
     const [routes] = React.useState([
