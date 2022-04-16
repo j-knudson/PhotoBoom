@@ -3,7 +3,7 @@ import {
     BackgroundContainer,
     BackgroundContainer_3p,
     BoomContainer,
-    BoomImage, BoomRating,
+    BoomImage, BoomRating, GridAddContainer,
     GridContainer,
     GridImage, InputArea, InputContainer, InputLabel, SubmitContainer,
     TextBoom, TextGridAdd, TextSectionHeader,
@@ -40,11 +40,11 @@ const GridDisplay = ({data1, iconColors, screen}) => {
     }
     return(
         <BackgroundContainer>
-            <BoomRating>
+            <GridAddContainer>
                 <TextGridAdd onPress={addPictureHandler} style={{backgroundColor: iconColors}}>
                     Add a Picture
                 </TextGridAdd>
-            </BoomRating>
+            </GridAddContainer>
             <Modal
                 visible={modelOpen}
                 animationType={"slide"}

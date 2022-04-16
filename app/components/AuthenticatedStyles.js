@@ -9,7 +9,8 @@ import {Colors} from "../components/Colors"
 
 
 export const BackgroundContainer = styled.View `
-    background-color: ${Colors.auth_background}; 
+    background-color: ${Colors.auth_background};
+     
 `;
 
 export const BackgroundContainer_3p = styled.View `
@@ -43,6 +44,13 @@ export const BoomRatingContainer = styled.View`
     align-content: center;
     justify-content: center;
     margin-bottom: 10px;   
+`;
+
+export const GridAddContainer = styled.TouchableOpacity `
+    position: absolute;
+    width: 70%;
+    bottom: 250px;
+    align-self: center; 
 `;
 
 
