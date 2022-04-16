@@ -33,7 +33,7 @@ const ProfessionalsScreen = ({route, navigation} ) => {
     const FirstRoute = () => (
         <BackgroundContainer_3p>
             {gridData &&
-                <GridDisplay data1={gridData} iconColors={Colors.primaryRed} screen={professionals}/>
+                <GridDisplay data1={gridData} iconColors={Colors.primaryRed} screen='professionals'/>
             }
         </BackgroundContainer_3p>
     )
