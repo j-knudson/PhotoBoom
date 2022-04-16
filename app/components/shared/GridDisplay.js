@@ -25,9 +25,10 @@ const GridDisplay = ({data1, iconColors, screen}) => {
 
     const submitPicture = (values) => {
         console.log("form submitted  values are: ", values)
+        console.log("values.group.screen is " +values.group.screen);
         setModalOpen(!modelOpen)
         //TODO add axios command here for sending to DB
-        const res = axios.put('http://10.0.2.2:3000/images',{name: values.name, group: data1.data[0].group, category: values.category, description: values.description, link: values.link}).then(function(result){
+        const res = axios.put('http://10.0.2.2:3000/images',{name: values.name, group: values.group.screen, category: values.category, description: values.description, link: values.link}).then(function(result){
             let rep = result.data;
             if (rep === "SUCCESS"){
                 //TODO enter success condition here
@@ -128,17 +129,17 @@ const GridDisplay = ({data1, iconColors, screen}) => {
             <FlatList
                 numColumns = {2}
                 keyExtractor={
-                    (item) => item.id
+                    (item) => item.imageID
                 }
-                data = {data1.data}
+                data = {data1}
                 renderItem={({ item }) => (
                     <GridContainer>
-                            {gridData &&
-                                <>
-                                    <TextBoom> {item.name} </TextBoom>
-                                    <GridImage source={{uri: item.image}} />
-                                </>
-                            }
+                        {gridData &&
+                            <>
+                                <TextBoom> {item.imageName} </TextBoom>
+                                <GridImage source={{uri: item.imageLink}} />
+                            </>
+                        }
                     </GridContainer>
                 )}
             />
