@@ -28,7 +28,7 @@ const ParentsScreen = ({route, navigation} ) => {
     const FirstRoute = () => (
         <BackgroundContainer_3p>
             {gridData &&
-                <GridDisplay data1={gridData} iconColors={Colors.primaryBlue} screen= 'parents'/>
+                <GridDisplay data1={gridData} iconColors={Colors.primaryBlue} screen={parents}/>
             }
         </BackgroundContainer_3p>
     )
