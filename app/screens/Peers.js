@@ -22,9 +22,13 @@ const PeersScreen = ({route, navigation} ) => {
     useEffect(dataLoader);
 
     //Playing with function to bring images in from DB
-    const res = axios.post('http://10.0.2.2:3000/images',{group: 'Peers'}).then(function(result){
+    const res = axios.post('http://10.0.2.2:3000/images',{group: 'Peer'}).then(function(result){
         let rep = result.data;
+        //TODO return "data: "+rep  I think this might return something very similar to what PeerGridData.json is
         console.log("This is rep "+rep);
+        rep.forEach(function(currentValue){
+            console.log(currentValue)}
+        )
     })
 
     const layout = useWindowDimensions();

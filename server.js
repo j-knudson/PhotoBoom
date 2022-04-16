@@ -23,7 +23,7 @@ app.get("/users",async function(request,response){
 
 
         // setting query statement
-        let sql = "SELECT * FROM cookies";
+        let sql = "SELECT * FROM images";
         // do query
         await conn.query(sql,function(err,result){
             if (err) {
@@ -184,7 +184,7 @@ app.post('/images',async function(request , response){
         let conn = mysql.createConnection({host: "localhost", user: "root", password: "mysql", database: "PhotoBoomDB"});
         await conn.connect();
 
-        let group = request.group;
+        let group = request.body.group;
 
         let sql = "SELECT * FROM images WHERE imageGroup = '"+group+"';";
         console.log(sql);
@@ -196,6 +196,7 @@ app.post('/images',async function(request , response){
             }
             else{
                 console.log("Success");
+                console.log("This is the result[0] "+result[0]);
                 response.send(result);
             }
             conn.end()
