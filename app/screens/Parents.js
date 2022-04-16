@@ -6,18 +6,36 @@ import b_Data from "../assets/parents.json";
 import {useWindowDimensions} from "react-native";
 import GridDisplay from "../components/shared/GridDisplay";
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
+import axios from "axios";
 
 const ParentsScreen = ({route, navigation} ) => {
     const b_data = require("../assets/parents.json");
     const g_data = require("../assets/ParentGrid.json")
     const [boomData, setBoomData] = React.useState(null);
     const [gridData, setGridData] = React.useState();
+    const [gridLoading, setGridLoading] = React.useState(true);
 
     function dataLoader() {
         setBoomData(b_data)
-        setGridData(g_data)
+        //setGridData(g_data)
     }
     useEffect(dataLoader);
+
+    useEffect(()=> {
+        const loadPost = async () =>{
+            setGridLoading(true);
+            const res = await axios.post('http://34.69.54.232:3000/images', {group: 'parents'})
+            setGridData(res.data);
+            console.log("In useEffect after axios.post ");
+            res.data.forEach(function(currentValue){
+                console.log(currentValue);
+            })
+            console.log(gridData);
+            setGridLoading(false);
+        }
+        loadPost();
+    },[]);
+
 
     const layout = useWindowDimensions();
     const [routes] = React.useState([
