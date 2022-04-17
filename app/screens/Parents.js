@@ -8,6 +8,9 @@ import GridDisplay from "../components/shared/GridDisplay";
 import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import axios from "axios";
 
+
+let serverAddress = '35.184.204.201';
+
 const ParentsScreen = ({route, navigation} ) => {
     const b_data = require("../assets/parents.json");
     const g_data = require("../assets/ParentGrid.json")
@@ -24,7 +27,7 @@ const ParentsScreen = ({route, navigation} ) => {
     useEffect(()=> {
         const loadPost = async () =>{
             setGridLoading(true);
-            const res = await axios.post('http://34.69.54.232:3000/images', {group: 'parents'})
+            const res = await axios.post('http://'+serverAddress+':3000/images', {group: 'parents'})
             setGridData(res.data);
             console.log("In useEffect after axios.post ");
             res.data.forEach(function(currentValue){
