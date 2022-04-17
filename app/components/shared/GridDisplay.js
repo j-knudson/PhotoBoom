@@ -14,6 +14,9 @@ import {Line, MsgBox, SubmitButton, TextButton, TextError} from "../styledcontai
 import {Colors} from "../Colors";
 import axios from 'axios';
 
+
+let serverAddress = '35.184.204.201';
+
 const GridDisplay = ({data1, iconColors, screen}) => {
     const [gridData, setGridData] = useState([]);
     const [modelOpen, setModalOpen] = useState(false);
@@ -28,7 +31,7 @@ const GridDisplay = ({data1, iconColors, screen}) => {
         console.log("values.group.screen is " +values.group.screen);
         setModalOpen(!modelOpen)
         //TODO add axios command here for sending to DB
-        const res = axios.put('http://34.69.54.232:3000/images',{name: values.name, group: values.group.screen, category: values.category, description: values.description, link: values.link}).then(function(result){
+        const res = axios.put('http://'+serverAddress+':3000/images',{name: values.name, group: values.group.screen, category: values.category, description: values.description, link: values.link}).then(function(result){
             let rep = result.data;
             if (rep === "SUCCESS"){
                 //TODO enter success condition here

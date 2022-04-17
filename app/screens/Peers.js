@@ -10,6 +10,8 @@ import {useWindowDimensions, View} from "react-native";
 import GridDisplay from "../components/shared/GridDisplay";
 import axios from 'axios';
 
+let serverAddress = '35.184.204.201';
+
 const PeersScreen = ({route, navigation} ) => {
     const dataTest = require("../assets/peers/PeerData.json")
     const g_data = require("../assets/peers/PeerGridData.json")
@@ -26,7 +28,7 @@ const PeersScreen = ({route, navigation} ) => {
     useEffect(()=> {
         const loadPost = async () =>{
             setGridLoading(true);
-            const res = await axios.post('http://34.69.54.232:3000/images', {group: 'peers'})
+            const res = await axios.post('http://'+serverAddress+':3000/images', {group: 'peers'})
             setGridData(res.data);
             console.log("In useEffect after axios.post ");
             res.data.forEach(function(currentValue){

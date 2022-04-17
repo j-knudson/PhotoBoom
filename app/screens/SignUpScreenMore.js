@@ -49,6 +49,8 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from "axios";
 
+let serverAddress = '35.184.204.201';
+
 const SignUpScreenMore = ( {route, navigation} ) => {
 
 
@@ -67,7 +69,7 @@ const SignUpScreenMore = ( {route, navigation} ) => {
         )
 
 
-        const res = axios.put('http://35.222.0.171:3000/users',
+        const res = axios.put('http://'+serverAddress+':3000/users',
             {email: values.email,
                 password: values.password,
                 firstName: values.firstName,

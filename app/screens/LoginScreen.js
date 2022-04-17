@@ -50,6 +50,8 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 WebBrowser.maybeCompleteAuthSession();
 
+let serverAddress = '35.184.204.201';
+
 const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState('');
@@ -141,7 +143,7 @@ const LoginScreen = ({navigation}) => {
             const result = await AsyncStorage.multiGet(keys);
             const map1 = result.map(element => element = {name: element[0], value: element[1]});
             console.log(map1);
-            const res = axios.put('http://35.222.0.171:3000/cookies', {user: email, cArray: map1});
+            const res = axios.put('http://'+serverAddress+':3000/cookies', {user: email, cArray: map1});
 
         } catch (error) {
             console.error(error)
@@ -155,7 +157,7 @@ const [hidePassword, setHidePassword] = useState(true);
 
             console.log(values)
 
-            const res = axios.post('http://35.222.0.171:3000/users',{email: values.email, password: values.password}).then(function(result){
+            const res = axios.post('http://'+serverAddress+':3000/users',{email: values.email, password: values.password}).then(function(result){
                 let rep = result.data;
                 console.log("This is rep: "+rep);
                 if (rep === "SUCCESS"){
@@ -360,7 +362,7 @@ const [hidePassword, setHidePassword] = useState(true);
                     cookies('@loginCount');
                     console.log("Login button clicked");
                     /*incrementLoginCounter();*/
-                    const res = axios.post('http://10.0.2.2:3000/users',{email: email, password: password}).then(function(result){
+                    const res = axios.post('http://'+serverAddress+':3000/users',{email: email, password: password}).then(function(result){
                         let rep = result.data;
                         console.log("This is rep: "+rep);
                         if (rep === "SUCCESS"){
