@@ -1,5 +1,6 @@
 import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
+import Map from "./app/screens/map"
 import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -12,6 +13,7 @@ import Splash2 from './app/screens/SplashScreen'
 //Navigators
 import SignInNavigator from './app/routes/SignUp'
 import AuthenticatedNavigator from "./app/routes/Authenticated";
+import MapView, {Marker} from "react-native-maps";
 
 
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -72,6 +74,7 @@ function AnimatedSplashScreen({ children, image }) {
     }, []);
 
     return (
+
         <View style={{ flex: 1 }}>
             {isAppReady && children}
             {!isSplashAnimationComplete && (
@@ -105,8 +108,7 @@ function AnimatedSplashScreen({ children, image }) {
                 </Animated.View>
 
             )}
-        </View>
-    );
+        </View>);
 }
 //TODO authentication workflow  replace authenticated with secure store token
 
