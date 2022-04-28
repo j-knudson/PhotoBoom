@@ -62,7 +62,7 @@ const HomeScreen = ( {route, navigation} ) => {
             {users.map((item)=>
                 <Text key={item}>{item}</Text>
             )}
-            <View style={styles.container}>
+            <View style={styles.bottomView}>
                 <MapView
                     style={{width: 400, height: 200}}
                     region={region}
@@ -94,6 +94,15 @@ const styles = StyleSheet.create ({
         justifyContent: 'space-around',
         padding: 10,
     },
+    bottomView: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#EE5407',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute', //Here is the trick
+        bottom: 0, //Here is the trick
+    }
 })
 
 export default HomeScreen;

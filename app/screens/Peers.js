@@ -10,7 +10,7 @@ import {useWindowDimensions, View} from "react-native";
 import GridDisplay from "../components/shared/GridDisplay";
 import axios from 'axios';
 
-let serverAddress = '35.184.204.201';
+let serverAddress = '35.224.193.36';
 
 const PeersScreen = ({route, navigation} ) => {
     const dataTest = require("../assets/peers/PeerData.json")

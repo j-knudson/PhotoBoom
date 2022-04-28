@@ -9,7 +9,7 @@ import {SceneMap, TabBar, TabView} from "react-native-tab-view";
 import axios from "axios";
 
 
-let serverAddress = '35.184.204.201';
+let serverAddress = '35.224.193.36';
 
 const ParentsScreen = ({route, navigation} ) => {
     const b_data = require("../assets/parents.json");
